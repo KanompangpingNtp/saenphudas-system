@@ -5,10 +5,10 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card shadow-lg">
                 <div class="card-header text-center bg-primary text-white">
-                    <h4>เข้าสู่ระบบ</h4>
+                    <h4>ลงชื่อเข้าสู่ระบบ</h4>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('Login') }}">
@@ -31,11 +31,11 @@
                         </div>
 
                         <div class="mb-3 text-center">
-                            <a href="{{ route('RegisterPage') }}" class="text-decoration-none text-primary">ยังไม่มีบัญชี? ลงทะเบียนที่นี่</a>
+                            <span class="text-black">ยังไม่มีบัญชี?</span><a href="{{ route('RegisterPage') }}" class="text-decoration-none text-primary"> ลงทะเบียน</a>
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">เข้าสู่ระบบ</button>
+                            <button type="submit" class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
                         </div>
                     </form>
                 </div>

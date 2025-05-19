@@ -34,10 +34,6 @@ use App\Http\Controllers\land_building_tax_appeals\LandBuildingTaxAppealControll
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 //auth
 Route::get('/', [AuthController::class, 'LoginPage'])->name('LoginPage');
 Route::get('/register', [AuthController::class, 'RegisterPage'])->name('RegisterPage');

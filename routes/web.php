@@ -33,6 +33,8 @@ use App\Http\Controllers\land_building_tax_appeals\LandBuildingTaxAppealControll
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//test
+Route::view('/test', 'home.first-page');
 
 //auth
 Route::get('/', [AuthController::class, 'LoginPage'])->name('LoginPage');

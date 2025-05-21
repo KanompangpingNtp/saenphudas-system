@@ -34,7 +34,7 @@ use App\Http\Controllers\land_building_tax_appeals\LandBuildingTaxAppealControll
 |
 */
 //test
-Route::view('/test', 'home.first-page');
+Route::view('/test', 'home.second-page');
 
 //auth
 Route::get('/', [AuthController::class, 'LoginPage'])->name('LoginPage');

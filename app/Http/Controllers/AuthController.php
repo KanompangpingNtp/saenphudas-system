@@ -25,11 +25,14 @@ class AuthController extends Controller
         if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
 
-            if (Auth::user()->level === 'admin') {
+            if (Auth::user()->level === '1') {
                 return redirect()->route('AdminIndex');
-            } elseif (Auth::user()->level === 'user') {
+            } elseif (Auth::user()->level === '2') {
                 return redirect()->route('UserIndex');
+            } elseif (Auth::user()->level === '3') {
+                return redirect()->route('AdminWastePayment');
             }
+
         }
 
         return back()->withErrors([

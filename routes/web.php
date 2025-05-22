@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\disability\AdminDisabilityController;
@@ -26,6 +27,8 @@ use App\Http\Controllers\tax_refund_requests\AdminLandTaxRefundRequestController
 use App\Http\Controllers\tax_refund_requests\LandTaxRefundRequestController;
 use App\Http\Controllers\emergency\EmergencyController;
 
+use App\Http\Controllers\waste_payment\AdminWastePaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,9 +42,12 @@ use App\Http\Controllers\emergency\EmergencyController;
 //test
 Route::view('/test', 'home.status-trash-page');
 
+Route::get('/', [HomeController::class, 'Home'])->name('Home');
+Route::get('/eservice', [HomeController::class, 'Eservice'])->name('Eservice');
+
 //auth
-Route::get('/', [AuthController::class, 'LoginPage'])->name('LoginPage');
-Route::get('/register', [AuthController::class, 'RegisterPage'])->name('RegisterPage');
+Route::get('/login-page', [AuthController::class, 'LoginPage'])->name('LoginPage');
+Route::get('/register-page', [AuthController::class, 'RegisterPage'])->name('RegisterPage');
 Route::post('/register', [AuthController::class, 'Register'])->name('Register');
 Route::post('/login', [AuthController::class, 'Login'])->name('Login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -215,4 +221,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/tax_refund_requests/export-pdf/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestAdminExportPDF'])->name('LandTaxRefundRequestAdminExportPDF');
     Route::post('/admin/tax_refund_requests/admin-reply/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestAdminReply'])->name('LandTaxRefundRequestAdminReply');
     Route::post('/admin/tax_refund_requests/update-status/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestUpdateStatus'])->name('LandTaxRefundRequestUpdateStatus');
+});
+
+Route::middleware(['admin_waste_payment'])->group(function () {
+    Route::get('/admin/admin_waste_payment', [AdminWastePaymentController::class, 'AdminWastePayment'])->name('AdminWastePayment');
 });

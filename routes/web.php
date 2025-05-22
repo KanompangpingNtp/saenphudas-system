@@ -37,7 +37,7 @@ use App\Http\Controllers\emergency\EmergencyController;
 |
 */
 //test
-Route::view('/test', 'home.second-page');
+Route::view('/test', 'home.status-trash-page');
 
 //auth
 Route::get('/', [AuthController::class, 'LoginPage'])->name('LoginPage');

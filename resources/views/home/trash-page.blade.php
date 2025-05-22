@@ -1,5 +1,5 @@
 @extends('home.layouts.app')
-@section('title', 'Home Page')
+@section('title', 'Trash Page')
 <style>
     .body-bg {
         background-image: url("{{ asset('first-page/พื้นหลัง.png') }}");

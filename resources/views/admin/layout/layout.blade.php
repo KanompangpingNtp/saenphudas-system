@@ -8,29 +8,30 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Admin Dashbord</title>
-    <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
     @if ($message = Session::get('success'))
-    <script>
-        Swal.fire({
-            icon: 'success'
-            , title: '{{ $message }}'
-        , })
-
-    </script>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ $message }}',
+            })
+        </script>
     @endif
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="#">ระบบ Eservice</a>
         <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!" title="Toggle sidebar">
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"
+            title="Toggle sidebar">
             <i class="fas fa-bars"></i>
         </button>
         <!-- Navbar Search-->
@@ -38,8 +39,10 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span style="margin-right: 15px;">{{ Auth::user()->name }}</span> <i class="fas fa-user fa-fw ms-1"></i>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <span style="margin-right: 15px;">{{ Auth::user()->name }}</span> <i
+                        class="fas fa-user fa-fw ms-1"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li>
@@ -61,41 +64,45 @@
                 <div class="sb-sidenav-menu" style="overflow-y: auto; max-height: calc(100vh - 100px);">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">เมนู</div>
-                        <a class="nav-link" href="{{route('GeneralRequestsAdminShowData')}}">
+                        <a class="nav-link" href="{{ route('GeneralRequestsAdminShowData') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             คำร้องทั่วไป
                         </a>
-                        <a class="nav-link" href="{{route('ElderlyAllowanceAdminShowData')}}">
+                        <a class="nav-link" href="{{ route('ElderlyAllowanceAdminShowData') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             แบบยืนยันเบี้ยยังชีพผู้สูงอายุ
                         </a>
-                        <a class="nav-link" href="{{route('DisabilityAdminShowData')}}">
+                        <a class="nav-link" href="{{ route('DisabilityAdminShowData') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             แบบคำขอลงทะเบียนรับเงินเบี้ยความพิการ
                         </a>
-                        <a class="nav-link" href="{{route('TableReceiveAssistanceAdminPages')}}">
+                        <a class="nav-link" href="{{ route('TableReceiveAssistanceAdminPages') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             แบบคำขอรับการสงเคราะห์ <br> (ผู้ป่วยเอดส์)
                         </a>
-                        <a class="nav-link" href="{{route('ChangeInUseAdminPages')}}">
+                        <a class="nav-link" href="{{ route('ChangeInUseAdminPages') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             (ภ.ด.ส.๕) แบบแจ้งการเปลี่ยนแปลงการใช้ประโยชน์ที่ดินหรือสิ่งปลูกสร้าง
                         </a>
-                        <a class="nav-link" href="{{route('LicenseTaxAdminPages')}}">
+                        <a class="nav-link" href="{{ route('LicenseTaxAdminPages') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             (ภ.ป.๑) แนบแสดงรายการ ภาษีป้าย
                         </a>
-                        <a class="nav-link" href="{{route('TableChildApplyAdminPages')}}">
+                        <a class="nav-link" href="{{ route('TableChildApplyAdminPages') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             แบบฟอร์มใบสมัคร ศูนย์พัฒนาเด็กเล็ก
                         </a>
-                        <a class="nav-link" href="{{route('PayTaxBuildAndRoomAdminPages')}}">
+                        <a class="nav-link" href="{{ route('PayTaxBuildAndRoomAdminPages') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             หนังสือขอผ่อนชำระภาษีที่ดินและสิ่งปลูกสร้าง / ห้องชุด
                         </a>
-                        <a class="nav-link" href="{{route('LandBuildingTaxAppealAdminShowData')}}">
+                        <a class="nav-link" href="{{ route('LandBuildingTaxAppealAdminShowData') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             คำร้องขอรับเงินภาษีที่ดินและสิ่งปลูกสร้างคืน
+                        </a>
+                        <a class="nav-link" href="{{ route('LandTaxRefundRequestAdminShowData') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
+                            คำร้องคัดค้านการประเมินภาษีหรือ การเรียกเก็บภาษีที่ดินและสิ่งปลูกสร้าง
                         </a>
                     </div>
                 </div>
@@ -127,8 +134,9 @@
             </footer>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="{{asset('js/scripts.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 
 </html>

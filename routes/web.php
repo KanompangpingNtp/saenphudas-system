@@ -40,7 +40,7 @@ use App\Http\Controllers\waste_payment\AdminWastePaymentController;
 |
 */
 //test
-Route::view('/test', 'home.status-trash-page');
+Route::view('/test', 'home.check-valuetrash-page');
 
 Route::get('/', [HomeController::class, 'Home'])->name('Home');
 Route::get('/eservice', [HomeController::class, 'Eservice'])->name('Eservice');

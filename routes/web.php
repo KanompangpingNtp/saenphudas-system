@@ -36,6 +36,8 @@ use App\Http\Controllers\emergency\EmergencyController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//test
+Route::view('/test', 'home.second-page');
 
 //auth
 Route::get('/', [AuthController::class, 'LoginPage'])->name('LoginPage');

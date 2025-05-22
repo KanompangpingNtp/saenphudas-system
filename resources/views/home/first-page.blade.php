@@ -76,7 +76,7 @@
                         บริการยื่นคำร้องออนไลน์สะดวกรวดเร็วตลอด 24 ชั่วโมง
                     </div>
                     <div class="text-center border-x-custom py-3 ms-4">
-                        <a href="#" class="btn-first-effect">
+                        <a href="{{ route('Eservice') }}" class="btn-first-effect">
                             <img src="{{ asset('first-page/ปุ่ม e-service.png') }}" alt="btn-คำร้อง" class="img-fluid">
                         </a>
                     </div>

@@ -177,9 +177,9 @@
             </a>
             <div class="d-flex flex-column justify-content-center align-items-center mt-3 mt-lg-0">
                 <div class="d-flex justify-content-center align-items-center gap-2">
-                    <a href="#" class="text-center"><img src="{{ asset('header/เข้าสู่ระบบ.png') }}" alt="login"
+                    <a href="{{ route('LoginPage') }}" class="text-center"><img src="{{ asset('header/เข้าสู่ระบบ.png') }}" alt="login"
                             class="img-fluid btn-hover-effect"></a>
-                    <a href="#" class="text-center"><img src="{{ asset('header/สมัครสมาชิก.png') }}" alt="register"
+                    <a href="{{ route('RegisterPage') }}" class="text-center"><img src="{{ asset('header/สมัครสมาชิก.png') }}" alt="register"
                             class="img-fluid btn-hover-effect"></a>
                 </div>
                 <div class="text-warn mt-2 text-center">

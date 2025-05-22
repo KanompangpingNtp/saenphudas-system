@@ -26,27 +26,27 @@
                 <div class="col-lg-6 d-flex flex-column justify-content-start align-items-center align-items-sm-start gap-3">
                     <div
                         class="d-flex flex-column flex-sm-row justify-content-start align-items-center align-items-sm-start gap-2 mt-2 mt-lg-5 w-100">
-                        
+
                         <div class="d-flex justify-content-center align-items-center">
                             <img src="{{ asset('second-page/สำนักปลัด.png') }}" alt="สำนักปลัด">
                         </div>
                         <div class="d-flex flex-column justify-content-start align-items-start gap-2 w-100">
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('GeneralRequestsFormPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-1 mb-xl-0">
                                 คำร้องทั่วไป
                             </a>
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('ElderlyAllowanceFormPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-1 mb-xl-0">
                                 แบบคำขอยืนยันสิทธิรับเงินเบี้ยยังชีพผู้สูงอายุ
                             </a>
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('DisabilityFormPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-1 mb-xl-0">
                                 แบบคำขอลงทะเบียนรับเงินเบี้ยความพิการ
                             </a>
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('ReceiveAssistanceFormPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-1 mb-xl-0">
                                 แบบคำขอรับการสงเคราะห์ (ผู้ป่วยเอดส์)
@@ -55,7 +55,7 @@
                     </div>
                     <div
                         class="d-flex flex-column flex-sm-row justify-content-start align-items-center align-items-sm-start gap-2 mt-2 mt-lg-5 w-100">
-                        
+
                         <div class="d-flex justify-content-center align-items-center">
                             <img src="{{ asset('second-page/กองช่าง.png') }}" alt="กองช่าง">
                         </div>
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div
-                        class="d-flex flex-column flex-sm-row justify-content-start align-items-center align-items-sm-start gap-2 mt-2 mt-lg-5 w-100"> 
+                        class="d-flex flex-column flex-sm-row justify-content-start align-items-center align-items-sm-start gap-2 mt-2 mt-lg-5 w-100">
                         <div class="d-flex justify-content-center align-items-center">
                             <img src="{{ asset('second-page/กองสาธารณสุข.png') }}" alt="กองสาธารณสุข">
                         </div>
@@ -104,27 +104,27 @@
                             <img src="{{ asset('second-page/กองคลัง.png') }}" alt="กองคลัง">
                         </div>
                         <div class="d-flex flex-column justify-content-start align-items-start gap-2 w-100">
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('LicenseTaxFormPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-1 mb-xl-0">
                                 (ภ.ป.๑ แนบแสดงรายการ ภาษีป้าย)
                             </a>
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('PayTaxBuildAndRoomFormPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-3 mb-xl-0">
                                 หนังสือขอผ่อนชำระเงินภาษีที่ดินและสิ่งปลูกสร้าง / ห้องชุด
                             </a>
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('LandBuildingTaxAppealPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-3 mb-xl-0">
                                 (ภ.ด.ส.๑๐) คำร้องคัดค้านการประเมินภาษีหรือ การเรียนเก็บภาษีที่ดินและสิ่งปลูกสร้าง
                             </a>
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('ChangeInUseFormPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-3 mb-xl-0">
                                 (ภ.ป.ส.๕) แบบแจ้งการเปลี่ยนแปลงการใช้ประโยชน์ที่ดินหรือสิ่งปลูกสร้าง
                             </a>
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('LandTaxRefundRequestPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow"
                                     class="mb-3 mb-xl-0">
@@ -138,7 +138,7 @@
                             <img src="{{ asset('second-page/กองการศึกษา.png') }}" alt="กองการศึกษา">
                         </div>
                         <div class="d-flex flex-column justify-content-start align-items-start gap-2 w-100">
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('ChildApplyPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow"
                                     class="mb-1 mb-xl-0">

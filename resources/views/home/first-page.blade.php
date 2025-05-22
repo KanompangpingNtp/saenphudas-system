@@ -93,7 +93,7 @@
                         การแจ้งเตือนและธนาคารขยะ
                     </div>
                     <div class="bg-green d-flex flex-column justify-content-center align-items-center mt-3 mx-auto px-3">
-                        <a href="#" class="text-center mb-2 btn-first-effect border-y-custom pb-2">
+                        <a href="{{ route('UserWastePayment') }}" class="text-center mb-2 btn-first-effect border-y-custom pb-2">
                             <img src="{{ asset('first-page/กดmock up.png') }}" alt="alert-trash" class="img-fluid">
                         </a>
                         <a href="#" class="text-center btn-first-effect">
@@ -128,7 +128,7 @@
                         การแจ้งเตือนเหตุฉุกเฉิน
                     </div>
                     <div class="bg-green mx-auto d-flex justify-content-center align-items-center gap-2 mt-3 px-3">
-                        <a href="#" class="text-center btn-first-effect ">
+                        <a href="{{ route('emergency.index') }}" class="text-center btn-first-effect ">
                             <img src="{{ asset('first-page/แจ้งเหตุ.png') }}" alt="แจ้งเหตุ" class="img-fluid">
                         </a>
                         <div class="d-flex flex-column justify-content-center align-items-center border-x-custom2 ps-3 gap-1">

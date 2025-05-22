@@ -3,12 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Default Title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 <style>
@@ -176,11 +178,35 @@
                 </div>
             </a>
             <div class="d-flex flex-column justify-content-center align-items-center mt-3 mt-lg-0">
-                <div class="d-flex justify-content-center align-items-center gap-2">
+                {{-- <div class="d-flex justify-content-center align-items-center gap-2">
                     <a href="{{ route('LoginPage') }}" class="text-center"><img src="{{ asset('header/เข้าสู่ระบบ.png') }}" alt="login"
                             class="img-fluid btn-hover-effect"></a>
                     <a href="{{ route('RegisterPage') }}" class="text-center"><img src="{{ asset('header/สมัครสมาชิก.png') }}" alt="register"
                             class="img-fluid btn-hover-effect"></a>
+                    <a href="#" class="text-center"><img src="{{ asset('header/ออกจากระบบ.png') }}" alt="logout"
+                            class="img-fluid btn-hover-effect"></a>
+                </div> --}}
+                <div class="d-flex justify-content-center align-items-center gap-2">
+                    @guest
+                        <a href="{{ route('LoginPage') }}" class="text-center">
+                            <img src="{{ asset('header/เข้าสู่ระบบ.png') }}" alt="login"
+                                class="img-fluid btn-hover-effect">
+                        </a>
+                        <a href="{{ route('RegisterPage') }}" class="text-center">
+                            <img src="{{ asset('header/สมัครสมาชิก.png') }}" alt="register"
+                                class="img-fluid btn-hover-effect">
+                        </a>
+                    @endguest
+
+                    @auth
+                        <form action="{{ route('logout') }}" method="POST" class="text-center">
+                            @csrf
+                            <button type="submit" style="border: none; background: none; padding: 0;">
+                                <img src="{{ asset('header/ออกจากระบบ.png') }}" alt="logout"
+                                    class="img-fluid btn-hover-effect">
+                            </button>
+                        </form>
+                    @endauth
                 </div>
                 <div class="text-warn mt-2 text-center">
                     คำแนะนำสมัครสมาชิกเพื่อติดตามสถานะการดำเนินการ

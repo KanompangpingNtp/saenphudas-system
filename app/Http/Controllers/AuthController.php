@@ -31,8 +31,9 @@ class AuthController extends Controller
                 return redirect()->route('UserIndex');
             } elseif (Auth::user()->level === '3') {
                 return redirect()->route('AdminWastePayment');
+            } elseif (Auth::user()->level === '4') {
+                return redirect()->route('UserWastePayment');
             }
-
         }
 
         return back()->withErrors([
@@ -90,6 +91,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('LoginPage');
+        return redirect()->route('Home');
     }
 }

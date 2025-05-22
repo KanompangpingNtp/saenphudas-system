@@ -21,7 +21,9 @@ class EmergencyController extends Controller
 
     public function send(Request $request)
     {
+        dd($request);
         $input = $request->input();
+
         if ($request->hasFile('file')) {
             $file = $request->file('file');
 

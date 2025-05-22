@@ -21,9 +21,10 @@
     <div class="body-bg py-4">
         <div class="container">
             <div class="d-flex justify-content-start">
-                <a href="#" class="btn-back-effect">
+                {{-- <a href="#" class="btn-back-effect">
                     <img src="{{ asset('trash-page/btn-back.png') }}" alt="btn-back" class="img-fluid">
-                </a>
+                </a> --}}
+                <br>
             </div>
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-6 col-lg-4 d-flex flex-column justify-content-start align-items-center">

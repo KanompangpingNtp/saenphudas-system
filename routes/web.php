@@ -28,6 +28,7 @@ use App\Http\Controllers\tax_refund_requests\LandTaxRefundRequestController;
 use App\Http\Controllers\emergency\EmergencyController;
 
 use App\Http\Controllers\waste_payment\AdminWastePaymentController;
+use App\Http\Controllers\waste_payment\UserWastePaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,7 @@ use App\Http\Controllers\waste_payment\AdminWastePaymentController;
 |
 */
 //test
-Route::view('/test', 'home.second-page');
+Route::view('/test', 'home.trash-page');
 
 Route::get('/', [HomeController::class, 'Home'])->name('Home');
 Route::get('/eservice', [HomeController::class, 'Eservice'])->name('Eservice');
@@ -223,6 +224,10 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/tax_refund_requests/update-status/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestUpdateStatus'])->name('LandTaxRefundRequestUpdateStatus');
 });
 
+Route::middleware(['user_waste_payment'])->group(function () {
+    Route::get('/user/waste_payment', [UserWastePaymentController::class, 'UserWastePayment'])->name('UserWastePayment');
+});
+
 Route::middleware(['admin_waste_payment'])->group(function () {
-    Route::get('/admin/admin_waste_payment', [AdminWastePaymentController::class, 'AdminWastePayment'])->name('AdminWastePayment');
+    Route::get('/admin/waste_payment', [AdminWastePaymentController::class, 'AdminWastePayment'])->name('AdminWastePayment');
 });

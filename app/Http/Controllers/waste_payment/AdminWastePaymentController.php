@@ -10,6 +10,6 @@ class AdminWastePaymentController extends Controller
     //
     public function AdminWastePayment()
     {
-        return view("waste-payment.dashboard.index");
+        return view("waste-payment.index");
     }
 }

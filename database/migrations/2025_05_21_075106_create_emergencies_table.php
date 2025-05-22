@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('detail');
             $table->text('photo');
+            $table->string('tel');
             $table->integer('type');
             $table->text('lat');
             $table->text('long');

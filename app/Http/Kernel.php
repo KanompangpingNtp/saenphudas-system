@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'user' => \App\Http\Middleware\UserMiddleware::class,
         'admin_waste_payment' => \App\Http\Middleware\AdminWastePayment::class,
+        'user_waste_payment' => \App\Http\Middleware\UserWastePayment::class,
     ];
 }

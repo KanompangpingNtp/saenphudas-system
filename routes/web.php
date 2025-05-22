@@ -22,6 +22,9 @@ use App\Http\Controllers\pay_tax_build_and_room\AdminPayTaxBuildAndRoom;
 use App\Http\Controllers\pay_tax_build_and_room\PayTaxBuildAndRoom;
 use App\Http\Controllers\land_building_tax_appeals\AdminLandBuildingTaxAppealController;
 use App\Http\Controllers\land_building_tax_appeals\LandBuildingTaxAppealController;
+use App\Http\Controllers\tax_refund_requests\AdminLandTaxRefundRequestController;
+use App\Http\Controllers\tax_refund_requests\LandTaxRefundRequestController;
+use App\Http\Controllers\emergency\EmergencyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +79,14 @@ Route::post('/pay_tax_build_and_room/form/create', [PayTaxBuildAndRoom::class, '
 //คำร้องคัดค้านการประเมินภาษี
 Route::get('/land_building_tax_appeals', [LandBuildingTaxAppealController::class, 'LandBuildingTaxAppealPage'])->name('LandBuildingTaxAppealPage');
 Route::post('/land_building_tax_appeals/form/create', [LandBuildingTaxAppealController::class, 'LandBuildingTaxAppealFormCreate'])->name('LandBuildingTaxAppealFormCreate');
+
+//คำร้องขอรับเงินภาษีที่ดินและสิ่งปลูกสร้างคืน
+Route::get('/tax_refund_requests', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestPage'])->name('LandTaxRefundRequestPage');
+Route::post('/tax_refund_requests/form/create', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestFormCreate'])->name('LandTaxRefundRequestFormCreate');
+
+//ตัวแจ้งเหตุ
+Route::get('/emergency', [EmergencyController::class, 'index'])->name('emergency.index');
+Route::post('/emergency/send', [EmergencyController::class, 'send'])->name('emergency.send');
 
 Route::middleware(['user'])->group(function () {
     Route::get('/user/index', [UserController::class, 'UserIndex'])->name('UserIndex');
@@ -133,6 +144,11 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user/account/LandBuildingTaxAppeal/show-details', [LandBuildingTaxAppealController::class, 'LandBuildingTaxAppealShowDetails'])->name('LandBuildingTaxAppealShowDetails');
     Route::post('/user/account/LandBuildingTaxAppeal/{form}/reply', action: [LandBuildingTaxAppealController::class, 'LandBuildingTaxAppealUserReply'])->name('LandBuildingTaxAppealUserReply');
     Route::get('/user/account/LandBuildingTaxAppeal/{id}/pdf', [LandBuildingTaxAppealController::class, 'LandBuildingTaxAppealUserExportPDF'])->name('LandBuildingTaxAppealUserExportPDF');
+
+    //คำร้องขอรับเงินภาษีที่ดินและสิ่งปลูกสร้างคืน
+    Route::get('/user/account/TaxRefundRequest/show-details', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestShowDetails'])->name('LandTaxRefundRequestShowDetails');
+    Route::post('/user/account/TaxRefundRequest/{form}/reply', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestUserReply'])->name('LandTaxRefundRequestUserReply');
+    Route::get('/user/account/TaxRefundRequest/{id}/pdf', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestUserExportPDF'])->name('LandTaxRefundRequestUserExportPDF');
 });
 
 Route::middleware(['admin'])->group(function () {
@@ -191,4 +207,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/land_building_tax_appeals/export-pdf/{id}', [AdminLandBuildingTaxAppealController::class, 'LandBuildingTaxAppealAdminExportPDF'])->name('LandBuildingTaxAppealAdminExportPDF');
     Route::post('/admin/land_building_tax_appeals/admin-reply/{id}', [AdminLandBuildingTaxAppealController::class, 'LandBuildingTaxAppealAdminReply'])->name('LandBuildingTaxAppealAdminReply');
     Route::post('/admin/land_building_tax_appeals/update-status/{id}', [AdminLandBuildingTaxAppealController::class, 'LandBuildingTaxAppealUpdateStatus'])->name('LandBuildingTaxAppealUpdateStatus');
+
+    //คำร้องขอรับเงินภาษีที่ดินและสิ่งปลูกสร้างคืน
+    Route::get('/admin/tax_refund_requests/showdata', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestAdminShowData'])->name('LandTaxRefundRequestAdminShowData');
+    Route::get('/admin/tax_refund_requests/export-pdf/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestAdminExportPDF'])->name('LandTaxRefundRequestAdminExportPDF');
+    Route::post('/admin/tax_refund_requests/admin-reply/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestAdminReply'])->name('LandTaxRefundRequestAdminReply');
+    Route::post('/admin/tax_refund_requests/update-status/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestUpdateStatus'])->name('LandTaxRefundRequestUpdateStatus');
 });

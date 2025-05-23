@@ -25,10 +25,15 @@ use App\Http\Controllers\land_building_tax_appeals\AdminLandBuildingTaxAppealCon
 use App\Http\Controllers\land_building_tax_appeals\LandBuildingTaxAppealController;
 use App\Http\Controllers\tax_refund_requests\AdminLandTaxRefundRequestController;
 use App\Http\Controllers\tax_refund_requests\LandTaxRefundRequestController;
+use App\Http\Controllers\garbage_collection\AdminGarbageCollectionController;
+use App\Http\Controllers\garbage_collection\GarbageCollectionController;
 use App\Http\Controllers\emergency\EmergencyController;
 
 use App\Http\Controllers\waste_payment\AdminWastePaymentController;
 use App\Http\Controllers\waste_payment\UserWastePaymentController;
+use App\Http\Controllers\waste_payment\CheckValuetrashController;
+use App\Http\Controllers\waste_payment\StatusTrashController;
+use App\Http\Controllers\waste_payment\TrashToxicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +102,10 @@ Route::post('/tax_refund_requests/form/create', [LandTaxRefundRequestController:
 Route::get('/emergency', [EmergencyController::class, 'index'])->name('emergency.index');
 Route::post('/emergency/send', [EmergencyController::class, 'send'])->name('emergency.send');
 
+//
+Route::get('/garbage_collection', [GarbageCollectionController::class, 'GarbageCollectionForm'])->name('GarbageCollectionForm');
+Route::post('/garbage_collection/form/create', [GarbageCollectionController::class, 'GarbageCollectionFormCreate'])->name('GarbageCollectionFormCreate');
+
 Route::middleware(['user'])->group(function () {
     Route::get('/user/index', [UserController::class, 'UserIndex'])->name('UserIndex');
 
@@ -158,6 +167,17 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user/account/TaxRefundRequest/show-details', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestShowDetails'])->name('LandTaxRefundRequestShowDetails');
     Route::post('/user/account/TaxRefundRequest/{form}/reply', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestUserReply'])->name('LandTaxRefundRequestUserReply');
     Route::get('/user/account/TaxRefundRequest/{id}/pdf', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestUserExportPDF'])->name('LandTaxRefundRequestUserExportPDF');
+
+    //ค่าขยะ (หน้าเว็บ)
+    Route::get('/user/waste_payment', [UserWastePaymentController::class, 'UserWastePayment'])->name('UserWastePayment');
+    Route::get('/user/waste_payment/check-valuetrash', [CheckValuetrashController::class, 'CheckValuetrash'])->name('CheckValuetrash');
+    Route::get('/user/waste_payment/status-trash', [StatusTrashController::class, 'StatusTrash'])->name('StatusTrash');
+    Route::get('/user/waste_payment/trash-toxic', [TrashToxicController::class, 'TrashToxic'])->name('TrashToxic');
+
+    //แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
+    Route::get('/user/account/GarbageCollection/show-details', [GarbageCollectionController::class, 'GarbageCollectionShowDetails'])->name('GarbageCollectionShowDetails');
+    Route::post('/user/account/GarbageCollection/{form}/reply', [GarbageCollectionController::class, 'GarbageCollectionUserReply'])->name('GarbageCollectionUserReply');
+    Route::get('/user/account/GarbageCollection/{id}/pdf', [GarbageCollectionController::class, 'GarbageCollectionUserExportPDF'])->name('GarbageCollectionUserExportPDF');
 });
 
 Route::middleware(['admin'])->group(function () {
@@ -222,10 +242,12 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/tax_refund_requests/export-pdf/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestAdminExportPDF'])->name('LandTaxRefundRequestAdminExportPDF');
     Route::post('/admin/tax_refund_requests/admin-reply/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestAdminReply'])->name('LandTaxRefundRequestAdminReply');
     Route::post('/admin/tax_refund_requests/update-status/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestUpdateStatus'])->name('LandTaxRefundRequestUpdateStatus');
-});
 
-Route::middleware(['user_waste_payment'])->group(function () {
-    Route::get('/user/waste_payment', [UserWastePaymentController::class, 'UserWastePayment'])->name('UserWastePayment');
+    //แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
+    Route::get('/admin/GarbageCollection/showdata', [AdminGarbageCollectionController::class, 'GarbageCollectionAdminShowData'])->name('GarbageCollectionAdminShowData');
+    Route::get('/admin/GarbageCollection/export-pdf/{id}', [AdminGarbageCollectionController::class, 'GarbageCollectionAdminExportPDF'])->name('GarbageCollectionAdminExportPDF');
+    Route::post('/admin/GarbageCollection/admin-reply/{id}', [AdminGarbageCollectionController::class, 'AdminGarbageCollectionAdminReply'])->name('AdminGarbageCollectionAdminReply');
+    Route::post('/admin/GarbageCollection/update-status/{id}', [AdminGarbageCollectionController::class, 'AdminGarbageCollectionUpdateStatus'])->name('AdminGarbageCollectionUpdateStatus');
 });
 
 Route::middleware(['admin_waste_payment'])->group(function () {

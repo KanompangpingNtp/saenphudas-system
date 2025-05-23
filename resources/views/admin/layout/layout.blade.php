@@ -104,6 +104,10 @@
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             คำร้องคัดค้านการประเมินภาษีหรือ การเรียกเก็บภาษีที่ดินและสิ่งปลูกสร้าง
                         </a>
+                          <a class="nav-link" href="{{ route('GarbageCollectionAdminShowData') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
+                            แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
+                        </a>
                     </div>
                 </div>
                 {{-- <div class="sb-sidenav-footer">

@@ -28,11 +28,9 @@ class AuthController extends Controller
             if (Auth::user()->level === '1') {
                 return redirect()->route('AdminIndex');
             } elseif (Auth::user()->level === '2') {
-                return redirect()->route('UserIndex');
+                return redirect()->route('Home');
             } elseif (Auth::user()->level === '3') {
                 return redirect()->route('AdminWastePayment');
-            } elseif (Auth::user()->level === '4') {
-                return redirect()->route('UserWastePayment');
             }
         }
 

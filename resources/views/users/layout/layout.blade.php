@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -61,7 +62,7 @@
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu" style="overflow-y: auto; max-height: calc(100vh - 100px);">
+                <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">เมนู</div>
                         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#ops1"
@@ -255,6 +256,26 @@
                                 <a class="nav-link" href="{{ route('LandTaxRefundRequestPage') }}">ฟอร์ม</a>
                                 <a class="nav-link"
                                     href="{{ route('LandTaxRefundRequestShowDetails') }}">ประวัติการส่งฟอร์ม</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#option1" aria-expanded="false"
+                            aria-controls="option1">
+                            <div class="sb-nav-link-icon">
+                                <i class="bi bi-clipboard"></i>
+                            </div>
+                            แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย
+                            <div class="sb-sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div class="collapse" id="option1" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ route('GarbageCollectionForm') }}">ฟอร์ม</a>
+                                <a class="nav-link"
+                                    href="{{ route('GarbageCollectionShowDetails') }}">ประวัติการส่งฟอร์ม</a>
                             </nav>
                         </div>
                     </div>

@@ -34,6 +34,7 @@ use App\Http\Controllers\waste_payment\UserWastePaymentController;
 use App\Http\Controllers\waste_payment\CheckValuetrashController;
 use App\Http\Controllers\waste_payment\StatusTrashController;
 use App\Http\Controllers\waste_payment\TrashToxicController;
+use App\Http\Controllers\trash_can_installation\TrashCanInstallationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -252,4 +253,9 @@ Route::middleware(['admin'])->group(function () {
 
 Route::middleware(['admin_waste_payment'])->group(function () {
     Route::get('/admin/waste_payment', [AdminWastePaymentController::class, 'AdminWastePayment'])->name('AdminWastePayment');
+
+    Route::get('/admin/trash_can_installation', [TrashCanInstallationController::class, 'TrashCanInstallationPage'])->name('TrashCanInstallationPage');
+    Route::get('/admin/trash_can_installation/detail/{id}', [TrashCanInstallationController::class, 'TrashCanInstallationDetail'])->name('TrashCanInstallationDetail');
+    Route::post('/admin/trash_can_installation/detail/update-trash-status/{id}', [TrashCanInstallationController::class, 'updateTrashStatus'])->name('updateTrashStatus');
+
 });

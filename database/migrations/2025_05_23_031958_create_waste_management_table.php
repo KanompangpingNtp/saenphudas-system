@@ -25,9 +25,12 @@ return new class extends Migration
             $table->string('province');
             $table->string('phone');
             $table->string('optione');
-            $table->text('optione_detail');
+            $table->text('optione_detail')->nullable();
             $table->string('lat');
             $table->string('lng');
+            $table->string('user_latitude');
+            $table->string('user_longitude');
+            $table->string('trash_can_status');
             $table->timestamps();
         });
     }

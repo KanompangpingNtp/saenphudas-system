@@ -40,21 +40,26 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <span style="margin-right: 15px;">{{ Auth::user()->name }}</span> <i
-                        class="fas fa-user fa-fw ms-1"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li>
-                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                            @csrf
-                            <button type="submit" class="dropdown-item">
-                                ออกจากระบบ<i class="bi bi-door-closed-fill ms-3"></i>
-                            </button>
-                        </form>
-                    </li>
-                </ul>
+                @auth
+                    <!-- เมนูสำหรับผู้ใช้ที่ล็อกอินแล้ว -->
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user fa-fw"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="dropdown-item">
+                                    ออกจากระบบ<i class="bi bi-door-closed-fill ms-3"></i>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                @else
+                    <!-- เมนูสำหรับผู้ที่ยังไม่ได้ล็อกอิน -->
+                    <a class="nav-link btn btn-primary" href="{{ route('LoginPage') }}">เข้าสู่ระบบ</a>
+                @endauth
             </li>
         </ul>
 
@@ -259,9 +264,8 @@
                             </nav>
                         </div>
 
-                        <a class="nav-link collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#option1" aria-expanded="false"
-                            aria-controls="option1">
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#option1"
+                            aria-expanded="false" aria-controls="option1">
                             <div class="sb-nav-link-icon">
                                 <i class="bi bi-clipboard"></i>
                             </div>

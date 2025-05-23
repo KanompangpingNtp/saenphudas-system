@@ -28,10 +28,12 @@ class GarbageCollectionController extends Controller
             'district' => 'required|string|max:100',
             'province' => 'required|string|max:100',
             'phone' => 'required|string|max:20',
-            'optione' => 'required|array',
-            'optione_detail' => 'nullable|string',
-            'latitude' => 'required|string',
-            'longitude' => 'required|string',
+            'optione' => 'required|string|in:1,2,3,4,5',
+            'optione_detail' => 'nullable|string|required_if:optione,5',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'user_latitude' => 'required|numeric',
+            'user_longitude' => 'required|numeric',
             'attachments.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
 
@@ -39,6 +41,7 @@ class GarbageCollectionController extends Controller
 
         $waste = WasteManagement::create([
             'users_id' => Auth::id(),
+            'status' => 1,
             'salutation' => $request->salutation,
             'name' => $request->full_name,
             'address' => $request->address,
@@ -47,10 +50,13 @@ class GarbageCollectionController extends Controller
             'district' => $request->district,
             'province' => $request->province,
             'phone' => $request->phone,
-            'optione' => implode(',', $request->optione),
+            'optione' => $request->optione,
             'optione_detail' => $request->optione_detail,
             'lat' => $request->latitude,
             'lng' => $request->longitude,
+            'user_latitude' => $request->user_latitude,
+            'user_longitude' => $request->user_longitude,
+            'trash_can_status' => 1,
         ]);
 
         if ($request->hasFile('attachments')) {

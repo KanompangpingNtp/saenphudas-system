@@ -88,7 +88,7 @@
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-2 mb-xl-0">
                                 คำขอรับใบอนุญาต จัดตั้งสถานที่จำหน่ายอาหารหรือสถานที่สะสมอาหาร
                             </a>
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('GarbageCollectionForm') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-1 mb-xl-0">
                                 คำร้องทั่วไปขอถังขยะ

@@ -54,6 +54,14 @@
     </div>
 
     <ul class="menu-inner py-1">
+        {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">ประวัติ</span></li> --}}
+
+        <li class="menu-item {{ request()->is('admin/waste_payment*') ? 'active' : '' }}">
+            <a href="{{ route('AdminWastePayment') }}" class="menu-link">
+                <div data-i18n="Analytics">Dashboard</div>
+            </a>
+        </li>
+
         <li class="menu-header small text-uppercase"><span class="menu-header-text">จัดการข้อมูล</span></li>
 
         <li class="menu-item {{ request()->is('admin/trash_can_installation*') ? 'active' : '' }}">
@@ -62,7 +70,30 @@
                 <div data-i18n="Analytics">ตำแหน่งที่ติดตั้งถังขยะ</div>
             </a>
         </li>
-        <!-- เพิ่มเมนูอื่น ๆ ตามต้องการ -->
+
+        <li class="menu-item {{ request()->is('admin/trash_installer*') ? 'active' : '' }}">
+            <a href="{{ route('TrashInstallerPage') }}" class="menu-link">
+                <i class='menu-icon tf-icons bx  bx-trash'  ></i>
+                <div data-i18n="Analytics">ผู้ใช้บริการติดตั้งถังขยะ</div>
+            </a>
+        </li>
+
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">ประวัติ</span></li>
+
+        <li class="menu-item {{ request()->is('admin/verify_payment*') ? 'active' : '' }}">
+            <a href="{{ route('VerifyPaymentPage') }}" class="menu-link">
+                <i class='menu-icon tf-icons bx  bx-credit-card-alt'></i>
+                <div data-i18n="Analytics">ตรวจสอบการชำระเงิน</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ request()->is('admin/payment_history*') ? 'active' : '' }}">
+            <a href="{{ route('PaymentHistoryPage') }}" class="menu-link">
+                <i class='menu-icon tf-icons bx  bx-history'></i>
+                <div data-i18n="Analytics">ประวัติการชำระเงิน</div>
+            </a>
+        </li>
+
     </ul>
 </aside>
 <!-- / Sidebar -->

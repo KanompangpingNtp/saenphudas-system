@@ -109,8 +109,9 @@
 
     .custom-table td,
     .custom-table th {
-        border: 1px solid #ccc; /* สีเส้นขอบ */
-  padding: 10px;
+        border: 1px solid #ccc;
+        /* สีเส้นขอบ */
+        padding: 10px;
         vertical-align: middle;
         text-align: center;
         white-space: nowrap;
@@ -136,7 +137,8 @@
                 <!-- แถวที่ 1: input 3 ช่อง -->
                 <div class="col-lg-4 mb-2">
                     <div class="bg-green p-2 rounded-3">
-                        <input type="text" class="bg-green border-0 w-100 no-click" value="นายระบบ เทสไปก่อน" readonly>
+                        <input type="text" class="bg-green border-0 w-100 no-click"
+                            value="{{ $user->userDetail->salutation }}{{ $user->name }}" readonly>
                     </div>
                 </div>
                 <div class="col-lg-2 mb-2">
@@ -155,7 +157,7 @@
                 <!-- แถวที่ 2: textarea -->
                 <div class="col-12">
                     <div class="bg-white p-3 rounded-3">
-                        <textarea name="address" id="address" class="border-0 w-100 fs-3 fw-bold no-click" rows="4" readonly>ที่อยู่: 100/22 ม.44 หมู่บ้านสะท้านฟ้า ต.โลกาวินาศ จ.สวรรค์ทลาย 9999</textarea>
+                        <textarea name="address" id="address" class="border-0 w-100 fs-3 fw-bold no-click" rows="4" readonly>ที่อยู่: {{ $user->userDetail->house_number }} ม.{{ $user->userDetail->village }} ต.{{ $user->userDetail->subdistrict }} อ.{{ $user->userDetail->district }} จ.{{ $user->userDetail->province }} 9999</textarea>
                     </div>
                 </div>
             </div>
@@ -163,7 +165,7 @@
                 ประวัติการชำระ
             </div>
             <div class="table-wrapper">
-                <table class="custom-table rounded-table w-100">
+                {{-- <table class="custom-table rounded-table w-100">
                     <thead>
                         <tr>
                             <th>เดือน</th>
@@ -183,16 +185,100 @@
                             <td><a href="#"><img src="{{asset('check-valuetrash/search.png')}}" alt="search"></a></td>
                             <td><a href="#"><img src="{{asset('check-valuetrash/tips.png')}}" alt="tips"></a></td>
                         </tr>
+                    </tbody>
+                </table> --}}
+
+                <table class="custom-table rounded-table w-100">
+                    <thead>
                         <tr>
-                            <td>กุมภาพันธ์</td>
-                            <td>ค่าชำระขยะประจำเดือน</td>
-                            <td>ชำระแล้ว</td>
-                            <td>เสร็จสิ้น</td>
-                            <td><a href="#"><img src="{{asset('check-valuetrash/search.png')}}" alt="search"></a></td>
-                            <td><a href="#"><img src="{{asset('check-valuetrash/tips.png')}}" alt="tips"></a></td>
+                            <th>เดือน</th>
+                            <th>รายการ</th>
+                            <th>สถานะ</th>
+                            <th>ใบเสร็จ</th>
+                            <th>ชำระ</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($payments as $payment)
+                            <tr>
+                                <td>{{ \Carbon\Carbon::parse($payment->due_date)->locale('th')->translatedFormat('F Y') }}
+                                </td>
+                                <td>ค่าชำระขยะประจำเดือน</td>
+                                <td>
+                                    @if ($payment->payment_status == 3)
+                                        <span class="text-success">ชำระเงินแล้ว</span>
+                                    @elseif ($payment->payment_status == 2)
+                                        <span class="text-warning">รอตรวจสอบ</span>
+                                    @elseif ($payment->payment_status == 1)
+                                        <span class="text-danger">ยังไม่ชำระเงิน</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="#"><img src="{{ asset('check-valuetrash/search.png') }}"
+                                            alt="search"></a>
+                                </td>
+                                <td>
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#paymentModal{{ $payment->id }}">
+                                        <img src="{{ asset('check-valuetrash/tips.png') }}" alt="tips">
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
+
+                @foreach ($payments as $payment)
+                    <div class="modal fade" id="paymentModal{{ $payment->id }}" tabindex="-1"
+                        aria-labelledby="paymentModalLabel{{ $payment->id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form action="{{ route('CheckValuetrashUpdateSlip', $payment->id) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('POST')
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="paymentModalLabel{{ $payment->id }}">รายละเอียดการชำระ
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="ปิด"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <p><strong>ยอดที่ต้องชำระ:</strong> {{ number_format($payment->amount, 2) }} บาท
+                                        </p>
+                                        <p><strong>กำหนดชำระ:</strong>
+                                            {{ \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y') }}</p>
+
+                                        @if ($payment->payment_slip)
+                                            <p><strong>สลิป:</strong></p>
+                                            <img src="{{ asset('storage/payment_slips/' . $payment->payment_slip) }}"
+                                                alt="slip" class="img-fluid rounded mb-2">
+                                        @endif
+
+                                        @if ($payment->payment_status == 1)
+                                            <div class="mb-3">
+                                                <label
+                                                    for="payment_slip_{{ $payment->id }}"><strong>แนบสลิป:</strong></label>
+                                                <input type="file" name="payment_slip"
+                                                    id="payment_slip_{{ $payment->id }}" class="form-control" required>
+                                            </div>
+                                        @endif
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">ปิด</button>
+                                        @if ($payment->payment_status == 1)
+                                            <button type="submit" class="btn btn-success">อัปโหลดสลิป</button>
+                                        @endif
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     @endsection

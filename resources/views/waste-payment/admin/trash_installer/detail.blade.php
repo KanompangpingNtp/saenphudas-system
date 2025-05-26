@@ -57,18 +57,52 @@
 
                     <br>
 
-                    @if ($form->trash_can_status == 1)
-                        <form action="{{ route('updateTrashStatus', $form->id) }}" method="POST"
-                            onsubmit="return confirm('ยืนยันการอัปเดตสถานะการติดตั้ง')">
-                            @csrf
-                            <button type="submit" class="btn btn-primary">ติดตั้งถังขยะแล้ว</button>
-                        </form>
-                    @endif
+                    <h5 class="text-center mt-3">ข้อมูลบิล</h5>
+
+                    <table class="table table-bordered" id="data_table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th class="text-center">จำนวนเงิน</th>
+                                <th class="text-center">สถานะการชำระ</th>
+                                <th class="text-center">วันที่ครบกำหนด</th>
+                                <th class="text-center">วันที่ชำระ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($form->payments as $index => $payment)
+                                <tr>
+                                    <td class="text-center">{{ $index + 1 }}</td>
+                                    <td class="text-center">{{ number_format($payment->amount, 2) }} บาท</td>
+                                    <td class="text-center">
+                                        @if ($payment->payment_status == 1)
+                                            <span class="badge bg-danger">ยังไม่ชำระ</span>
+                                        @elseif ($payment->payment_status == 2)
+                                            <span class="badge bg-warning text-dark">รอตรวจสอบ</span>
+                                        @elseif ($payment->payment_status == 3)
+                                            <span class="badge bg-success">ชำระแล้ว</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">{{ \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y') }}</td>
+                                    <td class="text-center">
+                                        @if ($payment->paid_at)
+                                            {{ \Carbon\Carbon::parse($payment->paid_at)->format('d/m/Y') }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('js/datatable.js') }}"></script>
+
     <script>
         let map, userMarker, trashMarker;
 
@@ -106,15 +140,13 @@
             });
 
             // เลือก icon ตาม trashCanStatus
-            const trashIcon = (trashCanStatus == 1) ?
-                {
-                    url: "https://cdn-icons-png.flaticon.com/512/679/679922.png",
-                    scaledSize: new google.maps.Size(40, 40),
-                } :
-                {
-                    url: "{{ asset('images/garbage_collection/trash-bin.png') }}",
-                    scaledSize: new google.maps.Size(32, 32),
-                };
+            const trashIcon = (trashCanStatus == 1) ? {
+                url: "https://cdn-icons-png.flaticon.com/512/679/679922.png",
+                scaledSize: new google.maps.Size(40, 40),
+            } : {
+                url: "{{ asset('images/garbage_collection/trash-bin.png') }}",
+                scaledSize: new google.maps.Size(32, 32),
+            };
 
             trashMarker = new google.maps.Marker({
                 position: trashLocation,

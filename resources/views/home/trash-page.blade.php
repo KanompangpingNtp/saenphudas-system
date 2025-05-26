@@ -27,7 +27,7 @@
             </div> --}}
             <div class="row justify-content-center align-items-center h-100">
                 <div class="col-6 col-md-4 d-flex flex-column justify-content-start align-items-center">
-                    <a href="#" class="btn-back-effect">
+                    <a href="{{ route('StatusTrash') }}" class="btn-back-effect">
                         <img src="{{ asset('trash-page/ดูสถานะรถขยะ.png') }}" alt="ดูสถานะรถขยะ" class="img-fluid">
                     </a>
                     <div class="d-none d-md-block fs-4 fw-bold mt-3 px-xl-5" style="line-height: 1;">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="col-6 col-md-4 d-flex flex-column justify-content-start align-items-center">
-                    <a href="#" class="btn-back-effect">
+                    <a href="{{ route('CheckValuetrash') }}" class="btn-back-effect">
                         <img src="{{ asset('trash-page/ดูข้อมูลการชำระ.png') }}" alt="ดูข้อมูลการชำระ" class="img-fluid">
                     </a>
                     <div class="d-none d-md-block fs-4 fw-bold mt-3 px-xl-5" style="line-height: 1;">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="col-6 col-md-4 d-flex flex-column justify-content-start align-items-center">
-                    <a href="#" class="btn-back-effect">
+                    <a href="{{ route('TrashToxic') }}" class="btn-back-effect">
                         <img src="{{ asset('trash-page/ดูจุดทิ้งขยะ.png') }}" alt="ดูจุดทิ้งขยะ" class="img-fluid">
                     </a>
                     <div class="d-none d-md-block fs-4 fw-bold mt-3 px-xl-5" style="line-height: 1;">

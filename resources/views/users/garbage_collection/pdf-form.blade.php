@@ -105,46 +105,63 @@
         <span>เขียนที่</span><span class="dotted-line" style="width: 30%; text-align: center; line-height: 1;"></span>
     </div>
     <div class="box_text" style="text-align: right; margin-top:0.5rem; margin-right:8rem;">
-        <span>วันที่</span><span class="dotted-line" style="width: 35%; text-align: center; line-height: 1;"></span>
+        <span>วันที่</span><span class="dotted-line"
+            style="width: 35%; text-align: center; line-height: 1;">{{ $form->created_at }}</span>
     </div>
     <div class="box_text" style="text-align: left;">
         <span>เรื่อง ขอรับบริการจัดเก็บขยะมูลฝอย</span><br>
         <span>เรียน นายกเทศมลตรีตำบลแสนภูดาษ</span>
     </div>
     <div class="box_text" style="text-align: left; margin-left:2rem; margin-top:1rem;">
-        <span>ข้าพเจ้า</span><span class="dotted-line" style="width: 46%; text-align: center; line-height: 1;"></span>
+        <span>ข้าพเจ้า</span><span class="dotted-line"
+            style="width: 46%; text-align: center; line-height: 1;">{{ $form->salutation }} {{ $form->name }}</span>
         <span>อยู่บ้านเลขที่</span><span class="dotted-line"
-            style="width: 10%; text-align: center; line-height: 1;"></span>
-        <span>หมู่ที่</span><span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
-        <span>ตำบล</span><span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
+            style="width: 10%; text-align: center; line-height: 1;">{{ $form->address }}</span>
+        <span>หมู่ที่</span><span class="dotted-line"
+            style="width: 10%; text-align: center; line-height: 1;">{{ $form->village }}</span>
+        <span>ตำบล</span><span class="dotted-line"
+            style="width: 10%; text-align: center; line-height: 1;">{{ $form->sub_district }}</span>
         <div class="box_text" style="text-align: left; margin-left:-2rem;">
-            <span>อำเภอ</span><span class="dotted-line" style="width: 15%; text-align: center; line-height: 1;"></span>
+            <span>อำเภอ</span><span class="dotted-line"
+                style="width: 15%; text-align: center; line-height: 1;">{{ $form->district }}</span>
             <span>จังหวัด</span><span class="dotted-line"
-                style="width: 15%; text-align: center; line-height: 1;"></span>
+                style="width: 15%; text-align: center; line-height: 1;">{{ $form->province }}</span>
             <span>เบอร์โทรศัพท์</span><span class="dotted-line"
-                style="width: 15%; text-align: center; line-height: 1;"></span>
+                style="width: 15%; text-align: center; line-height: 1;">{{ $form->phone }}</span>
         </div>
     </div>
     <div class="box_text" style="text-align: left; margin-left:2rem; margin-top:1rem;">
         <span class="font-weight: bold;">โปรดขีดเครื่องหมาย / ลงใน ()
             หน้าข้อความที่ตรงกับประเภทของสถานที่จัดเก็บขยะมูลฝอยของท่าน</span>
         <div class="box_text" style="text-align: left; margin-left:-2rem;">
-            <span><input type="checkbox"> บ้านที่อยู่อาศัย</span>
-            <span><input type="checkbox"> บ้านเช่า / อาคารให้เช่า</span>
-            <span><input type="checkbox"> ร้านค้า</span>
-            <span><input type="checkbox"> โรงงาน / ประกอบธุรกิจ</span>
-            <span><input type="checkbox"> อื่นๆ โปรดระบุ</span><span class="dotted-line"
-                style="width: 22%; text-align: center; line-height: 1;"></span>
+            <span>
+                <input type="checkbox" {{ $form->optione == 1 ? 'checked' : '' }}> บ้านที่อยู่อาศัย
+            </span>
+            <span>
+                <input type="checkbox" {{ $form->optione == 2 ? 'checked' : '' }}> บ้านเช่า / อาคารให้เช่า
+            </span>
+            <span>
+                <input type="checkbox" {{ $form->optione == 3 ? 'checked' : '' }}> ร้านค้า
+            </span>
+            <span>
+                <input type="checkbox" {{ $form->optione == 4 ? 'checked' : '' }}> โรงงาน / ประกอบธุรกิจ
+            </span>
+            <span>
+                <input type="checkbox" {{ $form->optione == 5 ? 'checked' : '' }}> อื่นๆ โปรดระบุ
+            </span>
+            <span class="dotted-line"
+                style="width: 22%; text-align: center; line-height: 1;">{{ $form->optione_detail }}</span>
         </div>
     </div>
     <div class="box_text" style="text-align: left; margin-left:2rem; margin-top:1rem;">
         <span>มีความประสงค์จะขอรับบริการจัดเก็บขยะมูลฝอย กับเทศบาลตำบลแสนภูดาษ ณ บ้านเลขที่</span><span
-            class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
-        <span>หมู่ที่</span><span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
+            class="dotted-line" style="width: 10%; text-align: center; line-height: 1;">{{ $form->address }}</span>
+        <span>หมู่ที่</span><span class="dotted-line"
+            style="width: 10%; text-align: center; line-height: 1;">{{ $form->village }}</span>
         <span>ตำบลแสนภูดาษ</span>
         <div class="box_text" style="text-align: left; margin-left:-2rem;">
             <span>อำเภอบ้านโพธิ์ จังหวัดฉะเชิงเทรา เบอร์โทรศัพท์</span><span class="dotted-line"
-                style="width: 20%; text-align: center; line-height: 1;"></span>
+                style="width: 20%; text-align: center; line-height: 1;">{{ $form->phone }}</span>
         </div>
     </div>
     <div class="box_text" style="text-align: left; margin-left:2rem; margin-top:1rem;">
@@ -183,12 +200,12 @@
     </div>
     <div class="box_text" style="text-align: right; margin-top:1rem; position: relative;">
         <span>ลงชื่อ</span>
-        <span class="dotted-line" style="width: 30%; text-align: center;">{{ $form->full_name }}</span>
+        <span class="dotted-line" style="width: 30%; text-align: center;">{{ $form->name }}</span>
         <span>ผู้ยื่นคำร้อง</span>
         <div style="margin-right: 55px;">
             <span>(</span>
             <span class="dotted-line"
-                style="width: 30%; text-align: center;">{{ $form->salutation }}&nbsp;{{ $form->full_name }}</span>
+                style="width: 30%; text-align: center;">{{ $form->salutation }}&nbsp;{{ $form->name }}</span>
             <span>)</span>
         </div>
     </div>
@@ -197,13 +214,13 @@
         <div style="width: 48%; float: left; text-align: right;">
             <span>ลงชื่อ</span>
             <span class="dotted-line" style="display: inline-block; width: 60%; text-align: center;">
-                {{ $form->full_name }}
+
             </span>
             <span>ผู้รับคำร้อง</span>
             <div style="margin-right: 55px;">
                 <span>(</span>
                 <span class="dotted-line" style="display: inline-block; width: 60%; text-align: center;">
-                    {{ $form->salutation }}&nbsp;{{ $form->full_name }}
+
                 </span>
                 <span>)</span>
             </div>
@@ -271,42 +288,58 @@
         <span>เขียนที่</span><span class="dotted-line" style="width: 30%; text-align: center; line-height: 1;"></span>
     </div>
     <div class="box_text" style="text-align: right; margin-top:0.5rem; margin-right:8rem;">
-        <span>วันที่</span><span class="dotted-line" style="width: 35%; text-align: center; line-height: 1;"></span>
+        <span>วันที่</span><span class="dotted-line"
+            style="width: 35%; text-align: center; line-height: 1;">{{ $form->created_at }}</span>
     </div>
     <div class="box_text" style="text-align: left;">
         <span>เรื่อง ขอรับบริการจัดเก็บขยะมูลฝอย</span><br>
         <span>เรียน นายกเทศมลตรีตำบลแสนภูดาษ</span>
     </div>
     <div class="box_text" style="text-align: left; margin-left:2rem; margin-top:1rem;">
-        <span>ข้าพเจ้า</span><span class="dotted-line" style="width: 46%; text-align: center; line-height: 1;"></span>
+        <span>ข้าพเจ้า</span><span class="dotted-line"
+            style="width: 46%; text-align: center; line-height: 1;">{{ $form->salutation }}
+            {{ $form->name }}</span>
         <span>อยู่บ้านเลขที่</span><span class="dotted-line"
-            style="width: 10%; text-align: center; line-height: 1;"></span>
-        <span>หมู่ที่</span><span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
-        <span>ตำบล</span><span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
+            style="width: 10%; text-align: center; line-height: 1;">{{ $form->address }}</span>
+        <span>หมู่ที่</span><span class="dotted-line"
+            style="width: 10%; text-align: center; line-height: 1;">{{ $form->village }}</span>
+        <span>ตำบล</span><span class="dotted-line"
+            style="width: 10%; text-align: center; line-height: 1;">{{ $form->sub_district }}</span>
         <div class="box_text" style="text-align: left; margin-left:-2rem;">
-            <span>อำเภอ</span><span class="dotted-line" style="width: 15%; text-align: center; line-height: 1;"></span>
+            <span>อำเภอ</span><span class="dotted-line"
+                style="width: 15%; text-align: center; line-height: 1;">{{ $form->district }}</span>
             <span>จังหวัด</span><span class="dotted-line"
-                style="width: 15%; text-align: center; line-height: 1;"></span>
+                style="width: 15%; text-align: center; line-height: 1;">{{ $form->province }}</span>
             <span>เบอร์โทรศัพท์</span><span class="dotted-line"
-                style="width: 15%; text-align: center; line-height: 1;"></span>
+                style="width: 15%; text-align: center; line-height: 1;">{{ $form->phone }}</span>
         </div>
     </div>
     <div class="box_text" style="text-align: left; margin-left:2rem; margin-top:1rem;">
         <span class="font-weight: bold;">โปรดขีดเครื่องหมาย / ลงใน ()
             หน้าข้อความที่ตรงกับประเภทของสถานที่จัดเก็บขยะมูลฝอยของท่าน</span>
         <div class="box_text" style="text-align: left; margin-left:-2rem;">
-            <span><input type="checkbox"> บ้านที่อยู่อาศัย</span>
-            <span><input type="checkbox"> บ้านเช่า / อาคารให้เช่า</span>
-            <span><input type="checkbox"> ร้านค้า</span>
-            <span><input type="checkbox"> โรงงาน / ประกอบธุรกิจ</span>
-            <span><input type="checkbox"> อื่นๆ โปรดระบุ</span><span class="dotted-line"
-                style="width: 22%; text-align: center; line-height: 1;"></span>
+            <span>
+                <input type="checkbox" {{ $form->optione == 1 ? 'checked' : '' }}> บ้านที่อยู่อาศัย
+            </span>
+            <span>
+                <input type="checkbox" {{ $form->optione == 2 ? 'checked' : '' }}> บ้านเช่า / อาคารให้เช่า
+            </span>
+            <span>
+                <input type="checkbox" {{ $form->optione == 3 ? 'checked' : '' }}> ร้านค้า
+            </span>
+            <span>
+                <input type="checkbox" {{ $form->optione == 4 ? 'checked' : '' }}> โรงงาน / ประกอบธุรกิจ
+            </span>
+            <span>
+                <input type="checkbox" {{ $form->optione == 5 ? 'checked' : '' }}> อื่นๆ โปรดระบุ
+            </span>
+            <span class="dotted-line" style="width: 22%; text-align: center; line-height: 1;">{{ $form->optione_detail }}</span>
         </div>
     </div>
     <div class="box_text" style="text-align: left; margin-left:2rem; margin-top:1rem;">
         <span>โดยมีความประสงค์จะขอรับบริการ ขอถังขยะมูลฝอยทั่วไปเพื่อใช้กับบ้านเลขที่</span>
-        <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
-        <span>หมู่ที่</span><span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
+        <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;">{{ $form->address }}</span>
+        <span>หมู่ที่</span><span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;">{{ $form->village }}</span>
         <span>ตำบลแสนภูดาษ อำเภอบ้านโพธิ์</span>
         <div class="box_text" style="text-align: left; margin-left:-2rem; margin-top:-0.8rem;">
             <span>จังหวัดฉะเชิงเทรา</span>
@@ -348,12 +381,12 @@
     </div>
     <div class="box_text" style="text-align: right; margin-top:1rem; position: relative;">
         <span>ลงชื่อ</span>
-        <span class="dotted-line" style="width: 30%; text-align: center;">{{ $form->full_name }}</span>
+        <span class="dotted-line" style="width: 30%; text-align: center;">{{ $form->name }}</span>
         <span>ผู้ยื่นคำร้อง</span>
         <div style="margin-right: 55px;">
             <span>(</span>
             <span class="dotted-line"
-                style="width: 30%; text-align: center;">{{ $form->salutation }}&nbsp;{{ $form->full_name }}</span>
+                style="width: 30%; text-align: center;">{{ $form->salutation }}&nbsp;{{ $form->name }}</span>
             <span>)</span>
         </div>
     </div>
@@ -362,13 +395,13 @@
         <div style="width: 48%; float: left; text-align: right;">
             <span>ลงชื่อ</span>
             <span class="dotted-line" style="display: inline-block; width: 60%; text-align: center;">
-                {{ $form->full_name }}
+
             </span>
             <span>ผู้รับคำร้อง</span>
             <div style="margin-right: 55px;">
                 <span>(</span>
                 <span class="dotted-line" style="display: inline-block; width: 60%; text-align: center;">
-                    {{ $form->salutation }}&nbsp;{{ $form->full_name }}
+
                 </span>
                 <span>)</span>
             </div>

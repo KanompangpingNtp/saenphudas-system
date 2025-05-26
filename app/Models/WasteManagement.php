@@ -42,4 +42,9 @@ class WasteManagement extends Model
     {
         return $this->hasMany(WasteManagementReply::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(WastePayment::class);
+    }
 }

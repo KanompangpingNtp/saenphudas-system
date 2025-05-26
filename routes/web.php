@@ -28,13 +28,16 @@ use App\Http\Controllers\tax_refund_requests\LandTaxRefundRequestController;
 use App\Http\Controllers\garbage_collection\AdminGarbageCollectionController;
 use App\Http\Controllers\garbage_collection\GarbageCollectionController;
 use App\Http\Controllers\emergency\EmergencyController;
-
 use App\Http\Controllers\waste_payment\AdminWastePaymentController;
 use App\Http\Controllers\waste_payment\UserWastePaymentController;
 use App\Http\Controllers\waste_payment\CheckValuetrashController;
 use App\Http\Controllers\waste_payment\StatusTrashController;
 use App\Http\Controllers\waste_payment\TrashToxicController;
 use App\Http\Controllers\trash_can_installation\TrashCanInstallationController;
+use App\Http\Controllers\verify_payment\VerifyPaymentController;
+use App\Http\Controllers\payment_history\PaymentHistoryController;
+use App\Http\Controllers\trash_installer\TrashInstallerController;
+use App\Http\Controllers\non_payment\NonPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -171,8 +174,12 @@ Route::middleware(['user'])->group(function () {
 
     //ค่าขยะ (หน้าเว็บ)
     Route::get('/user/waste_payment', [UserWastePaymentController::class, 'UserWastePayment'])->name('UserWastePayment');
+
     Route::get('/user/waste_payment/check-valuetrash', [CheckValuetrashController::class, 'CheckValuetrash'])->name('CheckValuetrash');
+    Route::post('/user/waste_payment/check-valuetrash/update-slip/{id}', [CheckValuetrashController::class, 'CheckValuetrashUpdateSlip'])->name('CheckValuetrashUpdateSlip');
+
     Route::get('/user/waste_payment/status-trash', [StatusTrashController::class, 'StatusTrash'])->name('StatusTrash');
+
     Route::get('/user/waste_payment/trash-toxic', [TrashToxicController::class, 'TrashToxic'])->name('TrashToxic');
 
     //แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
@@ -257,5 +264,15 @@ Route::middleware(['admin_waste_payment'])->group(function () {
     Route::get('/admin/trash_can_installation', [TrashCanInstallationController::class, 'TrashCanInstallationPage'])->name('TrashCanInstallationPage');
     Route::get('/admin/trash_can_installation/detail/{id}', [TrashCanInstallationController::class, 'TrashCanInstallationDetail'])->name('TrashCanInstallationDetail');
     Route::post('/admin/trash_can_installation/detail/update-trash-status/{id}', [TrashCanInstallationController::class, 'updateTrashStatus'])->name('updateTrashStatus');
+    Route::post('/admin/trash_can_installation/bill/create/{id}', [TrashCanInstallationController::class, 'CreateBill'])->name('CreateBill');
 
+    Route::get('/admin/verify_payment', [VerifyPaymentController::class, 'VerifyPaymentPage'])->name('VerifyPaymentPage');
+    Route::post('/admin/verify_payment/approve/{id}', [VerifyPaymentController::class, 'approvePayment'])->name('approvePayment');
+
+    Route::get('/admin/payment_history', [PaymentHistoryController::class, 'PaymentHistoryPage'])->name('PaymentHistoryPage');
+
+    Route::get('/admin/trash_installer', [TrashInstallerController::class, 'TrashInstallerPage'])->name('TrashInstallerPage');
+    Route::get('/admin/trash_installer/detail/{id}', [TrashInstallerController::class, 'TrashInstallerDetail'])->name('TrashInstallerDetail');
+
+    Route::get('/admin/waste_payment/non_payment', [NonPaymentController::class, 'NonPaymentPage'])->name('NonPaymentPage');
 });

@@ -35,13 +35,21 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('TrashCanInstallationDetail', $form->id) }}"
-                                            class="btn btn-primary btn-sm"><i class='bx  bx-search-alt'></i></a>
+                                        <div class="d-inline">
+                                            <a href="{{ route('TrashCanInstallationDetail', $form->id) }}"
+                                                class="btn btn-primary btn-sm"><i class='bx bx-search-alt'></i></a>
+                                        </div>
 
                                         @if ($form->trash_can_status == 2)
-                                            <button class="btn btn-warning btn-sm">
-                                                <i class='bx bx-wallet-alt'></i>
-                                            </button>
+                                            <div class="d-inline">
+                                                <form action="{{ route('CreateBill', $form->id) }}" method="POST"
+                                                    style="display:inline;" onsubmit="return confirm('ยืนยันการเรียกชำระเงิน')">
+                                                    @csrf
+                                                    <button class="btn btn-warning btn-sm">
+                                                        <i class='bx bx-wallet-alt'></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         @endif
                                     </td>
                                 </tr>

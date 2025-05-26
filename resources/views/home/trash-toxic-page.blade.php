@@ -50,15 +50,24 @@
         width: 100%;
     }
 </style>
-@php
+{{-- @php
     // จำลองข้อมูลพิกัด 5 จุดเริ่มต้น
     $movingPoints = [
-        ['id' => 1, 'lat' => 13.736717, 'lng' => 100.523186],
-        ['id' => 2, 'lat' => 13.738, 'lng' => 100.525],
-        ['id' => 3, 'lat' => 13.734, 'lng' => 100.522],
-        ['id' => 4, 'lat' => 13.737, 'lng' => 100.526],
-        ['id' => 5, 'lat' => 13.7355, 'lng' => 100.524],
+        // ['id' => 1, 'lat' => 15.86471156192326, 'lng' => 100.59032409380147],
+        // ['id' => 2, 'lat' => 13.738, 'lng' => 100.525],
+        // ['id' => 3, 'lat' => 13.734, 'lng' => 100.522],
+        // ['id' => 4, 'lat' => 13.737, 'lng' => 100.526],
+        // ['id' => 5, 'lat' => 13.7355, 'lng' => 100.524],
     ];
+@endphp --}}
+@php
+    $movingPoints = $movingPoints->map(function ($point) {
+        return [
+            'id' => $point->id,
+            'lat' => (float) $point->lat,
+            'lng' => (float) $point->lng,
+        ];
+    });
 @endphp
 @section('content')
     <div class="body-bg py-4">
@@ -89,7 +98,8 @@
                     </div>
                     <div class="row justify-content-center align-items-center ">
                         <div class="col-6 d-block d-lg-none">
-                            <img src="{{ asset('icon-location/detail-trash-toxic.png') }}" alt="detail-trash-toxic" class="img-fluid ">
+                            <img src="{{ asset('icon-location/detail-trash-toxic.png') }}" alt="detail-trash-toxic"
+                                class="img-fluid ">
                         </div>
                         <div class="col-6 d-block d-lg-none">
                             <img src="{{ asset('icon-location/detail-user.png') }}" alt="detail-user" class="img-fluid">
@@ -161,7 +171,7 @@
                     map: map,
                     title: `จุดที่เคลื่อนที่ ${point.id}`,
                     icon: {
-                        url: "{{ asset('icon-location/location-red.png') }}",
+                        url: "{{ asset('images/garbage_collection/trash-bin.png') }}",
                         scaledSize: new google.maps.Size(32, 32),
                     },
                 });

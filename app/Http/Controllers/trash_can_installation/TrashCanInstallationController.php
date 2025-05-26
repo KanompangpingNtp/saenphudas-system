@@ -5,6 +5,7 @@ namespace App\Http\Controllers\trash_can_installation;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\WasteManagement;
+use App\Models\WastePayment;
 
 class TrashCanInstallationController extends Controller
 {
@@ -29,5 +30,31 @@ class TrashCanInstallationController extends Controller
         $form->save();
 
         return redirect()->back()->with('success', 'อัปเดตสถานะถังขยะเรียบร้อยแล้ว');
+    }
+
+    public function CreateBill($id)
+    {
+        $form = WasteManagement::findOrFail($id);
+        $form->trash_can_status = 3;
+        $form->save();
+
+        $existing = WastePayment::where('waste_management_id', $id)->first();
+        if ($existing) {
+            return redirect()->back()->with('error', 'มีรายการชำระเงินแล้ว');
+        }
+
+        $amount = 100.00;
+        $createdAt = now();
+        $dueDate = $createdAt->copy()->addMonth();
+
+        WastePayment::create([
+            'waste_management_id' => $id,
+            'amount' => $amount,
+            'payment_status' => 1,
+            'due_date' => $dueDate,
+            'paid_at' => $createdAt,
+        ]);
+
+        return redirect()->back()->with('success', 'สร้างรายการชำระเงินเรียบร้อย');
     }
 }

@@ -12,6 +12,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 <style>
     @font-face {
@@ -166,6 +169,23 @@
 </style>
 
 <body class="d-flex flex-column min-vh-100">
+     @if ($message = Session::get('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ $message }}',
+            });
+        </script>
+    @endif
+
+    @if ($message = Session::get('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ $message }}',
+            });
+        </script>
+    @endif
     <!-- Header -->
     <header class="header-bg pt-2 pb-4">
         <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center">

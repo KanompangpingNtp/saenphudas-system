@@ -41,9 +41,33 @@
 
     <!-- jQuery (ต้องใช้กับ DataTables) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 
 <body class="layout-menu-fixed">
+
+    @if ($message = Session::get('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ $message }}',
+            });
+        </script>
+    @endif
+
+    @if ($message = Session::get('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ $message }}',
+            });
+        </script>
+    @endif
+
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             @include('waste-payment.layouts.partials.sidebar') <!-- เมนูซ้าย -->

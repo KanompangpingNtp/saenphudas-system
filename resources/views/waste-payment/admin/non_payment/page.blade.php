@@ -6,6 +6,38 @@
                 <div class="card-body">
                     <h3 class="text-center mb-4">ผู้ขาดการชำระเงิน</h3>
 
+                    <form method="GET" action="{{ route('NonPaymentPage') }}" class="row g-2 mb-3">
+                        <div class="col-md-2">
+                            <select name="month" class="form-select">
+                                <option value="">-- เลือกเดือน --</option>
+                                @foreach (range(1, 12) as $m)
+                                    <option value="{{ $m }}" {{ request('month') == $m ? 'selected' : '' }}
+                                        {{ in_array($m, $availableMonths) ? '' : 'disabled' }}>
+                                        {{ \Carbon\Carbon::create()->month($m)->locale('th')->isoFormat('MMMM') }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <select name="year" class="form-select">
+                                <option value="">-- เลือกปี --</option>
+                                @for ($y = now()->year; $y >= now()->year - 5; $y--)
+                                    <option value="{{ $y }}" {{ request('year') == $y ? 'selected' : '' }}
+                                        {{ in_array($y, $availableYears) ? '' : 'disabled' }}>
+                                        {{ $y + 543 }}
+                                    </option>
+                                @endfor
+                            </select>
+                        </div>
+
+                        <div class="col-md-1">
+                            <button type="submit" class="btn btn-primary">
+                                <i class='bx bx-search-alt'></i>
+                            </button>
+                        </div>
+                    </form>
+
                     <table class="table table-bordered table-striped" id="data_table">
                         <thead>
                             <tr>
@@ -41,7 +73,8 @@
                                             <span class="badge bg-secondary">สถานะอื่นๆ</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{ \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y') }}</td>
+                                    <td class="text-center">
+                                        {{ \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

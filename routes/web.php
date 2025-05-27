@@ -38,6 +38,8 @@ use App\Http\Controllers\verify_payment\VerifyPaymentController;
 use App\Http\Controllers\payment_history\PaymentHistoryController;
 use App\Http\Controllers\trash_installer\TrashInstallerController;
 use App\Http\Controllers\non_payment\NonPaymentController;
+use App\Http\Controllers\health_hazard_applications\AdminHealthHazardApplicationController;
+use App\Http\Controllers\health_hazard_applications\HealthHazardApplicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,6 +103,10 @@ Route::post('/land_building_tax_appeals/form/create', [LandBuildingTaxAppealCont
 //คำร้องขอรับเงินภาษีที่ดินและสิ่งปลูกสร้างคืน
 Route::get('/tax_refund_requests', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestPage'])->name('LandTaxRefundRequestPage');
 Route::post('/tax_refund_requests/form/create', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestFormCreate'])->name('LandTaxRefundRequestFormCreate');
+
+//แบบคำร้องใบอณุญาตประกอบกิจการที่เป็นอันตรายต่อสุขภาพ
+Route::get('/health_hazard_applications', [HealthHazardApplicationController::class, 'HealthHazardApplicationFormPage'])->name('HealthHazardApplicationFormPage');
+Route::post('/health_hazard_applications/form/create', [HealthHazardApplicationController::class, 'HealthHazardApplicationFormCreate'])->name('HealthHazardApplicationFormCreate');
 
 //ตัวแจ้งเหตุ
 Route::get('/emergency', [EmergencyController::class, 'index'])->name('emergency.index');
@@ -186,6 +192,18 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user/account/GarbageCollection/show-details', [GarbageCollectionController::class, 'GarbageCollectionShowDetails'])->name('GarbageCollectionShowDetails');
     Route::post('/user/account/GarbageCollection/{form}/reply', [GarbageCollectionController::class, 'GarbageCollectionUserReply'])->name('GarbageCollectionUserReply');
     Route::get('/user/account/GarbageCollection/{id}/pdf', [GarbageCollectionController::class, 'GarbageCollectionUserExportPDF'])->name('GarbageCollectionUserExportPDF');
+
+    //แบบคำร้องใบอณุญาตประกอบกิจการที่เป็นอันตรายต่อสุขภาพ
+    Route::get('/user-account/health_hazard_applications/show-details', [HealthHazardApplicationController::class, 'HealthHazardApplicationShowDetails'])->name('HealthHazardApplicationShowDetails');
+    Route::get('/user-account/health_hazard_applications/export-pdf/{id}', [HealthHazardApplicationController::class, 'HealthHazardApplicationUserExportPDF'])->name('HealthHazardApplicationUserExportPDF');
+    Route::post('/user-account/health_hazard_applications/reply/{id}', [HealthHazardApplicationController::class, 'HealthHazardApplicationUserReply'])->name('HealthHazardApplicationUserReply');
+    Route::get('/user-account/health_hazard_applications/show-edit/{id}', [HealthHazardApplicationController::class, 'HealthHazardApplicationUserShowFormEdit'])->name('HealthHazardApplicationUserShowFormEdit');
+    Route::get('/user-account/certificate/health_hazard_applications/export-pdf/{id}', [HealthHazardApplicationController::class, 'CertificateHealthHazardPDF'])->name('CertificateHealthHazardPDF');
+    Route::get('/user-account/health_hazard_applications/detail/{id}', [HealthHazardApplicationController::class, 'HealthHazardApplicationDetail'])->name('HealthHazardApplicationDetail');
+    Route::get('/user-account/health_hazard_applications/calendar/{id}', [HealthHazardApplicationController::class, 'HealthHazardApplicationCalendar'])->name('HealthHazardApplicationCalendar');
+    Route::put('/user-account/health_hazard_applications/calendarSave', [HealthHazardApplicationController::class, 'HealthHazardApplicationCalendarSave'])->name('HealthHazardApplicationCalendarSave');
+    Route::get('/user-account/health_hazard_applications/payment/{id}', [HealthHazardApplicationController::class, 'HealthHazardApplicationPayment'])->name('HealthHazardApplicationPayment');
+    Route::put('/user-account/health_hazard_applications/paymentSave', [HealthHazardApplicationController::class, 'HealthHazardApplicationPaymentSave'])->name('HealthHazardApplicationPaymentSave');
 });
 
 Route::middleware(['admin'])->group(function () {
@@ -256,6 +274,26 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/GarbageCollection/export-pdf/{id}', [AdminGarbageCollectionController::class, 'GarbageCollectionAdminExportPDF'])->name('GarbageCollectionAdminExportPDF');
     Route::post('/admin/GarbageCollection/admin-reply/{id}', [AdminGarbageCollectionController::class, 'AdminGarbageCollectionAdminReply'])->name('AdminGarbageCollectionAdminReply');
     Route::post('/admin/GarbageCollection/update-status/{id}', [AdminGarbageCollectionController::class, 'AdminGarbageCollectionUpdateStatus'])->name('AdminGarbageCollectionUpdateStatus');
+
+    //แบบคำร้องใบอณุญาตประกอบกิจการที่เป็นอันตรายต่อสุขภาพ
+    Route::get('/admin/health_hazard_applications/showdata', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminShowData'])->name('HealthHazardApplicationAdminShowData');
+    Route::get('/admin/health_hazard_applications/appointment', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminAppointment'])->name('HealthHazardApplicationAdminAppointment');
+    Route::get('/admin/health_hazard_applications/export-pdf/{id}', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminExportPDF'])->name('HealthHazardApplicationAdminExportPDF');
+    Route::post('/admin/health_hazard_applications/admin-reply/{id}', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminReply'])->name('HealthHazardApplicationAdminReply');
+    Route::post('/admin/health_hazard_applications/update-status/{id}', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationUpdateStatus'])->name('HealthHazardApplicationUpdateStatus');
+    Route::get('/admin/health_hazard_applications/confirm/{id}', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminConfirm'])->name('HealthHazardApplicationAdminConfirm');
+    Route::put('/admin/health_hazard_applications/confirm', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminConfirmSave'])->name('HealthHazardApplicationAdminConfirmSave');
+    Route::get('/admin/health_hazard_applications/detail/{id}', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminDetail'])->name('HealthHazardApplicationAdminDetail');
+    Route::get('/admin/health_hazard_applications/calendar/{id}', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminCalendar'])->name('HealthHazardApplicationAdminCalendar');
+    Route::put('/admin/health_hazard_applications/calendarSave', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminCalendarSave'])->name('HealthHazardApplicationAdminCalendarSave');
+    Route::get('/admin/health_hazard_applications/explore', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminExplore'])->name('HealthHazardApplicationAdminExplore');
+    Route::get('/admin/health_hazard_applications/checklist/{id}', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminChecklist'])->name('HealthHazardApplicationAdminChecklist');
+    Route::put('/admin/health_hazard_applications/checklistSave', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminChecklistSave'])->name('HealthHazardApplicationAdminChecklistSave');
+    Route::get('/admin/health_hazard_applications/payment', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminPayment'])->name('HealthHazardApplicationAdminPayment');
+    Route::get('/admin/health_hazard_applications/payment-check/{id}', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminPaymentCheck'])->name('HealthHazardApplicationAdminPaymentCheck');
+    Route::put('/admin/health_hazard_applications/paymentSave', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminPaymentSave'])->name('HealthHazardApplicationAdminPaymentSave');
+    Route::get('/admin/health_hazard_applications/approve', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminApprove'])->name('HealthHazardApplicationAdminApprove');
+    Route::get('/admin/certificate/health_hazard_applications/export-pdf/{id}', [AdminHealthHazardApplicationController::class, 'AdminCertificateHealthHazardApplicationPDF'])->name('AdminCertificateHealthHazardApplicationPDF');
 });
 
 Route::middleware(['admin_waste_payment'])->group(function () {
@@ -270,9 +308,10 @@ Route::middleware(['admin_waste_payment'])->group(function () {
     Route::post('/admin/verify_payment/approve/{id}', [VerifyPaymentController::class, 'approvePayment'])->name('approvePayment');
 
     Route::get('/admin/payment_history', [PaymentHistoryController::class, 'PaymentHistoryPage'])->name('PaymentHistoryPage');
+    Route::post('/admin/payment_history/upload-bill/{id}', [PaymentHistoryController::class, 'uploadBill'])->name('uploadBill');
 
     Route::get('/admin/trash_installer', [TrashInstallerController::class, 'TrashInstallerPage'])->name('TrashInstallerPage');
     Route::get('/admin/trash_installer/detail/{id}', [TrashInstallerController::class, 'TrashInstallerDetail'])->name('TrashInstallerDetail');
 
-    Route::get('/admin/waste_payment/non_payment', [NonPaymentController::class, 'NonPaymentPage'])->name('NonPaymentPage');
+    Route::get('/admin/non_payment', [NonPaymentController::class, 'NonPaymentPage'])->name('NonPaymentPage');
 });

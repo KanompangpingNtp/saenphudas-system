@@ -33,7 +33,7 @@
                                 <div class="card-body text-center">
                                     <h5 class="card-title text-white">รอตรวจสอบการชำระ</h5>
                                     <p class="card-text display-6">{{ $verifyCount }} คน</p>
-                                    <a href="#" class="btn btn-light btn-sm">ดูรายละเอียด</a>
+                                    <a href="{{ route('VerifyPaymentPage') }}" class="btn btn-light btn-sm">ดูรายละเอียด</a>
                                 </div>
                             </div>
                         </div>

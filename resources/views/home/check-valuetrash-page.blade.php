@@ -214,8 +214,11 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#"><img src="{{ asset('check-valuetrash/search.png') }}"
-                                            alt="search"></a>
+                                    @if (!is_null($payment->bill))
+                                        <a href="{{ asset('storage/bills/' . $payment->bill) }}" target="_blank">
+                                            <img src="{{ asset('check-valuetrash/search.png') }}" alt="search">
+                                        </a>
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="#" data-bs-toggle="modal"

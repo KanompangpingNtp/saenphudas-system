@@ -15,7 +15,8 @@ class WastePayment extends Model
         'payment_status',
         'payment_slip',
         'paid_at',
-        'due_date'
+        'due_date',
+        'bill'
     ];
 
     public function wasteManagement()

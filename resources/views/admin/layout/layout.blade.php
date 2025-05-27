@@ -108,6 +108,24 @@
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
                         </a>
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#public_health1" aria-expanded="false" aria-controls="public_health1">
+                            <div class="sb-nav-link-icon">
+                                <i class="bi bi-clipboard"></i>
+                            </div>
+                            แบบคำร้องใบอนุญาตประกอบกิจการที่เป็นอันตรายต่อสุขภาพ
+                            <div class="sb-sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div class="collapse" id="public_health1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{route('HealthHazardApplicationAdminShowData')}}">รับเรื่อง</a>
+                                <a class="nav-link" href="{{route('HealthHazardApplicationAdminAppointment')}}">การนัดหมาย</a>
+                                <a class="nav-link" href="{{route('HealthHazardApplicationAdminExplore')}}">ออกสำรวจ</a>
+                                <a class="nav-link" href="{{route('HealthHazardApplicationAdminPayment')}}">ชำระเงิน</a>
+                                <a class="nav-link" href="{{route('HealthHazardApplicationAdminApprove')}}">ออกใบอนุญาต</a>
+                            </nav>
+                        </div>
                     </div>
                 </div>
                 {{-- <div class="sb-sidenav-footer">

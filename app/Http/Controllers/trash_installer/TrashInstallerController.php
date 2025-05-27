@@ -17,6 +17,7 @@ class TrashInstallerController extends Controller
             }
         ])
             ->where('status', 2)
+            ->where('trash_can_status', 3)
             ->get();
 
         return view("waste-payment.admin.trash_installer.page", compact('forms'));

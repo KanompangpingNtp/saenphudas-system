@@ -282,6 +282,25 @@
                                     href="{{ route('GarbageCollectionShowDetails') }}">ประวัติการส่งฟอร์ม</a>
                             </nav>
                         </div>
+
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#public_health2"
+                            aria-expanded="false" aria-controls="public_health2">
+                            <div class="sb-nav-link-icon">
+                                <i class="bi bi-clipboard"></i>
+                            </div>
+                            แบบคำร้องใบอนุญาตประกอบกิจการที่เป็นอันตรายต่อสุขภาพ
+                            <div class="sb-sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div class="collapse" id="public_health2" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ route('HealthHazardApplicationFormPage') }}">ฟอร์ม</a>
+                                <a class="nav-link"
+                                    href="{{ route('HealthHazardApplicationShowDetails') }}">ประวัติการส่งฟอร์ม</a>
+                            </nav>
+                        </div>
                     </div>
                 </div>
                 {{-- <div class="sb-sidenav-footer">

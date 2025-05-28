@@ -308,6 +308,7 @@
                             <span style="margin-left: 25px;">(</span>
                             <span style="display: inline-block; width: 40%; border-bottom: 1px dotted #000;"></span>
                             <span>)</span>
+                        </div>
                     </td>
 
                     <!-- ฝั่งขวา -->

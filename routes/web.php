@@ -40,6 +40,8 @@ use App\Http\Controllers\trash_installer\TrashInstallerController;
 use App\Http\Controllers\non_payment\NonPaymentController;
 use App\Http\Controllers\health_hazard_applications\AdminHealthHazardApplicationController;
 use App\Http\Controllers\health_hazard_applications\HealthHazardApplicationController;
+use App\Http\Controllers\food_storage_license\AdminFoodStorageLicenseController;
+use App\Http\Controllers\food_storage_license\FoodStorageLicenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,10 +105,6 @@ Route::post('/land_building_tax_appeals/form/create', [LandBuildingTaxAppealCont
 //คำร้องขอรับเงินภาษีที่ดินและสิ่งปลูกสร้างคืน
 Route::get('/tax_refund_requests', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestPage'])->name('LandTaxRefundRequestPage');
 Route::post('/tax_refund_requests/form/create', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestFormCreate'])->name('LandTaxRefundRequestFormCreate');
-
-//แบบคำร้องใบอณุญาตประกอบกิจการที่เป็นอันตรายต่อสุขภาพ
-Route::get('/health_hazard_applications', [HealthHazardApplicationController::class, 'HealthHazardApplicationFormPage'])->name('HealthHazardApplicationFormPage');
-Route::post('/health_hazard_applications/form/create', [HealthHazardApplicationController::class, 'HealthHazardApplicationFormCreate'])->name('HealthHazardApplicationFormCreate');
 
 //ตัวแจ้งเหตุ
 Route::get('/emergency', [EmergencyController::class, 'index'])->name('emergency.index');
@@ -194,6 +192,8 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user/account/GarbageCollection/{id}/pdf', [GarbageCollectionController::class, 'GarbageCollectionUserExportPDF'])->name('GarbageCollectionUserExportPDF');
 
     //แบบคำร้องใบอณุญาตประกอบกิจการที่เป็นอันตรายต่อสุขภาพ
+    Route::get('/health_hazard_applications', [HealthHazardApplicationController::class, 'HealthHazardApplicationFormPage'])->name('HealthHazardApplicationFormPage');
+    Route::post('/health_hazard_applications/form/create', [HealthHazardApplicationController::class, 'HealthHazardApplicationFormCreate'])->name('HealthHazardApplicationFormCreate');
     Route::get('/user-account/health_hazard_applications/show-details', [HealthHazardApplicationController::class, 'HealthHazardApplicationShowDetails'])->name('HealthHazardApplicationShowDetails');
     Route::get('/user-account/health_hazard_applications/export-pdf/{id}', [HealthHazardApplicationController::class, 'HealthHazardApplicationUserExportPDF'])->name('HealthHazardApplicationUserExportPDF');
     Route::post('/user-account/health_hazard_applications/reply/{id}', [HealthHazardApplicationController::class, 'HealthHazardApplicationUserReply'])->name('HealthHazardApplicationUserReply');
@@ -204,6 +204,22 @@ Route::middleware(['user'])->group(function () {
     Route::put('/user-account/health_hazard_applications/calendarSave', [HealthHazardApplicationController::class, 'HealthHazardApplicationCalendarSave'])->name('HealthHazardApplicationCalendarSave');
     Route::get('/user-account/health_hazard_applications/payment/{id}', [HealthHazardApplicationController::class, 'HealthHazardApplicationPayment'])->name('HealthHazardApplicationPayment');
     Route::put('/user-account/health_hazard_applications/paymentSave', [HealthHazardApplicationController::class, 'HealthHazardApplicationPaymentSave'])->name('HealthHazardApplicationPaymentSave');
+
+    //แบบคำร้องใบอณุญาตสะสมอาหาร
+    Route::get('/food_storage_license', [FoodStorageLicenseController::class, 'FoodStorageLicenseFormPage'])->name('FoodStorageLicenseFormPage');
+    Route::post('/food_storage_license/form/create', [FoodStorageLicenseController::class, 'FoodStorageLicenseFormCreate'])->name('FoodStorageLicenseFormCreate');
+    Route::get('/user-account/food_storage_license/show-details', [FoodStorageLicenseController::class, 'FoodStorageLicenseShowDetails'])->name('FoodStorageLicenseShowDetails');
+    Route::get('/user-account/food_storage_license/export-pdf/{id}', [FoodStorageLicenseController::class, 'FoodStorageLicenseUserExportPDF'])->name('FoodStorageLicenseUserExportPDF');
+    Route::post('/user-account/food_storage_license/reply/{id}', [FoodStorageLicenseController::class, 'FoodStorageLicenseUserReply'])->name('FoodStorageLicenseUserReply');
+    Route::get('/user-account/food_storage_license/show-edit/{id}', [FoodStorageLicenseController::class, 'FoodStorageLicenseUserShowFormEdit'])->name('FoodStorageLicenseUserShowFormEdit');
+    Route::get('/user-account/certificate/food_storage_license/export-pdf/{id}', [FoodStorageLicenseController::class, 'CertificateFoodStorageLicensePDF'])->name('CertificateFoodStorageLicensePDF');
+    Route::get('/user-account/certificate/food_sales/export-pdf/{id}', [FoodStorageLicenseController::class, 'CertificateFoodSalesPDF'])->name('CertificateFoodSalesPDF');
+    Route::get('/user-account/food_storage_license/detail/{id}', [FoodStorageLicenseController::class, 'FoodStorageLicenseDetail'])->name('FoodStorageLicenseDetail');
+    Route::get('/user-account/food_storage_license/calendar/{id}', [FoodStorageLicenseController::class, 'FoodStorageLicenseCalendar'])->name('FoodStorageLicenseCalendar');
+    Route::get('/user-account/food_storage_license/payment/{id}', [FoodStorageLicenseController::class, 'FoodStorageLicensePayment'])->name('FoodStorageLicensePayment');
+    Route::put('/user-account/food_storage_license/paymentSave', [FoodStorageLicenseController::class, 'FoodStorageLicensePaymentSave'])->name('FoodStorageLicensePaymentSave');
+    Route::put('/user-account/food_storage_license/calendarSave', [FoodStorageLicenseController::class, 'FoodStorageLicenseCalendarSave'])->name('FoodStorageLicenseCalendarSave');
+    Route::get('/user-account/food_storage_license/food_checklist/export-pdf/{id}', [FoodStorageLicenseController::class, 'FoodStorageLicenseUserChecklistPDF'])->name('FoodStorageLicenseUserChecklistPDF');
 });
 
 Route::middleware(['admin'])->group(function () {
@@ -294,6 +310,29 @@ Route::middleware(['admin'])->group(function () {
     Route::put('/admin/health_hazard_applications/paymentSave', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminPaymentSave'])->name('HealthHazardApplicationAdminPaymentSave');
     Route::get('/admin/health_hazard_applications/approve', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminApprove'])->name('HealthHazardApplicationAdminApprove');
     Route::get('/admin/certificate/health_hazard_applications/export-pdf/{id}', [AdminHealthHazardApplicationController::class, 'AdminCertificateHealthHazardApplicationPDF'])->name('AdminCertificateHealthHazardApplicationPDF');
+    Route::post('/admin/certificate/health_hazard_applications/extend', [AdminHealthHazardApplicationController::class, 'CertificateHealthHazardApplicationCoppy'])->name('CertificateHealthHazardApplicationCoppy');
+    Route::get('/admin/health_hazard_applications/expire', [AdminHealthHazardApplicationController::class, 'CertificateHealthHazardApplicationExpire'])->name('CertificateHealthHazardApplicationExpire');
+
+    //แบบคำร้องใบอณุญาตสะสมอาหาร
+    Route::get('/admin/food_storage_license/showdata', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminShowData'])->name('FoodStorageLicenseAdminShowData');
+    Route::get('/admin/food_storage_license/appointment', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminAppointment'])->name('FoodStorageLicenseAdminAppointment');
+    Route::get('/admin/food_storage_license/explore', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminExplore'])->name('FoodStorageLicenseAdminExplore');
+    Route::get('/admin/food_storage_license/payment', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminPayment'])->name('FoodStorageLicenseAdminPayment');
+    Route::get('/admin/food_storage_license/approve', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminApprove'])->name('FoodStorageLicenseAdminApprove');
+    Route::get('/admin/food_storage_license/export-pdf/{id}', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminExportPDF'])->name('FoodStorageLicenseAdminExportPDF');
+    Route::get('/admin/food_storage_license/calendar/{id}', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminCalendar'])->name('FoodStorageLicenseAdminCalendar');
+    Route::get('/admin/food_storage_license/checklist/{id}', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminChecklist'])->name('FoodStorageLicenseAdminChecklist');
+    Route::get('/admin/food_storage_license/payment-check/{id}', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminPaymentCheck'])->name('FoodStorageLicenseAdminPaymentCheck');
+    Route::get('/admin/food_storage_license/detail/{id}', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminDetail'])->name('FoodStorageLicenseAdminDetail');
+    Route::get('/admin/food_storage_license/confirm/{id}', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminConfirm'])->name('FoodStorageLicenseAdminConfirm');
+    Route::put('/admin/food_storage_license/confirm', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminConfirmSave'])->name('FoodStorageLicenseAdminConfirmSave');
+    Route::put('/admin/food_storage_license/checklistSave', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminChecklistSave'])->name('FoodStorageLicenseAdminChecklistSave');
+    Route::put('/admin/food_storage_license/calendarSave', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminCalendarSave'])->name('FoodStorageLicenseAdminCalendarSave');
+    Route::put('/admin/food_storage_license/paymentSave', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminPaymentSave'])->name('FoodStorageLicenseAdminPaymentSave');
+    Route::post('/admin/food_storage_license/admin-reply/{id}', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminReply'])->name('FoodStorageLicenseAdminReply');
+    Route::post('/admin/food_storage_license/update-status/{id}', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseUpdateStatus'])->name('FoodStorageLicenseUpdateStatus');
+    Route::get('/admin/certificate/food_storage_license/export-pdf/{id}', [AdminFoodStorageLicenseController::class, 'AdminCertificateFoodStorageLicensePDF'])->name('AdminCertificateFoodStorageLicensePDF');
+        Route::post('/admin/certificate/food_storage_license/extend', [AdminFoodStorageLicenseController::class, 'CertificateFoodStorageLicenseCoppy'])->name('CertificateFoodStorageLicenseCoppy');
 });
 
 Route::middleware(['admin_waste_payment'])->group(function () {

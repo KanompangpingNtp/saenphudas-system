@@ -78,12 +78,12 @@
                             <img src="{{ asset('second-page/กองสาธารณสุข.png') }}" alt="กองสาธารณสุข">
                         </div>
                         <div class="d-flex flex-column justify-content-start align-items-start gap-2 w-100">
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('HealthHazardApplicationFormPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-2 mb-xl-0">
                                 แบบคำร้องใบอนนุญาตประกิจการที่เป็นอันตรายต่อสุขภาพ
                             </a>
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('FoodStorageLicenseFormPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-2 mb-xl-0">
                                 คำขอรับใบอนุญาต จัดตั้งสถานที่จำหน่ายอาหารหรือสถานที่สะสมอาหาร

@@ -14,10 +14,11 @@ use App\Models\HealthLicensePaymentLogs;
 use App\Models\HealthLicenseReplies;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class AdminHealthHazardApplicationController extends Controller
 {
-     public function HealthHazardApplicationAdminShowData()
+    public function HealthHazardApplicationAdminShowData()
     {
         $forms = HealthLicenseApp::whereHas('details', function ($query) {
             $query->whereIn('status', [1, 2]);
@@ -290,12 +291,16 @@ class AdminHealthHazardApplicationController extends Controller
                     $filename = time() . '_' . $file->getClientOriginalName();
                     $path = $file->storeAs('payment', $filename, 'public');
                 }
+
+                $createdAt = Carbon::now();
+
                 $update = HealthLicensePaymentLogs::find($input['file-id']);
                 $update->receipt_book = $input['receipt_book'];
                 $update->receipt_number = $input['receipt_number'];
                 $update->file_treasury = $path;
                 $update->status = 2;
-                $update->updated_at = date('Y-m-d H:i:s');
+                $update->updated_at = now();
+                $update->expiration_date = $createdAt->copy()->addYear()->subDay();
                 if ($update->save()) {
                     $number = HealthLicenseNumberLogs::orderBy('id', 'desc')->first();
                     if ($number) {
@@ -353,5 +358,115 @@ class AdminHealthHazardApplicationController extends Controller
         )->setPaper('A4', 'portrait');
 
         return $pdf->stream('pdf' . $form->id . '.pdf');
+    }
+
+    public function CertificateHealthHazardApplicationCoppy(Request $request)
+    {
+        $id = $request->input('id');
+        $original = HealthLicenseApp::with('details')->findOrFail($id);
+
+        if ($original->details) {
+            $original->details->status = 11;
+            $original->details->save();
+        }
+
+        $newInfo = $original->replicate();
+        $newInfo->form_status = 1;
+        $newInfo->refer_app_id = $original->id;
+        $newInfo->created_at = now();
+        $newInfo->updated_at = now();
+        $newInfo->save();
+
+        if ($original->details) {
+            $newDetails = $original->details->replicate();
+            $newDetails->health_license_id = $newInfo->id;
+            $newDetails->status = 7;
+            $newDetails->created_at = now();
+            $newDetails->updated_at = now();
+            $newDetails->save();
+        }
+
+        $appointments = HealthLicenseAppointmentLogs::where('health_license_id', $original->id)->get();
+        foreach ($appointments as $appointment) {
+            $newAppointment = $appointment->replicate();
+            $newAppointment->health_license_id = $newInfo->id;
+            $newAppointment->created_at = now();
+            $newAppointment->updated_at = now();
+            $newAppointment->save();
+        }
+
+        $explores = HealthLicenseExploreLogs::where('health_license_id', $original->id)->get();
+        foreach ($explores as $explore) {
+            $newExplore = $explore->replicate();
+            $newExplore->health_license_id = $newInfo->id;
+            $newExplore->created_at = now();
+            $newExplore->updated_at = now();
+            $newExplore->save();
+        }
+
+        return response()->json(['success' => true, 'message' => 'คัดลอกข้อมูลเรียบร้อยแล้ว']);
+    }
+
+    public function CertificateHealthHazardApplicationExpire(Request $request)
+    {
+        $ninetyDaysFromNow = Carbon::now()->addDays(90);
+
+        // รับค่าเดือนและปีจากฟอร์ม
+        $month = $request->input('month');
+        $year = $request->input('year');
+
+        $startDate = null;
+        $endDate = null;
+
+        if ($month && $year) {
+            // กำหนดช่วงเวลาตามเดือนและปีที่เลือก
+            $startDate = Carbon::create($year, $month, 1)->startOfMonth();
+            $endDate = Carbon::create($year, $month, 1)->endOfMonth();
+        }
+
+        // ตรวจสอบว่ามีข้อมูลในเดือนและปีที่เลือกหรือไม่
+        $availableMonths = range(1, 12); // เดือนทั้งหมด
+        $availableYears = range(now()->year - 5, now()->year + 1); // ปีทั้งหมด
+
+        // กรองข้อมูลที่ตรงกับเดือนและปีที่เลือก
+        $forms = HealthLicenseApp::whereHas('details', function ($query) {
+            $query->whereIn('status', [10, 11]);
+        })
+            ->with(['user', 'details', 'files', 'replies'])
+            ->get()
+            ->filter(function ($form) use ($ninetyDaysFromNow, $startDate, $endDate) {
+                $latestPayment = HealthLicensePaymentLogs::where('health_license_id', $form->id)
+                    ->orderBy('id', 'desc')
+                    ->first();
+
+                if ($latestPayment && $latestPayment->expiration_date) {
+                    $form->payment = $latestPayment;
+
+                    $isWithin90Days = Carbon::parse($latestPayment->expiration_date)->lessThanOrEqualTo($ninetyDaysFromNow);
+
+                    if ($startDate && $endDate) {
+                        return Carbon::parse($latestPayment->created_at)->between($startDate, $endDate) && $isWithin90Days;
+                    }
+
+                    return $isWithin90Days;
+                }
+
+                return false;
+            });
+
+        // ตรวจสอบว่าในแต่ละเดือนและปีมีข้อมูลหรือไม่
+        $availableMonths = collect($availableMonths)->filter(function ($m) use ($forms) {
+            return $forms->filter(function ($form) use ($m) {
+                return Carbon::parse($form->payment->created_at)->month == $m;
+            })->isNotEmpty();
+        });
+
+        $availableYears = collect($availableYears)->filter(function ($y) use ($forms) {
+            return $forms->filter(function ($form) use ($y) {
+                return Carbon::parse($form->payment->created_at)->year == $y;
+            })->isNotEmpty();
+        });
+
+        return view('admin.health_hazard_applications.expire-details', compact('forms', 'availableMonths', 'availableYears'));
     }
 }

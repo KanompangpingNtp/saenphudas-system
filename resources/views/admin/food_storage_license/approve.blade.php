@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
     <div class="container">
-        <h2 class="text-center">แบบคำร้องใบอนุญาตประกอบกิจการที่เป็นอันตรายต่อสุขภาพ <br>
+        <h2 class="text-center">แบบคำร้องใบอนุญาต <br>
         </h2> <br>
 
         <table class="table table-bordered table-striped" id="data_table">
@@ -29,7 +29,7 @@
                             </td>
                             <td>
                                 @if ($form['details']->status == 10)
-                                    <a href="{{ route('AdminCertificateHealthHazardApplicationPDF', $form->id) }}"
+                                    <a href="{{ route('AdminCertificateFoodStorageLicensePDF', $form->id) }}"
                                         class="badge rounded-pill text-bg-success" target="_blank">
                                         ออกใบอนุญาต
                                     </a>
@@ -44,11 +44,11 @@
                                     onclick="confirmExtendLeave({{ $form->id }})">
                                     <i class="bi bi-calendar-plus"></i>
                                 </button>
-                                <a href="{{ route('HealthHazardApplicationAdminExportPDF', $form->id) }}"
+                                <a href="{{ route('FoodStorageLicenseAdminExportPDF', $form->id) }}"
                                     class="btn btn-danger btn-sm" target="_blank">
                                     <i class="bi bi-file-earmark-pdf"></i>
                                 </a>
-                                <a href="{{ route('HealthHazardApplicationAdminDetail', $form->id) }}"
+                                <a href="{{ route('FoodStorageLicenseAdminDetail', $form->id) }}"
                                     class="btn btn-success btn-sm">
                                     <i class="bi bi-search"></i>
                                 </a>
@@ -72,7 +72,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '/admin/certificate/health_hazard_applications/extend',
+                            url: '/admin/certificate/food_storage_license/extend',
                             type: 'POST',
                             data: {
                                 _token: $('meta[name="csrf-token"]').attr('content'),

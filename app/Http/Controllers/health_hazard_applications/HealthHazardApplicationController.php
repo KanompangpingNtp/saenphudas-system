@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HealthHazardApplicationController extends Controller
 {
-     public function HealthHazardApplicationFormPage()
+    public function HealthHazardApplicationFormPage()
     {
         return view('users.health_hazard_applications.page-form');
     }
@@ -90,20 +90,52 @@ class HealthHazardApplicationController extends Controller
         return redirect()->back()->with('success', 'ฟอร์มถูกส่งเรียบร้อยแล้ว');
     }
 
+    // public function HealthHazardApplicationShowDetails()
+    // {
+    //     $forms = HealthLicenseApp::with(['user', 'files', 'replies', 'details'])
+    //         ->where('users_id', Auth::id())
+    //         ->get();
+    //     if (!empty($forms)) {
+    //         foreach ($forms as $rs) {
+    //             $rs->appointmentte = HealthLicenseAppointmentLogs::orderBy('id', 'desc')->first();
+    //             $rs->payment = HealthLicensePaymentLogs::orderBy('id', 'desc')->first();
+    //         }
+    //     }
+
+    //     return view('users.health_hazard_applications.account.show-detail', compact('forms'));
+    // }
+
     public function HealthHazardApplicationShowDetails()
     {
-        $forms = HealthLicenseApp::with(['user', 'files', 'replies', 'details'])
+        $originalForms = HealthLicenseApp::with(['user', 'files', 'replies', 'details'])
             ->where('users_id', Auth::id())
+            ->whereNull('refer_app_id')
             ->get();
-        if (!empty($forms)) {
-            foreach ($forms as $rs) {
-                $rs->appointmentte = HealthLicenseAppointmentLogs::orderBy('id', 'desc')->first();
-                $rs->payment = HealthLicensePaymentLogs::orderBy('id', 'desc')->first();
-            }
+
+        $forms = collect();
+
+        foreach ($originalForms as $form) {
+            $latest = HealthLicenseApp::with(['user', 'files', 'replies', 'details'])
+                ->where('refer_app_id', $form->id)
+                ->orderByDesc('created_at')
+                ->first();
+
+            $finalForm = $latest ?? $form;
+
+            $finalForm->appointmentte = HealthLicenseAppointmentLogs::where('health_license_id', $finalForm->id)
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $finalForm->payment = HealthLicensePaymentLogs::where('health_license_id', $finalForm->id)
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $forms->push($finalForm);
         }
 
         return view('users.health_hazard_applications.account.show-detail', compact('forms'));
     }
+
 
     public function HealthHazardApplicationUserExportPDF($id)
     {

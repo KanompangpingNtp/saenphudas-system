@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -104,11 +105,12 @@
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             คำร้องคัดค้านการประเมินภาษีหรือ การเรียกเก็บภาษีที่ดินและสิ่งปลูกสร้าง
                         </a>
-                          <a class="nav-link" href="{{ route('GarbageCollectionAdminShowData') }}">
+                        <a class="nav-link" href="{{ route('GarbageCollectionAdminShowData') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
                         </a>
-                        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#public_health1" aria-expanded="false" aria-controls="public_health1">
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#public_health1"
+                            aria-expanded="false" aria-controls="public_health1">
                             <div class="sb-nav-link-icon">
                                 <i class="bi bi-clipboard"></i>
                             </div>
@@ -117,21 +119,51 @@
                                 <i class="fas fa-angle-down"></i>
                             </div>
                         </a>
-                        <div class="collapse" id="public_health1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <div class="collapse" id="public_health1" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{route('HealthHazardApplicationAdminShowData')}}">รับเรื่อง</a>
-                                <a class="nav-link" href="{{route('HealthHazardApplicationAdminAppointment')}}">การนัดหมาย</a>
-                                <a class="nav-link" href="{{route('HealthHazardApplicationAdminExplore')}}">ออกสำรวจ</a>
-                                <a class="nav-link" href="{{route('HealthHazardApplicationAdminPayment')}}">ชำระเงิน</a>
-                                <a class="nav-link" href="{{route('HealthHazardApplicationAdminApprove')}}">ออกใบอนุญาต</a>
+                                <a class="nav-link"
+                                    href="{{ route('HealthHazardApplicationAdminShowData') }}">รับเรื่อง</a>
+                                <a class="nav-link"
+                                    href="{{ route('HealthHazardApplicationAdminAppointment') }}">การนัดหมาย</a>
+                                <a class="nav-link"
+                                    href="{{ route('HealthHazardApplicationAdminExplore') }}">ออกสำรวจ</a>
+                                <a class="nav-link"
+                                    href="{{ route('HealthHazardApplicationAdminPayment') }}">ชำระเงิน</a>
+                                <a class="nav-link"
+                                    href="{{ route('HealthHazardApplicationAdminApprove') }}">ออกใบอนุญาต</a>
+                                <a class="nav-link"
+                                    href="{{ route('CertificateHealthHazardApplicationExpire') }}">ใบอนุญาตใกล้หมดอายุ</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#admin_food1"
+                            aria-expanded="false" aria-controls="admin_food1">
+                            <div class="sb-nav-link-icon">
+                                <i class="bi bi-clipboard"></i>
+                            </div>
+                            แบบคำร้องใบอนุญาตสะสมอาหาร
+                            <div class="sb-sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div class="collapse" id="admin_food1" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link"
+                                    href="{{ route('FoodStorageLicenseAdminShowData') }}">รับเรื่อง</a>
+                                <a class="nav-link"
+                                    href="{{ route('FoodStorageLicenseAdminAppointment') }}">การนัดหมาย</a>
+                                <a class="nav-link" href="{{ route('FoodStorageLicenseAdminExplore') }}">ออกสำรวจ</a>
+                                <a class="nav-link" href="{{ route('FoodStorageLicenseAdminPayment') }}">ชำระเงิน</a>
+                                <a class="nav-link"
+                                    href="{{ route('FoodStorageLicenseAdminApprove') }}">ออกใบอนุญาต</a>
+                                <a class="nav-link"
+                                    href="#">ใบอนุญาตใกล้หมดอายุ</a>
                             </nav>
                         </div>
                     </div>
                 </div>
-                {{-- <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
-                </div> --}}
             </nav>
         </div>
         <div id="layoutSidenav_content">

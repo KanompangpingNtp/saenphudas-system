@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Admin Dashbord</title>
+    <title>Eservice</title>
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -318,6 +318,25 @@
                                 <a class="nav-link" href="{{ route('FoodStorageLicenseFormPage') }}">ฟอร์ม</a>
                                 <a class="nav-link"
                                     href="{{ route('FoodStorageLicenseShowDetails') }}">ประวัติการส่งฟอร์ม</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#private_market"
+                            aria-expanded="false" aria-controls="private_market">
+                            <div class="sb-nav-link-icon">
+                                <i class="bi bi-clipboard"></i>
+                            </div>
+                            แบบคำร้องขอจัดตั้งตลาดเอกชน
+                            <div class="sb-sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div class="collapse" id="private_market" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ route('PrivateMarketFormPage') }}">ฟอร์ม</a>
+                                <a class="nav-link"
+                                    href="{{ route('PrivateMarketShowDetails') }}">ประวัติการส่งฟอร์ม</a>
                             </nav>
                         </div>
                     </div>

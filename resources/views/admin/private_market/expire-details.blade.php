@@ -17,7 +17,7 @@
     <div class="container">
         <h2 class="text-center">ใบอนุญาตใกล้หมดอายุ</h2> <br>
 
-        <form method="GET" action="{{ route('CertificateHealthHazardApplicationExpire') }}" class="row g-2 mb-4">
+        <form method="GET" action="{{ route('CertificatePrivateMarketExpire') }}" class="row g-2 mb-4">
             <div class="col-md-2">
                 <select name="month" class="form-select">
                     <option value="">-- เลือกเดือน --</option>

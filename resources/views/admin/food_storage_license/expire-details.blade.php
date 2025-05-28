@@ -17,7 +17,7 @@
     <div class="container">
         <h2 class="text-center">ใบอนุญาตใกล้หมดอายุ</h2> <br>
 
-        <form method="GET" action="{{ route('CertificateHealthHazardApplicationExpire') }}" class="row g-2 mb-4">
+        <form method="GET" action="{{ route('CertificateFoodStorageLicenseExpire') }}" class="row g-2 mb-4">
             <div class="col-md-2">
                 <select name="month" class="form-select">
                     <option value="">-- เลือกเดือน --</option>
@@ -80,7 +80,7 @@
 
                             <td>
                                 @if ($form['details']->status == 10)
-                                    <a href="{{ route('AdminCertificateHealthHazardApplicationPDF', $form->id) }}"
+                                    <a href="{{ route('AdminCertificateFoodStorageLicensePDF', $form->id) }}"
                                         class="badge rounded-pill text-bg-success" target="_blank" style="color: blue;">
                                         ออกใบอนุญาต
                                     </a>
@@ -91,7 +91,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('HealthHazardApplicationAdminExportPDF', $form->id) }}"
+                                <a href="{{ route('FoodStorageLicenseAdminExportPDF', $form->id) }}"
                                     class="btn btn-danger btn-sm" target="_blank">
                                     <i class="bi bi-file-earmark-pdf"></i>
                                 </a>

@@ -109,6 +109,8 @@
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
                         </a>
+
+                        <div class="sb-sidenav-menu-heading">ใบอนุญาต</div>
                         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#public_health1"
                             aria-expanded="false" aria-controls="public_health1">
                             <div class="sb-nav-link-icon">
@@ -159,7 +161,35 @@
                                 <a class="nav-link"
                                     href="{{ route('FoodStorageLicenseAdminApprove') }}">ออกใบอนุญาต</a>
                                 <a class="nav-link"
-                                    href="#">ใบอนุญาตใกล้หมดอายุ</a>
+                                    href="{{ route('CertificateFoodStorageLicenseExpire') }}">ใบอนุญาตใกล้หมดอายุ</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#private_market"
+                            aria-expanded="false" aria-controls="private_market">
+                            <div class="sb-nav-link-icon">
+                                <i class="bi bi-clipboard"></i>
+                            </div>
+                            แบบคำร้องขอจัดตั้งตลาดเอกชน
+                            <div class="sb-sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div class="collapse" id="private_market" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link"
+                                    href="{{ route('PrivateMarketAdminShowData') }}">รับเรื่อง</a>
+                                <a class="nav-link"
+                                    href="{{ route('PrivateMarketAdminAppointment') }}">การนัดหมาย</a>
+                                <a class="nav-link"
+                                    href="{{ route('PrivateMarketAdminExplore') }}">ออกสำรวจ</a>
+                                <a class="nav-link"
+                                    href="{{ route('PrivateMarketAdminPayment') }}">ชำระเงิน</a>
+                                <a class="nav-link"
+                                    href="{{ route('PrivateMarketAdminApprove') }}">ออกใบอนุญาต</a>
+                                <a class="nav-link"
+                                    href="{{ route('CertificatePrivateMarketExpire') }}">ใบอนุญาตใกล้หมดอายุ</a>
                             </nav>
                         </div>
                     </div>

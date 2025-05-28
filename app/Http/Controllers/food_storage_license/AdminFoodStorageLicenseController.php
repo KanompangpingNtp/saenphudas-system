@@ -208,52 +208,6 @@ class AdminFoodStorageLicenseController extends Controller
         return view('admin.food_storage_license.checklist', compact('form'));
     }
 
-    // public function FoodStorageLicenseAdminChecklistSave(Request $request)
-    // {
-    //     $input = $request->input();
-    //     if ($input['id']) {
-    //         $path = '';
-    //         if ($request->hasFile('formFile')) {
-    //             $file = $request->file('formFile');
-    //             $filename = time() . '_' . $file->getClientOriginalName();
-    //             $path = $file->storeAs('checklist', $filename, 'public');
-    //         }
-    //         $detail = FoodStorageFormDetails::where('informations_id', $input['id'])->first();
-    //         if ($input['result'] != 2) {
-    //             $detail->status = 7;
-    //             if ($detail->save()) {
-    //                 $insert = new FoodStorageExploreLogs();
-    //                 $insert->informations_id = $input['id'];
-    //                 $insert->detail = $input['detail'];
-    //                 $insert->file = $path;
-    //                 $insert->price = $input['price'];
-    //                 $insert->status = 1;
-    //                 $insert->created_at = date('Y-m-d H:i:s');
-    //                 $insert->updated_at = date('Y-m-d H:i:s');
-    //                 if ($insert->save()) {
-    //                     return redirect()->route('FoodStorageLicenseAdminExplore')->with('success', 'บันทึกรายการเรียบร้อยแล้ว');
-    //                 }
-    //             }
-    //         } else {
-    //             $detail->status = 8;
-    //             if ($detail->save()) {
-    //                 $insert = new FoodStorageExploreLogs();
-    //                 $insert->informations_id = $input['id'];
-    //                 $insert->detail = $input['detail'];
-    //                 $insert->file = $path;
-    //                 $insert->price = $input['price'];
-    //                 $insert->status = 2;
-    //                 $insert->created_at = date('Y-m-d H:i:s');
-    //                 $insert->updated_at = date('Y-m-d H:i:s');
-    //                 if ($insert->save()) {
-    //                     return redirect()->route('FoodStorageLicenseAdminExplore')->with('success', 'บันทึกรายการเรียบร้อยแล้ว');
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return redirect()->route('FoodStorageLicenseAdminExplore')->with('error', 'ไม่สามารถบันทึกข้อมูลได้');
-    // }
-
     public function FoodStorageLicenseAdminChecklistSave(Request $request)
     {
         $input = $request->input();
@@ -534,5 +488,68 @@ class AdminFoodStorageLicenseController extends Controller
         }
 
         return response()->json(['success' => true, 'message' => 'คัดลอกข้อมูลเรียบร้อยแล้ว']);
+    }
+
+    public function CertificateFoodStorageLicenseExpire(Request $request)
+    {
+        $ninetyDaysFromNow = Carbon::now()->addDays(90);
+
+        // รับค่าเดือนและปีจากฟอร์ม
+        $month = $request->input('month');
+        $year = $request->input('year');
+
+        $startDate = null;
+        $endDate = null;
+
+        if ($month && $year) {
+            // กำหนดช่วงเวลาตามเดือนและปีที่เลือก
+            $startDate = Carbon::create($year, $month, 1)->startOfMonth();
+            $endDate = Carbon::create($year, $month, 1)->endOfMonth();
+        }
+
+        // ตรวจสอบว่ามีข้อมูลในเดือนและปีที่เลือกหรือไม่
+        $availableMonths = range(1, 12); // เดือนทั้งหมด
+        $availableYears = range(now()->year - 5, now()->year + 1); // ปีทั้งหมด
+
+        // กรองข้อมูลที่มีสถานะ 10 หรือ 11 และวันหมดอายุภายใน 90 วัน
+        $forms = FoodStorageInformations::whereHas('details', function ($query) {
+            $query->whereIn('status', [10, 11]);
+        })
+            ->with(['user', 'details', 'files', 'replies'])
+            ->get()
+            ->filter(function ($form) use ($ninetyDaysFromNow, $startDate, $endDate) {
+                $latestPayment = FoodStoragePaymentLogs::where('informations_id', $form->id)
+                    ->orderBy('id', 'desc')
+                    ->first();
+
+                if ($latestPayment && $latestPayment->expiration_date) {
+                    $form->payment = $latestPayment;
+
+                    $isWithin90Days = Carbon::parse($latestPayment->expiration_date)->lessThanOrEqualTo($ninetyDaysFromNow);
+
+                    if ($startDate && $endDate) {
+                        return Carbon::parse($latestPayment->created_at)->between($startDate, $endDate) && $isWithin90Days;
+                    }
+
+                    return $isWithin90Days;
+                }
+
+                return false;
+            });
+
+        // ตรวจสอบว่าในแต่ละเดือนและปีมีข้อมูลหรือไม่
+        $availableMonths = collect($availableMonths)->filter(function ($m) use ($forms) {
+            return $forms->filter(function ($form) use ($m) {
+                return Carbon::parse($form->payment->created_at)->month == $m;
+            })->isNotEmpty();
+        });
+
+        $availableYears = collect($availableYears)->filter(function ($y) use ($forms) {
+            return $forms->filter(function ($form) use ($y) {
+                return Carbon::parse($form->payment->created_at)->year == $y;
+            })->isNotEmpty();
+        });
+
+        return view('admin.food_storage_license.expire-details', compact('forms', 'availableMonths', 'availableYears'));
     }
 }

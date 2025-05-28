@@ -42,6 +42,8 @@ use App\Http\Controllers\health_hazard_applications\AdminHealthHazardApplication
 use App\Http\Controllers\health_hazard_applications\HealthHazardApplicationController;
 use App\Http\Controllers\food_storage_license\AdminFoodStorageLicenseController;
 use App\Http\Controllers\food_storage_license\FoodStorageLicenseController;
+use App\Http\Controllers\private_market\AdminPrivateMarketController;
+use App\Http\Controllers\private_market\PrivateMarketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -220,6 +222,18 @@ Route::middleware(['user'])->group(function () {
     Route::put('/user-account/food_storage_license/paymentSave', [FoodStorageLicenseController::class, 'FoodStorageLicensePaymentSave'])->name('FoodStorageLicensePaymentSave');
     Route::put('/user-account/food_storage_license/calendarSave', [FoodStorageLicenseController::class, 'FoodStorageLicenseCalendarSave'])->name('FoodStorageLicenseCalendarSave');
     Route::get('/user-account/food_storage_license/food_checklist/export-pdf/{id}', [FoodStorageLicenseController::class, 'FoodStorageLicenseUserChecklistPDF'])->name('FoodStorageLicenseUserChecklistPDF');
+
+    //คำร้องขอจัดตั้งตลาดเอกชน
+    Route::get('/private_market', [PrivateMarketController::class, 'PrivateMarketFormPage'])->name('PrivateMarketFormPage');
+    Route::post('/private_market/form/create', [PrivateMarketController::class, 'PrivateMarketFormCreate'])->name('PrivateMarketFormCreate');
+    Route::get('/user-account/private_market/show-details', [PrivateMarketController::class, 'PrivateMarketShowDetails'])->name('PrivateMarketShowDetails');
+    Route::get('/user-account/private_market/export-pdf/{id}', [PrivateMarketController::class, 'privateMarketUserExportPDF'])->name('privateMarketUserExportPDF');
+    Route::get('/user-account/private_market/detail/{id}', [PrivateMarketController::class, 'privateMarketDetail'])->name('privateMarketDetail');
+    Route::get('/user-account/private_market/calendar/{id}', [PrivateMarketController::class, 'PrivateMarketCalendar'])->name('PrivateMarketCalendar');
+    Route::put('/user-account/private_market/calendarSave', [PrivateMarketController::class, 'PrivateMarketCalendarSave'])->name('PrivateMarketCalendarSave');
+    Route::get('/user-account/private_market/payment/{id}', [PrivateMarketController::class, 'PrivateMarketPayment'])->name('PrivateMarketPayment');
+    Route::put('/user-account/private_market/paymentSave', [PrivateMarketController::class, 'PrivateMarketPaymentSave'])->name('PrivateMarketPaymentSave');
+    Route::get('/user-account/certificate/private_market/export-pdf/{id}', [PrivateMarketController::class, 'CertificatePrivateMarketPDF'])->name('CertificatePrivateMarketPDF');
 });
 
 Route::middleware(['admin'])->group(function () {
@@ -332,7 +346,29 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/food_storage_license/admin-reply/{id}', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseAdminReply'])->name('FoodStorageLicenseAdminReply');
     Route::post('/admin/food_storage_license/update-status/{id}', [AdminFoodStorageLicenseController::class, 'FoodStorageLicenseUpdateStatus'])->name('FoodStorageLicenseUpdateStatus');
     Route::get('/admin/certificate/food_storage_license/export-pdf/{id}', [AdminFoodStorageLicenseController::class, 'AdminCertificateFoodStorageLicensePDF'])->name('AdminCertificateFoodStorageLicensePDF');
-        Route::post('/admin/certificate/food_storage_license/extend', [AdminFoodStorageLicenseController::class, 'CertificateFoodStorageLicenseCoppy'])->name('CertificateFoodStorageLicenseCoppy');
+    Route::post('/admin/certificate/food_storage_license/extend', [AdminFoodStorageLicenseController::class, 'CertificateFoodStorageLicenseCoppy'])->name('CertificateFoodStorageLicenseCoppy');
+    Route::get('/admin/food_storage_license/expire', [AdminFoodStorageLicenseController::class, 'CertificateFoodStorageLicenseExpire'])->name('CertificateFoodStorageLicenseExpire');
+
+    //คำร้องขอจัดตั้งตลาดเอกชน
+    Route::get('/admin/private_market/showdata', [AdminPrivateMarketController::class, 'PrivateMarketAdminShowData'])->name('PrivateMarketAdminShowData');
+    Route::get('/admin/private_market/export-pdf/{id}', [AdminPrivateMarketController::class, 'PrivateMarketAdminExportPDF'])->name('PrivateMarketAdminExportPDF');
+    Route::get('/admin/private_market/confirm/{id}', [AdminPrivateMarketController::class, 'PrivateMarketAdminConfirm'])->name('PrivateMarketAdminConfirm');
+    Route::put('/admin/private_market/confirm', [AdminPrivateMarketController::class, 'PrivateMarketAdminConfirmSave'])->name('PrivateMarketAdminConfirmSave');
+    Route::get('/admin/private_market/appointment', [AdminPrivateMarketController::class, 'PrivateMarketAdminAppointment'])->name('PrivateMarketAdminAppointment');
+    Route::get('/admin/private_market/detail/{id}', [AdminPrivateMarketController::class, 'PrivateMarketAdminDetail'])->name('PrivateMarketAdminDetail');
+    Route::get('/admin/private_market/calendar/{id}', [AdminPrivateMarketController::class, 'PrivateMarketAdminCalendar'])->name('PrivateMarketAdminCalendar');
+    Route::put('/admin/private_market/calendarSave', [AdminPrivateMarketController::class, 'PrivateMarketAdminCalendarSave'])->name('PrivateMarketAdminCalendarSave');
+
+    Route::get('/admin/private_market/explore', [AdminPrivateMarketController::class, 'PrivateMarketAdminExplore'])->name('PrivateMarketAdminExplore');
+    Route::get('/admin/private_market/checklist/{id}', [AdminPrivateMarketController::class, 'PrivateMarketAdminChecklist'])->name('PrivateMarketAdminChecklist');
+    Route::put('/admin/private_market/checklistSave', [AdminPrivateMarketController::class, 'PrivateMarketAdminChecklistSave'])->name('PrivateMarketAdminChecklistSave');
+    Route::get('/admin/private_market/payment', [AdminPrivateMarketController::class, 'PrivateMarketAdminPayment'])->name('PrivateMarketAdminPayment');
+    Route::get('/admin/private_market/payment-check/{id}', [AdminPrivateMarketController::class, 'PrivateMarketAdminPaymentCheck'])->name('PrivateMarketAdminPaymentCheck');
+    Route::put('/admin/private_market/paymentSave', [AdminPrivateMarketController::class, 'PrivateMarketAdminPaymentSave'])->name('PrivateMarketAdminPaymentSave');
+    Route::get('/admin/private_market/approve', [AdminPrivateMarketController::class, 'PrivateMarketAdminApprove'])->name('PrivateMarketAdminApprove');
+    Route::get('/admin/certificate/private_market/export-pdf/{id}', [AdminPrivateMarketController::class, 'AdminCertificatePrivateMarketPDF'])->name('AdminCertificatePrivateMarketPDF');
+    Route::post('/admin/certificate/private_market/extend', [AdminPrivateMarketController::class, 'CertificatePrivateMarketCopy'])->name('CertificatePrivateMarketCopy');
+    Route::get('/admin/private_market/expire', [AdminPrivateMarketController::class, 'CertificatePrivateMarketExpire'])->name('CertificatePrivateMarketExpire');
 });
 
 Route::middleware(['admin_waste_payment'])->group(function () {

@@ -109,6 +109,10 @@
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
                         </a>
+                        <a class="nav-link" href="{{ route('AmplifierAdminPages') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
+                            คำร้องขออนุญาตทำการโฆษณาโดยใช้เครื่องขยายเสียง
+                        </a>
 
                         <div class="sb-sidenav-menu-heading">ใบอนุญาต</div>
                         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#public_health1"

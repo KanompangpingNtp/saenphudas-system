@@ -7,7 +7,7 @@ use App\Models\Amplifier;
 use App\Models\AmplifierFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use App\Models\AmplifierReply;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class AmplifierController extends Controller
@@ -108,7 +108,7 @@ class AmplifierController extends Controller
 
         $pdf = Pdf::loadView('users.amplifier.pdf-form', compact('form'))->setPaper('A4', 'portrait');
 
-        return $pdf->stream('แบบคำขอร้องทั่วไป' . $form->id . '.pdf');
+        return $pdf->stream('คำร้องขออนุญาตทำการโฆษณาโดยใช้เครื่องขยายเสียง' . $form->id . '.pdf');
     }
 
     public function AmplifierFileUserReply(Request $request, $formId)
@@ -117,7 +117,7 @@ class AmplifierController extends Controller
             'message' => 'required|string|max:1000',
         ]);
 
-        Amplifier::create([
+        AmplifierReply::create([
             'amplifier_id' => $formId,
             'users_id' => auth()->id(),
             'reply_text' => $request->message,

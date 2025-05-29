@@ -380,6 +380,12 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/certificate/private_market/export-pdf/{id}', [AdminPrivateMarketController::class, 'AdminCertificatePrivateMarketPDF'])->name('AdminCertificatePrivateMarketPDF');
     Route::post('/admin/certificate/private_market/extend', [AdminPrivateMarketController::class, 'CertificatePrivateMarketCopy'])->name('CertificatePrivateMarketCopy');
     Route::get('/admin/private_market/expire', [AdminPrivateMarketController::class, 'CertificatePrivateMarketExpire'])->name('CertificatePrivateMarketExpire');
+
+    //คำร้องขออนุญาตทำการโฆษณาโดยใช้เครื่องขยายเสียง
+    Route::get('/admin/amplifier', [AdminAmplifierController::class, 'AmplifierAdminPages'])->name('AmplifierAdminPages');
+    Route::get('/admin/amplifier/ExportPdf/{id}', [AdminAmplifierController::class, 'AmplifierAdminExportPDF'])->name('AmplifierAdminExportPDF');
+    Route::post('/admin/amplifier/AdminReply/{id}', [AdminAmplifierController::class, 'AmplifierAdminReply'])->name('AmplifierAdminReply');
+    Route::post('/admin/amplifier/{id}/update-status', [AdminAmplifierController::class, 'AmplifierUpdateStatus'])->name('AmplifierUpdateStatus');
 });
 
 Route::middleware(['admin_waste_payment'])->group(function () {

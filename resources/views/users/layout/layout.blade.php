@@ -69,7 +69,7 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">เมนู</div>
+                        <div class="sb-sidenav-menu-heading">คำร้อง</div>
                         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#ops1"
                             aria-expanded="false" aria-controls="ops1">
                             <div class="sb-nav-link-icon">
@@ -280,6 +280,25 @@
                                 <a class="nav-link" href="{{ route('GarbageCollectionForm') }}">ฟอร์ม</a>
                                 <a class="nav-link"
                                     href="{{ route('GarbageCollectionShowDetails') }}">ประวัติการส่งฟอร์ม</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#amplifier"
+                            aria-expanded="false" aria-controls="amplifier">
+                            <div class="sb-nav-link-icon">
+                                <i class="bi bi-clipboard"></i>
+                            </div>
+                            คำร้องขออนุญาตทำการโฆษณาโดยใช้เครื่องขยายเสียง
+                            <div class="sb-sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div class="collapse" id="amplifier" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ route('AmplifierFormPage') }}">ฟอร์ม</a>
+                                <a class="nav-link"
+                                    href="{{ route('AmplifierShowDetails') }}">ประวัติการส่งฟอร์ม</a>
                             </nav>
                         </div>
 

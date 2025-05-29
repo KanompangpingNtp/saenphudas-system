@@ -44,6 +44,8 @@ use App\Http\Controllers\food_storage_license\AdminFoodStorageLicenseController;
 use App\Http\Controllers\food_storage_license\FoodStorageLicenseController;
 use App\Http\Controllers\private_market\AdminPrivateMarketController;
 use App\Http\Controllers\private_market\PrivateMarketController;
+use App\Http\Controllers\amplifier\AdminAmplifierController;
+use App\Http\Controllers\amplifier\AmplifierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,6 +117,10 @@ Route::post('/emergency/send', [EmergencyController::class, 'send'])->name('emer
 //
 Route::get('/garbage_collection', [GarbageCollectionController::class, 'GarbageCollectionForm'])->name('GarbageCollectionForm');
 Route::post('/garbage_collection/form/create', [GarbageCollectionController::class, 'GarbageCollectionFormCreate'])->name('GarbageCollectionFormCreate');
+
+//แบบคำร้องขอจัดตั้งตลาดเอกชน
+Route::get('/amplifier', [AmplifierController::class, 'AmplifierFormPage'])->name('AmplifierFormPage');
+Route::post('/amplifier/form/create', [AmplifierController::class, 'AmplifierFormCreate'])->name('AmplifierFormCreate');
 
 Route::middleware(['user'])->group(function () {
     Route::get('/user/index', [UserController::class, 'UserIndex'])->name('UserIndex');
@@ -234,6 +240,11 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user-account/private_market/payment/{id}', [PrivateMarketController::class, 'PrivateMarketPayment'])->name('PrivateMarketPayment');
     Route::put('/user-account/private_market/paymentSave', [PrivateMarketController::class, 'PrivateMarketPaymentSave'])->name('PrivateMarketPaymentSave');
     Route::get('/user-account/certificate/private_market/export-pdf/{id}', [PrivateMarketController::class, 'CertificatePrivateMarketPDF'])->name('CertificatePrivateMarketPDF');
+
+    //คำร้องขออนุญาตทำการโฆษณาโดยใช้เครื่องขยายเสียง
+    Route::get('/user/account/amplifier/show-details', [AmplifierController::class, 'AmplifierShowDetails'])->name('AmplifierShowDetails');
+    Route::post('/user/account/amplifier/{form}/reply', [AmplifierController::class, 'AmplifierFileUserReply'])->name('AmplifierFileUserReply');
+    Route::get('/user/account/amplifier/{id}/pdf', [AmplifierController::class, 'AmplifierFileUserExportPDF'])->name('AmplifierFileUserExportPDF');
 });
 
 Route::middleware(['admin'])->group(function () {

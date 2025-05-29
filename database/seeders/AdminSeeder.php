@@ -24,7 +24,7 @@ class AdminSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'users01@example.com'],
+            ['email' => 'users@example.com'],
             [
                 'name' => 'test',
                 'password' => Hash::make('123456789'),
@@ -38,15 +38,6 @@ class AdminSeeder extends Seeder
                 'name' => 'แอดมิน',
                 'password' => Hash::make('123456789'),
                 'level' => '3',
-            ]
-        );
-
-        User::updateOrCreate(
-            ['email' => 'users02@example.com'],
-            [
-                'name' => 'test',
-                'password' => Hash::make('123456789'),
-                'level' => '4',
             ]
         );
     }

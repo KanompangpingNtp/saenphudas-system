@@ -111,8 +111,10 @@
 </head>
 
 <body>
-
-
-
+    <div class="title_doc">
+        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('images/pdf/ครุฑ.png'))) }}"
+            alt="Logo" height="120"> <br><strong>คำร้องขออนุญาตทำการโฆษณาโดยใช้เครื่องขยายเสียง</strong>
+    </div>
 </body>
+
 </html>

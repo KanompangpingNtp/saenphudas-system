@@ -283,6 +283,7 @@
                             </nav>
                         </div>
 
+                        <div class="sb-sidenav-menu-heading">ใบอนุญาต</div>
                         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#public_health2"
                             aria-expanded="false" aria-controls="public_health2">
                             <div class="sb-nav-link-icon">

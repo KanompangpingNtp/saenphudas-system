@@ -165,29 +165,6 @@
                 ประวัติการชำระ
             </div>
             <div class="table-wrapper">
-                {{-- <table class="custom-table rounded-table w-100">
-                    <thead>
-                        <tr>
-                            <th>เดือน</th>
-                            <th>รายการ</th>
-                            <th>สถานะ</th>
-                            <th>ดำเนินการ</th>
-                            <th>ใบเสร็จ</th>
-                            <th>ชำระ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>มกราคม</td>
-                            <td>ค่าชำระขยะประจำเดือน</td>
-                            <td>ยังไม่ชำระ</td>
-                            <td>ดำเนินการ</td>
-                            <td><a href="#"><img src="{{asset('check-valuetrash/search.png')}}" alt="search"></a></td>
-                            <td><a href="#"><img src="{{asset('check-valuetrash/tips.png')}}" alt="tips"></a></td>
-                        </tr>
-                    </tbody>
-                </table> --}}
-
                 <table class="custom-table rounded-table w-100">
                     <thead>
                         <tr>

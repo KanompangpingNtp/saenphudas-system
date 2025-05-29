@@ -46,6 +46,10 @@ use App\Http\Controllers\private_market\AdminPrivateMarketController;
 use App\Http\Controllers\private_market\PrivateMarketController;
 use App\Http\Controllers\amplifier\AdminAmplifierController;
 use App\Http\Controllers\amplifier\AmplifierController;
+use App\Http\Controllers\general_road_request\AdminGeneralRoadRequestController;
+use App\Http\Controllers\general_road_request\GeneralRoadRequestController;
+use App\Http\Controllers\general_electricity_request\AdminGeneralElectricityRequestController;
+use App\Http\Controllers\general_electricity_request\GeneralElectricityRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +125,14 @@ Route::post('/garbage_collection/form/create', [GarbageCollectionController::cla
 //แบบคำร้องขอจัดตั้งตลาดเอกชน
 Route::get('/amplifier', [AmplifierController::class, 'AmplifierFormPage'])->name('AmplifierFormPage');
 Route::post('/amplifier/form/create', [AmplifierController::class, 'AmplifierFormCreate'])->name('AmplifierFormCreate');
+
+//คำร้องทั่วไป (แจ้งเรื่องไฟฟ้า)
+Route::get('/general-electricity-request', [GeneralElectricityRequestController::class, 'GeneralElectricityRequestFormPage'])->name('GeneralElectricityRequestFormPage');
+Route::post('/general-electricity-request/form/create', [GeneralElectricityRequestController::class, 'GeneralElectricityRequestFormCreate'])->name('GeneralElectricityRequestFormCreate');
+
+//คำร้องทั่วไป (แจ้งถนนชำรุด)
+Route::get('/general-road-request', [GeneralRoadRequestController::class, 'GeneralRoadRequestFormPage'])->name('GeneralRoadRequestFormPage');
+Route::post('/general-road-request/form/create', [GeneralRoadRequestController::class, 'GeneralRoadRequestFormCreate'])->name('GeneralRoadRequestFormCreate');
 
 Route::middleware(['user'])->group(function () {
     Route::get('/user/index', [UserController::class, 'UserIndex'])->name('UserIndex');
@@ -245,6 +257,20 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user/account/amplifier/show-details', [AmplifierController::class, 'AmplifierShowDetails'])->name('AmplifierShowDetails');
     Route::post('/user/account/amplifier/{form}/reply', [AmplifierController::class, 'AmplifierFileUserReply'])->name('AmplifierFileUserReply');
     Route::get('/user/account/amplifier/{id}/pdf', [AmplifierController::class, 'AmplifierFileUserExportPDF'])->name('AmplifierFileUserExportPDF');
+
+    //คำร้องทั่วไป (แจ้งเรื่องไฟฟ้า)
+    Route::get('/user-account/general-electricity-request/show-details', [GeneralElectricityRequestController::class, 'GeneralElectricityRequestShowDetails'])->name('GeneralElectricityRequestShowDetails');
+    Route::get('/user-account/general-electricity-request/export-pdf/{id}', [GeneralElectricityRequestController::class, 'GeneralElectricityRequestUserExportPDF'])->name('GeneralElectricityRequestUserExportPDF');
+    Route::post('/user-account/general-electricity-request/reply/{id}', [GeneralElectricityRequestController::class, 'GeneralElectricityRequestUserReply'])->name('GeneralElectricityRequestUserReply');
+    Route::get('/user-account/general-electricity-request/show-edit/{id}', [GeneralElectricityRequestController::class, 'GeneralElectricityRequestUserShowFormEdit'])->name('GeneralElectricityRequestUserShowFormEdit');
+    Route::put('/user-account/general-electricity-request/update-data/{id}', [GeneralElectricityRequestController::class, 'GeneralElectricityRequestUserUpdateForm'])->name('GeneralElectricityRequestUserUpdateForm');
+
+    //คำร้องทั่วไป (แจ้งถนนชำรุด)
+    Route::get('/user-account/general-road-request/show-details', [GeneralRoadRequestController::class, 'GeneralRoadRequestShowDetails'])->name('GeneralRoadRequestShowDetails');
+    Route::get('/user-account/general-road-request/export-pdf/{id}', [GeneralRoadRequestController::class, 'GeneralRoadRequestUserExportPDF'])->name('GeneralRoadRequestUserExportPDF');
+    Route::post('/user-account/general-road-request/reply/{id}', [GeneralRoadRequestController::class, 'GeneralRoadRequestUserReply'])->name('GeneralRoadRequestUserReply');
+    Route::get('/user-account/general-road-request/show-edit/{id}', [GeneralRoadRequestController::class, 'GeneralRoadRequestUserShowFormEdit'])->name('GeneralRoadRequestUserShowFormEdit');
+    Route::put('/user-account/general-road-request/update-data/{id}', [GeneralRoadRequestController::class, 'GeneralRoadRequestUserUpdateForm'])->name('GeneralRoadRequestUserUpdateForm');
 });
 
 Route::middleware(['admin'])->group(function () {
@@ -386,6 +412,18 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/amplifier/ExportPdf/{id}', [AdminAmplifierController::class, 'AmplifierAdminExportPDF'])->name('AmplifierAdminExportPDF');
     Route::post('/admin/amplifier/AdminReply/{id}', [AdminAmplifierController::class, 'AmplifierAdminReply'])->name('AmplifierAdminReply');
     Route::post('/admin/amplifier/{id}/update-status', [AdminAmplifierController::class, 'AmplifierUpdateStatus'])->name('AmplifierUpdateStatus');
+
+    //คำร้องทั่วไป (แจ้งถนนชำรุด)
+    Route::get('/admin/general-road-request/showdata', [AdminGeneralRoadRequestController::class, 'GeneralRoadRequestAdminShowData'])->name('GeneralRoadRequestAdminShowData');
+    Route::get('/admin/general-road-request/export-pdf/{id}', [AdminGeneralRoadRequestController::class, 'GeneralRoadRequestAdminExportPDF'])->name('GeneralRoadRequestAdminExportPDF');
+    Route::post('/admin/general-road-request/admin-reply/{id}', [AdminGeneralRoadRequestController::class, 'GeneralRoadRequestAdminReply'])->name('GeneralRoadRequestAdminReply');
+    Route::post('/admin/general-road-request/update-status/{id}', [AdminGeneralRoadRequestController::class, 'GeneralRoadRequestUpdateStatus'])->name('GeneralRoadRequestUpdateStatus');
+
+    //คำร้องทั่วไป (แจ้งเรื่องไฟฟ้า)
+    Route::get('/admin/general-electricity-request/showdata', [AdminGeneralElectricityRequestController::class, 'GeneralElectricityRequestAdminShowData'])->name('GeneralElectricityRequestAdminShowData');
+    Route::get('/admin/general-electricity-request/export-pdf/{id}', [AdminGeneralElectricityRequestController::class, 'GeneralElectricityRequestAdminExportPDF'])->name('GeneralElectricityRequestAdminExportPDF');
+    Route::post('/admin/general-electricity-request/admin-reply/{id}', [AdminGeneralElectricityRequestController::class, 'GeneralElectricityRequestAdminReply'])->name('GeneralElectricityRequestAdminReply');
+    Route::post('/admin/general-electricity-request/update-status/{id}', [AdminGeneralElectricityRequestController::class, 'GeneralElectricityRequestUpdateStatus'])->name('GeneralElectricityRequestUpdateStatus');
 });
 
 Route::middleware(['admin_waste_payment'])->group(function () {

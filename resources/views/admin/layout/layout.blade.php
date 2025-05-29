@@ -64,7 +64,7 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu" style="overflow-y: auto; max-height: calc(100vh - 100px);">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">เมนู</div>
+                        <div class="sb-sidenav-menu-heading">สำนักปลัด</div>
                         <a class="nav-link" href="{{ route('GeneralRequestsAdminShowData') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             คำร้องทั่วไป
@@ -81,6 +81,8 @@
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             แบบคำขอรับการสงเคราะห์ <br> (ผู้ป่วยเอดส์)
                         </a>
+
+                        <div class="sb-sidenav-menu-heading">กองคลัง</div>
                         <a class="nav-link" href="{{ route('ChangeInUseAdminPages') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             (ภ.ด.ส.๕) แบบแจ้งการเปลี่ยนแปลงการใช้ประโยชน์ที่ดินหรือสิ่งปลูกสร้าง
@@ -114,7 +116,17 @@
                             คำร้องขออนุญาตทำการโฆษณาโดยใช้เครื่องขยายเสียง
                         </a>
 
-                        <div class="sb-sidenav-menu-heading">ใบอนุญาต</div>
+                        <div class="sb-sidenav-menu-heading">กองช่าง</div>
+                        <a class="nav-link" href="{{ route('GeneralElectricityRequestAdminShowData') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
+                            คำร้องทั่วไป (แจ้งเรื่องไฟฟ้า)
+                        </a>
+                        <a class="nav-link" href="{{ route('GeneralRoadRequestAdminShowData') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
+                            คำร้องทั่วไป (แจ้งถนนชำรุด)
+                        </a>
+
+                        <div class="sb-sidenav-menu-heading">กองสาธารณสุขและสิ่งแวดล้อม</div>
                         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#public_health1"
                             aria-expanded="false" aria-controls="public_health1">
                             <div class="sb-nav-link-icon">
@@ -182,20 +194,22 @@
                         <div class="collapse" id="private_market" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link"
-                                    href="{{ route('PrivateMarketAdminShowData') }}">รับเรื่อง</a>
+                                <a class="nav-link" href="{{ route('PrivateMarketAdminShowData') }}">รับเรื่อง</a>
                                 <a class="nav-link"
                                     href="{{ route('PrivateMarketAdminAppointment') }}">การนัดหมาย</a>
-                                <a class="nav-link"
-                                    href="{{ route('PrivateMarketAdminExplore') }}">ออกสำรวจ</a>
-                                <a class="nav-link"
-                                    href="{{ route('PrivateMarketAdminPayment') }}">ชำระเงิน</a>
-                                <a class="nav-link"
-                                    href="{{ route('PrivateMarketAdminApprove') }}">ออกใบอนุญาต</a>
+                                <a class="nav-link" href="{{ route('PrivateMarketAdminExplore') }}">ออกสำรวจ</a>
+                                <a class="nav-link" href="{{ route('PrivateMarketAdminPayment') }}">ชำระเงิน</a>
+                                <a class="nav-link" href="{{ route('PrivateMarketAdminApprove') }}">ออกใบอนุญาต</a>
                                 <a class="nav-link"
                                     href="{{ route('CertificatePrivateMarketExpire') }}">ใบอนุญาตใกล้หมดอายุ</a>
                             </nav>
                         </div>
+
+                        <div class="sb-sidenav-menu-heading">กองการศึกษาศาสนาและวัฒนธรรม</div>
+                        <a class="nav-link" href="{{ route('TableChildApplyAdminPages') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
+                            แบบฟอร์มใบสมัคร ศูนย์พัฒนาเด็กเล็ก
+                        </a>
                     </div>
                 </div>
             </nav>

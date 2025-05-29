@@ -69,7 +69,7 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">คำร้อง</div>
+                        <div class="sb-sidenav-menu-heading">สำนักปลัด</div>
                         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#ops1"
                             aria-expanded="false" aria-controls="ops1">
                             <div class="sb-nav-link-icon">
@@ -146,6 +146,45 @@
                             </nav>
                         </div>
 
+                        <div class="sb-sidenav-menu-heading">กองช่าง</div>
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1"
+                            aria-expanded="false" aria-controls="collapseLayouts1">
+                            <div class="sb-nav-link-icon">
+                                <i class="bi bi-clipboard"></i>
+                            </div>
+                            คำร้องทั่วไป (แจ้งเรื่องไฟฟ้า)
+                            <div class="sb-sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ route('GeneralElectricityRequestFormPage') }}">ฟอร์ม</a>
+                                <a class="nav-link"
+                                    href="{{ route('GeneralElectricityRequestShowDetails') }}">ประวัติการส่งฟอร์ม</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2"
+                            aria-expanded="false" aria-controls="collapseLayouts2">
+                            <div class="sb-nav-link-icon">
+                                <i class="bi bi-clipboard"></i>
+                            </div>
+                            คำร้องทั่วไป (แจ้งถนนชำรุด)
+                            <div class="sb-sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ route('GeneralRoadRequestFormPage') }}">ฟอร์ม</a>
+                                <a class="nav-link"
+                                    href="{{ route('GeneralRoadRequestShowDetails') }}">ประวัติการส่งฟอร์ม</a>
+                            </nav>
+                        </div>
+
+                        <div class="sb-sidenav-menu-heading">กองคลัง</div>
                         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#change_in_use"
                             aria-expanded="false" aria-controls="change_in_use">
                             <div class="sb-nav-link-icon">
@@ -181,26 +220,6 @@
                                 <a class="nav-link" href="{{ route('LicenseTaxFormPage') }}">ฟอร์ม</a>
                                 <a class="nav-link"
                                     href="{{ route('LicenseTaxShowDetails') }}">ประวัติการส่งฟอร์ม</a>
-                            </nav>
-                        </div>
-
-                        <a class="nav-link collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#recruiting_children1" aria-expanded="false"
-                            aria-controls="recruiting_children1">
-                            <div class="sb-nav-link-icon">
-                                <i class="bi bi-clipboard"></i>
-                            </div>
-                            แบบฟอร์มใบสมัคร ศูนย์พัฒนาเด็กเล็ก
-                            <div class="sb-sidenav-collapse-arrow">
-                                <i class="fas fa-angle-down"></i>
-                            </div>
-                        </a>
-                        <div class="collapse" id="recruiting_children1" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{ route('ChildApplyPage') }}">ฟอร์ม</a>
-                                <a class="nav-link"
-                                    href="{{ route('TableChildApplyUsersPages') }}">ประวัติการส่งฟอร์ม</a>
                             </nav>
                         </div>
 
@@ -297,12 +316,11 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ route('AmplifierFormPage') }}">ฟอร์ม</a>
-                                <a class="nav-link"
-                                    href="{{ route('AmplifierShowDetails') }}">ประวัติการส่งฟอร์ม</a>
+                                <a class="nav-link" href="{{ route('AmplifierShowDetails') }}">ประวัติการส่งฟอร์ม</a>
                             </nav>
                         </div>
 
-                        <div class="sb-sidenav-menu-heading">ใบอนุญาต</div>
+                        <div class="sb-sidenav-menu-heading">กองสาธารณสุขและสิ่งแวดล้อม</div>
                         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#public_health2"
                             aria-expanded="false" aria-controls="public_health2">
                             <div class="sb-nav-link-icon">
@@ -357,6 +375,27 @@
                                 <a class="nav-link" href="{{ route('PrivateMarketFormPage') }}">ฟอร์ม</a>
                                 <a class="nav-link"
                                     href="{{ route('PrivateMarketShowDetails') }}">ประวัติการส่งฟอร์ม</a>
+                            </nav>
+                        </div>
+
+                        <div class="sb-sidenav-menu-heading">กองการศึกษาศาสนาและวัฒนธรรม</div>
+                        <a class="nav-link collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#recruiting_children1" aria-expanded="false"
+                            aria-controls="recruiting_children1">
+                            <div class="sb-nav-link-icon">
+                                <i class="bi bi-clipboard"></i>
+                            </div>
+                            แบบฟอร์มใบสมัคร ศูนย์พัฒนาเด็กเล็ก
+                            <div class="sb-sidenav-collapse-arrow">
+                                <i class="fas fa-angle-down"></i>
+                            </div>
+                        </a>
+                        <div class="collapse" id="recruiting_children1" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ route('ChildApplyPage') }}">ฟอร์ม</a>
+                                <a class="nav-link"
+                                    href="{{ route('TableChildApplyUsersPages') }}">ประวัติการส่งฟอร์ม</a>
                             </nav>
                         </div>
                     </div>

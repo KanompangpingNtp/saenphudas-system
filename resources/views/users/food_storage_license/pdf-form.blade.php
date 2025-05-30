@@ -108,7 +108,7 @@
     </div>
     <div class="box_text" style="text-align: right; margin-top:1rem;">
         <span>เขียนที่</span>
-        <span class="dotted-line" style="width: 32%; text-align: center; line-height: 1;">องค์การบริหารส่วนตำบลคลองอุดมชลจร</span>
+        <span class="dotted-line" style="width: 32%; text-align: center; line-height: 1;">เทศบาลตำบลแสนภูดาษ </span>
     </div>
     <div class="box_text" style="text-align: right; ">
         <span>วันที่</span>

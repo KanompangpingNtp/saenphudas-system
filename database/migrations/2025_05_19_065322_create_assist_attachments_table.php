@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('assist_attachments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('assist_people_id')->constrained('assist_people')->onDelete('cascade');
-            $table->text('reply_text');
-            $table->date('reply_date');
+            $table->string('file_path');
+            $table->string('file_type');
             $table->timestamps();
         });
     }

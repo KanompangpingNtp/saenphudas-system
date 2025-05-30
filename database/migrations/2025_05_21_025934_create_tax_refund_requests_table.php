@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('full_name')->nullable();
             $table->string('age')->nullable();
             $table->string('house_number')->nullable();
+            $table->string('road')->nullable();
+            $table->string('alley')->nullable();
             $table->string('village')->nullable();
             $table->string('subdistrict')->nullable();
             $table->string('district')->nullable();

@@ -76,7 +76,7 @@
                 <div class="big-text">
                     จุดถังขยะมีพิษใกล้ฉัน
                 </div>
-                <a href="#" class="btn-back-effect">
+                <a href="{{ route('UserWastePayment') }}" class="btn-back-effect">
                     <img src="{{ asset('trash-page/btn-back.png') }}" alt="btn-back" class="img-fluid">
                 </a>
             </div>

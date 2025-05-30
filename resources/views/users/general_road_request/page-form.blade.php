@@ -74,12 +74,12 @@
 
         <!-- Row 6: รายละเอียดคำขอ -->
         <div class="mb-3">
-            <label for="request_details" class="form-label">เรื่องร้องเรียนต่อองค์การบริหารส่วนตำบลคลองอุดมชลจร กรณี<span class="text-danger">*</span></label>
+            <label for="request_details" class="form-label">เรื่องร้องเรียนต่อเทศบาลตำบลแสนภูดาษ กรณี<span class="text-danger">*</span></label>
             <textarea class="form-control" id="request_details" name="request_details" rows="3" required></textarea>
         </div>
 
         <div class="mb-3">
-            <label for="proceedings" class="form-label">ข้าพเจ้าขอความอนุเคราะห์ให้องค์การบริหารส่วนตำบลคลองอุดมชลจร ดำเนินการ<span class="text-danger">*</span></label>
+            <label for="proceedings" class="form-label">ข้าพเจ้าขอความอนุเคราะห์ให้เทศบาลตำบลแสนภูดาษ ดำเนินการ<span class="text-danger">*</span></label>
             <textarea class="form-control" id="proceedings" name="proceedings" rows="3" required></textarea>
         </div>
 

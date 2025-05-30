@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('province')->nullable();
             $table->string('telephone')->nullable();
             $table->string('fax')->nullable();
+            $table->string('refer_app_id')->nullable();
             $table->timestamps();
         });
     }

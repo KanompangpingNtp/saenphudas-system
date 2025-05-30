@@ -21,7 +21,7 @@ class EmergencyController extends Controller
 
     public function send(Request $request)
     {
-        dd($request);
+        // dd($request);
         $input = $request->input();
 
         if ($request->hasFile('file')) {
@@ -75,11 +75,11 @@ class EmergencyController extends Controller
                     'type' => 'text',
                     'text' => $data['text']
                 ],
-                [
-                    'type' => 'image',
-                    'originalContentUrl' => $data['photo'],
-                    'previewImageUrl' => $data['photo']
-                ]
+                // [
+                //     // 'type' => 'image',
+                //     // 'originalContentUrl' => $data['photo'],
+                //     // 'previewImageUrl' => $data['photo']
+                // ]
             ]
         ];
 

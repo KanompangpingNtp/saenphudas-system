@@ -59,7 +59,7 @@
                         </div>
                         <div class="modal-body">
                             <span style="color: black;">preview</span>
-                            <a href="{{ route('AmplifierAdminExportPDF', $form->id) }}" class="btn btn-danger btn-sm"
+                            <a href="{{ route('AmplifierFileUserExportPDF', $form->id) }}" class="btn btn-danger btn-sm"
                                 target="_blank">
                                 <i class="bi bi-file-earmark-pdf"></i>
                             </a>

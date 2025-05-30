@@ -22,7 +22,7 @@
 
         body {
             font-family: 'sarabun', 'sarabun-bold', sans-serif;
-            font-size: 19.3px;
+            font-size: 18px;
             margin: 0;
             padding: 0;
             line-height: 0.8;
@@ -79,71 +79,92 @@
     <div class="box_text" style="text-align: left; margin-top:1rem;">
         <div>
             <span style="font-weight: bold;">1. ประเภทกิจการ</span>
-            <input type="checkbox" style="margin-left: 34px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 34px; margin-right: 5px;"
+                {{ $document_option->business_type == '1' ? 'checked' : '' }}>
             <span>จำหน่ายอาหาร</span>
-            <input type="checkbox" style="margin-left: 20px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 20px; margin-right: 5px;"
+                {{ $document_option->business_type == '2' ? 'checked' : '' }}>
             <span>สะสมอาหาร</span>
         </div>
         <div style="margin-top: -8px;">
             <span style="font-weight: bold;">2. ประเภทการตรวจ</span>
-            <input type="checkbox" style="margin-left: 20px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 20px; margin-right: 5px;"
+                {{ $document_option->inspection_type == '1' ? 'checked' : '' }}>
             <span>ขออณุญาตใหม่</span>
-            <input type="checkbox" style="margin-left: 20px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 20px; margin-right: 5px;"
+                {{ $document_option->inspection_type == '2' ? 'checked' : '' }}>
             <span>ต่ออายุใบอนุญาต</span>
         </div>
         <div style="margin-top: -8px;">
             <span style="font-weight: bold;">3. ชื่อสถานประกอบกิจการ</span>
-            <span class="dotted-line" style="width: 78%; text-align: center; line-height: 1;">{{$form->full_name}}</span>
+            <span class="dotted-line"
+                style="width: 78%; text-align: center; line-height: 1;">{{ $document_option->name_establishment }}</span>
             <div style="margin-left: 1rem; margin-top: -5px;">
                 <span>ชื่อผู้ประกอบการ/เจ้าของ</span>
-                <span class="dotted-line" style="width: 35%; text-align: center; line-height: 1;">{{$form->full_name}}</span>
+                <span class="dotted-line"
+                    style="width: 35%; text-align: center; line-height: 1;">{{ $document_option->owner_name }}</span>
                 <span>ชื่อผู้จัดการ</span>
-                <span class="dotted-line" style="width: 35%; text-align: center; line-height: 1;">{{$form->full_name}}</span>
+                <span class="dotted-line"
+                    style="width: 35%; text-align: center; line-height: 1;">{{ $document_option->manager_name }}</span>
             </div>
         </div>
         <div style="margin-top: -8px;">
             <span style="font-weight: bold;">4. สถานที่ตั้งเลขที่</span>
-            <span class="dotted-line" style="width: 8%; text-align: center; line-height: 1;"></span>
+            <span class="dotted-line"
+                style="width: 8%; text-align: center; line-height: 1;">{{ $document_option->location }}</span>
             <span>หมู่</span>
-            <span class="dotted-line" style="width: 8%; text-align: center; line-height: 1;"></span>
+            <span class="dotted-line"
+                style="width: 8%; text-align: center; line-height: 1;">{{ $document_option->village }}</span>
             <span>ซอย</span>
-            <span class="dotted-line" style="width: 6%; text-align: center; line-height: 1;"></span>
+            <span class="dotted-line"
+                style="width: 6%; text-align: center; line-height: 1;">{{ $document_option->alley }}</span>
             <span>ถนน</span>
-            <span class="dotted-line" style="width: 8%; text-align: center; line-height: 1;"></span>
-            <span>ตำบลแสนภูดาษ</span>
-            <span class="dotted-line" style="width: 8%; text-align: center; line-height: 1;"></span>
-            <span>อำเภอบ้านโพธิ์</span>
-            <span class="dotted-line" style="width: 8%; text-align: center; line-height: 1;"></span>
+            <span class="dotted-line"
+                style="width: 8%; text-align: center; line-height: 1;">{{ $document_option->road }}</span>
+            <span>ตำบล</span>
+            <span class="dotted-line"
+                style="width: 8%; text-align: center; line-height: 1;">{{ $document_option->subdistrict }}</span>
+            <span>อำเภอ</span>
+            <span class="dotted-line"
+                style="width: 8%; text-align: center; line-height: 1;">{{ $document_option->district }}</span>
             <div style="margin-left: 1rem; margin-top: -5px;">
                 <span>จังหวัดฉะเชิงเทรา</span>
                 <span>หมายเลขติดต่อ</span>
-                <span class="dotted-line" style="width: 15%; text-align: center; line-height: 1;"></span>
+                <span class="dotted-line"
+                    style="width: 15%; text-align: center; line-height: 1;">-</span>
                 <span>โทรศัพท์</span>
-                <span class="dotted-line" style="width: 15%; text-align: center; line-height: 1;"></span>
+                <span class="dotted-line"
+                    style="width: 15%; text-align: center; line-height: 1;">{{ $document_option->phone }}</span>
                 <span>โทรสาร</span>
-                <span class="dotted-line" style="width: 15%; text-align: center; line-height: 1;"></span>
+                <span class="dotted-line"
+                    style="width: 15%; text-align: center; line-height: 1;">{{ $document_option->fax }}</span>
             </div>
         </div>
         <div style="margin-top: -4px;">
             <span style="font-weight: bold;">5. ลักษณะอาคารประกอบการ</span>
-            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;"
+                {{ in_array(1, json_decode($document_option->characteristics_options ?? '[]', true)) ? 'checked' : '' }}>
             <span>อาคารเอกเทศ</span>
-            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;"
+                {{ in_array(2, json_decode($document_option->characteristics_options ?? '[]', true)) ? 'checked' : '' }}>
             <span>ห้องแถว</span>
-            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;"
+                {{ in_array(3, json_decode($document_option->characteristics_options ?? '[]', true)) ? 'checked' : '' }}>
             <span>อาคารพักอาศัย</span>
-            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;"
+                {{ in_array(4, json_decode($document_option->characteristics_options ?? '[]', true)) ? 'checked' : '' }}>
             <span>ตึกแถว</span>
-            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;"
+                {{ in_array(5, json_decode($document_option->characteristics_options ?? '[]', true)) ? 'checked' : '' }}>
             <span>ตึกแถวไม้</span>
             <div style="margin-left: 1rem; margin-top: -5px;">
                 <span>จำนวน</span>
-                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
+                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;">{{ $document_option->characteristics_floor }}</span>
                 <span>ชั้น</span>
                 <span style="margin-left: 40px;">ประกอบกิจการชั้นที่</span>
-                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
+                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;">{{ $document_option->characteristics_floor_no }}</span>
                 <span style="margin-left: 40px;">พื้นที่ประกอบกิจการ</span>
-                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
+                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;">{{ $document_option->characteristics_area }}</span>
                 <span>ตร.ม</span>
             </div>
         </div>
@@ -158,24 +179,29 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="padding-left: 1.3rem;">- มีทางระบายน้ำหรือบ่อรับน้ำโสโครกที่ทำด้วยวัสดุถาวร เรียบ ไม่รั่ว ไม่ซึม ระบายน้ำได้สะดวก</td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="padding-left: 1.3rem;">- มีทางระบายน้ำหรือบ่อรับน้ำโสโครกที่ทำด้วยวัสดุถาวร เรียบ
+                            ไม่รั่ว ไม่ซึม ระบายน้ำได้สะดวก</td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option1 == '1' ? 'checked' : '' }}></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option1 == '2' ? 'checked' : '' }}></td>
                     </tr>
                     <tr>
-                        <td style="padding-left: 1.3rem;"> - มีระบบบำบัดน้ำเสียหรือไม่ (ถ้ามีระบายน้ำเสียไปสู่ที่ใด<span class="dotted-line" style="width: 40%; text-align: center; line-height: 1;"></span>)</td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="padding-left: 1.3rem;"> - มีระบบบำบัดน้ำเสียหรือไม่ (ถ้ามีระบายน้ำเสียไปสู่ที่ใด<span
+                                class="dotted-line" style="width: 40%; text-align: center; line-height: 1;"></span>)
+                        </td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option2 == '1' ? 'checked' : '' }}></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option2 == '2' ? 'checked' : '' }}></td>
                     </tr>
                     <tr>
-                        <td style="padding-left: 1.3rem;"> - มีบ่อพักและบ่อดักไขมันที่ถูกต้องตามหลักสุขาภิบาลหรือไม่</td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="padding-left: 1.3rem;"> - มีบ่อพักและบ่อดักไขมันที่ถูกต้องตามหลักสุขาภิบาลหรือไม่
+                        </td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option3 == '1' ? 'checked' : '' }}></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option3 == '2' ? 'checked' : '' }}></td>
                     </tr>
                     <tr>
-                        <td style="padding-left: 1.3rem;"> - มีอ่างล้างภาชนะและอุปกรณ์ที่ถูกต้องตามหลักสุขาภิบาลหรือไม่</td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="padding-left: 1.3rem;"> - มีอ่างล้างภาชนะและอุปกรณ์ที่ถูกต้องตามหลักสุขาภิบาลหรือไม่
+                        </td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option4 == '1' ? 'checked' : '' }}></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option4 == '2' ? 'checked' : '' }}></td>
                     </tr>
                 </tbody>
             </table>
@@ -190,23 +216,24 @@
                 <tbody>
                     <tr>
                         <td style="padding-left: 1.3rem;">- มีแสงสว่างและการระบายอากาศเพียงพอหรือไม่</td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="text-align: center;" ><input type="checkbox" {{ $document_option->sanitary_option5 == '1' ? 'checked' : '' }}></td>
+                        <td style="text-align: center;" ><input type="checkbox" {{ $document_option->sanitary_option5 == '2' ? 'checked' : '' }}></td>
                     </tr>
                     <tr>
-                        <td style="padding-left: 1.3rem;">- มีที่รองรับขยะมูลฝอยและสิ่งปฏิกูลที่ถูกสุขลักษณะและเพียงพอหรือไม่</td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="padding-left: 1.3rem;">-
+                            มีที่รองรับขยะมูลฝอยและสิ่งปฏิกูลที่ถูกสุขลักษณะและเพียงพอหรือไม่</td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option6 == '1' ? 'checked' : '' }}></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option6 == '2' ? 'checked' : '' }}></td>
                     </tr>
                     <tr>
                         <td style="padding-left: 1.3rem;">- มีอ่างล้างมือที่ถูกสุขลักษณะและมีสบู่ใช้เพียงพอหรือไม่</td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option7 == '1' ? 'checked' : '' }}></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option7 == '2' ? 'checked' : '' }}></td>
                     </tr>
                     <tr>
                         <td style="padding-left: 1.3rem;">- มีห้องน้ำ ห้องส้วม ที่ถูกสุขลักษณะและเพียงพอหรือไม่</td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option8 == '1' ? 'checked' : '' }}></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option8 == '2' ? 'checked' : '' }}></td>
                     </tr>
                 </tbody>
             </table>
@@ -220,19 +247,23 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="padding-left: 1.3rem;">- มีการจัดสถานที่ให้สะอาด เป็นระเบียบเรียบร้อย ไม่เป็นที่อยู่อาศัยของสัตว์นำโรค</td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="padding-left: 1.3rem;">- มีการจัดสถานที่ให้สะอาด เป็นระเบียบเรียบร้อย
+                            ไม่เป็นที่อยู่อาศัยของสัตว์นำโรค</td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option9 == '1' ? 'checked' : '' }}></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option9 == '2' ? 'checked' : '' }}></td>
                     </tr>
                     <tr>
-                        <td style="padding-left: 1.3rem;">- มีการจัดโต๊ะ เก้าอี้ หรือที่นั่ง มีสภาพแข็งแรง สะอาดเป็นระเบียบเรียบร้อย</td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="padding-left: 1.3rem;">- มีการจัดโต๊ะ เก้าอี้ หรือที่นั่ง มีสภาพแข็งแรง
+                            สะอาดเป็นระเบียบเรียบร้อย</td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option10 == '1' ? 'checked' : '' }}></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option10 == '2' ? 'checked' : '' }}></td>
                     </tr>
                     <tr>
-                        <td style="padding-left: 1.3rem;">- มีภาชนะอุปกรณ์เครื่องใช้ในการทำ ประกอบ ปรุง และบริโภค เพียงพอ ปลอดภัย <span style="margin-left: 0.5rem;">และถูกต้องด้วยสุขลักษณะตามเกณฑ์มาตรฐานหรือไม่</span></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
-                        <td style="text-align: center;"><input type="checkbox"></td>
+                        <td style="padding-left: 1.3rem;">- มีภาชนะอุปกรณ์เครื่องใช้ในการทำ ประกอบ ปรุง และบริโภค
+                            เพียงพอ ปลอดภัย <span
+                                style="margin-left: 0.5rem;">และถูกต้องด้วยสุขลักษณะตามเกณฑ์มาตรฐานหรือไม่</span></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option11 == '1' ? 'checked' : '' }}></td>
+                        <td style="text-align: center;"><input type="checkbox" {{ $document_option->sanitary_option11 == '2' ? 'checked' : '' }}></td>
                     </tr>
                 </tbody>
             </table>
@@ -241,59 +272,60 @@
             <span style="font-weight: bold;">7. สุขวิทยาส่วนบุคคลของผู้สัมผัสอาหาร (เฉพาะสถานที่จำหน่ายอาหาร)</span>
             <div style="margin-left: 1rem; margin-top: 0px;">
                 <span>- ผู้สัมผัสอาหาร จำนวน</span>
-                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
+                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;">{{ $document_option->food_handlersx }}</span>
                 <span>คน</span>
                 <span style="margin-left: 2rem;">ผู้ปรุง</span>
-                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
+                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;">{{ $document_option->cook }}</span>
                 <span>คน</span>
                 <span style="margin-left: 2rem;">ผู้เสิร์ฟ</span>
-                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;"></span>
+                <span class="dotted-line" style="width: 10%; text-align: center; line-height: 1;">{{ $document_option->server }}</span>
                 <span>คน</span>
             </div>
             <div style="margin-left: 1rem; margin-top: -4px;">
                 <span>- มีการตรวจสุขภาพประจำปีหรือไม่</span>
-                <input type="checkbox" style="margin-left: 30px; margin-right: 5px;">
+                <input type="checkbox" style="margin-left: 30px; margin-right: 5px;" {{ $document_option->health_check_option == '1' ? 'checked' : '' }}>
                 <span>มี</span>
-                <input type="checkbox" style="margin-left: 80px; margin-right: 5px;">
+                <input type="checkbox" style="margin-left: 80px; margin-right: 5px;" {{ $document_option->health_check_option == '2' ? 'checked' : '' }}>
                 <span>ไม่มี</span>
             </div>
             <div style="margin-left: 1rem; margin-top: -4px;">
                 <span>- การแต่งกายของผู้สัมผัสอาหาร</span>
-                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;">
+                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;" {{ $document_option->dressing_option == '1' ? 'checked' : '' }}>
                 <span>สะอาด</span>
-                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;">
+                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;" {{ $document_option->dressing_option == '2' ? 'checked' : '' }}>
                 <span>สวมเสื้อมีแขน</span>
-                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;">
+                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;" {{ $document_option->dressing_option == '3' ? 'checked' : '' }}>
                 <span>ผูกผ้ากันเปื้อน</span>
-                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;">
+                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;" {{ $document_option->dressing_option == '4' ? 'checked' : '' }}>
                 <span>สวมหมวกหรือเน็ตคลุมผม</span>
             </div>
             <div style="margin-left: 1rem; margin-top: -4px;">
                 <span>- เคยผ่านการอบรมด้านสุขาภิบาลอาหารหรือไม่</span>
-                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;">
+                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;" {{ $document_option->training_option == '1' ? 'checked' : '' }}>
                 <span>เคย</span>
-                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;">
+                <input type="checkbox" style="margin-left: 20px; margin-right: 5px;" {{ $document_option->training_option == '2' ? 'checked' : '' }}>
                 <span>ไม่เคย</span>
             </div>
         </div>
         <div style="margin-top: -6px;">
-            <span style="font-weight: bold;">8. มีถังดับเพลิงอยู่ในสภาพสมบูรณ์ ไม่ชำรุด สามารถหยิบใช้งานได้ดี สะดวก และมีการตรวจสอบทุกปี</span>
-            <input type="checkbox" style="margin-left: 30px; margin-right: 5px;">
+            <span style="font-weight: bold;">8. มีถังดับเพลิงอยู่ในสภาพสมบูรณ์ ไม่ชำรุด สามารถหยิบใช้งานได้ดี สะดวก
+                และมีการตรวจสอบทุกปี</span>
+            <input type="checkbox" style="margin-left: 30px; margin-right: 5px;" {{ $document_option->extinguisher_option == '1' ? 'checked' : '' }}>
             <span>มี</span>
-            <input type="checkbox" style="margin-left: 30px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 30px; margin-right: 5px;" {{ $document_option->extinguisher_option == '2' ? 'checked' : '' }}>
             <span>ไม่มี</span>
         </div>
         <div style="margin-top: -6px;">
             <span style="font-weight: bold;">9. สรุปผลการตรวจ</span>
-            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;" {{ $document_option->status == '1' ? 'checked' : '' }}>
             <span>เห็นควรอนุญาต</span>
-            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;">
+            <input type="checkbox" style="margin-left: 10px; margin-right: 5px;" {{ $document_option->status == '2' ? 'checked' : '' }}>
             <span>ไม่เห็นควรอนุญาต เนื่องจาก</span>
-            <span class="dotted-line" style="width: 40%; text-align: center; line-height: 1;"></span>
+            <span class="dotted-line" style="width: 40%; text-align: center; line-height: 1;">-</span>
         </div>
         <div style="margin-top: -5px;">
             <span style="font-weight: bold;">10. ข้อสรุปแนะนำของเจ้าหน้าที่ผู้ตรวจ</span>
-            <span class="dotted-line" style="width: 68%; text-align: center; line-height: 1;"></span>
+            <span class="dotted-line" style="width: 68%; text-align: center; line-height: 1;">{{ $document_option->detail }}</span>
         </div>
         <div class="box_text" style="margin-top: 20px;">
             <table width="100%" style="border-collapse: collapse;">

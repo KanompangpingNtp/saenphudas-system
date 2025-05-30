@@ -63,20 +63,55 @@ class PrivateMarketController extends Controller
         return redirect()->back()->with('success', 'ส่งคำขอเรียบร้อยแล้ว');
     }
 
+    // public function PrivateMarketShowDetails()
+    // {
+    //     $forms = PrivateMarket::with(['user', 'files', 'replies'])
+    //         ->where('users_id', Auth::id())
+    //         ->get();
+    //     if (!empty($forms)) {
+    //         foreach ($forms as $rs) {
+    //             $rs->appointmentte = PrivateMarketointmentLogs::orderBy('id', 'desc')->first();
+    //             $rs->payment = PrivateMarketPaymentLogs::orderBy('id', 'desc')->first();
+    //         }
+    //     }
+
+    //     return view('users.private_market.account.show-detail', compact('forms'));
+    // }
+
     public function PrivateMarketShowDetails()
     {
-        $forms = PrivateMarket::with(['user', 'files', 'replies'])
+        // ดึงเฉพาะรายการต้นฉบับ
+        $originalForms = PrivateMarket::with(['user', 'files', 'replies'])
             ->where('users_id', Auth::id())
+            ->whereNull('refer_app_id')
             ->get();
-        if (!empty($forms)) {
-            foreach ($forms as $rs) {
-                $rs->appointmentte = PrivateMarketointmentLogs::orderBy('id', 'desc')->first();
-                $rs->payment = PrivateMarketPaymentLogs::orderBy('id', 'desc')->first();
-            }
+
+        $forms = collect();
+
+        foreach ($originalForms as $form) {
+            // ค้นหารายการล่าสุดที่อ้างอิงถึงต้นฉบับ
+            $latest = PrivateMarket::with(['user', 'files', 'replies'])
+                ->where('refer_app_id', $form->id)
+                ->orderByDesc('created_at')
+                ->first();
+
+            $finalForm = $latest ?? $form;
+
+            // เพิ่มข้อมูลการนัดหมายและการชำระเงิน
+            $finalForm->appointmentte = PrivateMarketointmentLogs::where('market_id', $finalForm->id)
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $finalForm->payment = PrivateMarketPaymentLogs::where('market_id', $finalForm->id)
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $forms->push($finalForm);
         }
 
         return view('users.private_market.account.show-detail', compact('forms'));
     }
+
 
     public function privateMarketUserExportPDF($id)
     {

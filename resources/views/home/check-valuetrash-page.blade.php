@@ -157,7 +157,7 @@
                 <!-- แถวที่ 2: textarea -->
                 <div class="col-12">
                     <div class="bg-white p-3 rounded-3">
-                        <textarea name="address" id="address" class="border-0 w-100 fs-3 fw-bold no-click" rows="4" readonly>ที่อยู่: {{ $user->userDetail->house_number }} ม.{{ $user->userDetail->village }} ต.{{ $user->userDetail->subdistrict }} อ.{{ $user->userDetail->district }} จ.{{ $user->userDetail->province }} 9999</textarea>
+                        <textarea name="address" id="address" class="border-0 w-100 fs-3 fw-bold no-click" rows="4" readonly>ที่อยู่: {{ $user->userDetail->house_number }} ม.{{ $user->userDetail->village }} ต.{{ $user->userDetail->subdistrict }} อ.{{ $user->userDetail->district }} จ.{{ $user->userDetail->province }}</textarea>
                     </div>
                 </div>
             </div>

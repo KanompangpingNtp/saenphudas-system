@@ -53,7 +53,11 @@
                             @elseif($form->status == 9)
                                 <span class="badge rounded-pill text-bg-primary">รอการตรวจสอบชำระเงิน</span>
                             @elseif($form->status == 10)
-                                <a href="{{ route('CertificatePrivateMarketPDF', $form->id) }}"
+                                {{-- <a href="{{ route('CertificatePrivateMarketPDF', $form->id) }}"
+                                    class="badge rounded-pill text-bg-success" target="_blank">
+                                    ออกใบอนุญาต
+                                </a> --}}
+                                <a href="{{ route('privateMarketUserExportPDF', $form->id) }}"
                                     class="badge rounded-pill text-bg-success" target="_blank">
                                     ออกใบอนุญาต
                                 </a>
@@ -77,12 +81,6 @@
                             {{-- <a href="{{ route('privateMarketUserExportPDF', $form->id) }}" class="btn btn-danger btn-sm" target="_blank">
                         <i class="bi bi-file-earmark-pdf"></i>
                     </a> --}}
-                            @if ($form->status == 10)
-                                <a href="{{ route('privateMarketUserExportPDF', $form->id) }}"
-                                    class="btn btn-danger btn-sm" target="_blank">
-                                    <i class="bi bi-file-earmark-pdf"></i>
-                                </a>
-                            @endif
                             <a href="{{ route('privateMarketDetail', $form->id) }}" class="btn btn-success btn-sm">
                                 <i class="bi bi-search"></i>
                             </a>

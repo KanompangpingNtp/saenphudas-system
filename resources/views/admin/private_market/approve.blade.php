@@ -29,6 +29,10 @@
                             </td>
                             <td>
                                 @if ($form->status == 10)
+                                    {{-- <a href="{{ route('HealthHazardApplicationAdminExportPDF', $form->id) }}"
+                                        class="badge rounded-pill text-bg-success" target="_blank">
+                                        ออกใบอนุญาต
+                                    </a> --}}
                                     <a href="{{ route('AdminCertificatePrivateMarketPDF', $form->id) }}"
                                         class="badge rounded-pill text-bg-success" target="_blank">
                                         ออกใบอนุญาต
@@ -44,10 +48,10 @@
                                     onclick="confirmExtendLeave({{ $form->id }})">
                                     <i class="bi bi-calendar-plus"></i>
                                 </button>
-                                <a href="{{ route('HealthHazardApplicationAdminExportPDF', $form->id) }}"
+                                {{-- <a href="{{ route('HealthHazardApplicationAdminExportPDF', $form->id) }}"
                                     class="btn btn-danger btn-sm" target="_blank">
                                     <i class="bi bi-file-earmark-pdf"></i>
-                                </a>
+                                </a> --}}
                                 <a href="{{ route('HealthHazardApplicationAdminDetail', $form->id) }}"
                                     class="btn btn-success btn-sm">
                                     <i class="bi bi-search"></i>

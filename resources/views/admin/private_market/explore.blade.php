@@ -42,9 +42,9 @@
                     <a href="{{ route('PrivateMarketAdminChecklist', $form->id) }}" class="btn btn-primary btn-sm">
                         <i class="bi bi-card-checklist"></i>
                     </a>
-                    <a href="{{ route('PrivateMarketAdminExportPDF', $form->id) }}" class="btn btn-danger btn-sm" target="_blank">
+                    {{-- <a href="{{ route('PrivateMarketAdminExportPDF', $form->id) }}" class="btn btn-danger btn-sm" target="_blank">
                         <i class="bi bi-file-earmark-pdf"></i>
-                    </a>
+                    </a> --}}
                     <a href="{{ route('PrivateMarketAdminDetail', $form->id) }}" class="btn btn-success btn-sm">
                         <i class="bi bi-search"></i>
                     </a>

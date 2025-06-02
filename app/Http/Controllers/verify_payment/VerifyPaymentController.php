@@ -14,6 +14,7 @@ class VerifyPaymentController extends Controller
             ->where('payment_status', '2')
             ->whereNotNull('payment_slip')
             ->get();
+        //  dd($payments);
 
         return view('waste-payment.admin.verify_payment.page', compact('payments'));
     }

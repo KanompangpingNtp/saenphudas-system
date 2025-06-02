@@ -191,9 +191,10 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if (!is_null($payment->bill))
+                                    @if (!empty($payment->bill))
                                         <a href="{{ asset('storage/bills/' . $payment->bill) }}" target="_blank">
-                                            <img src="{{ asset('check-valuetrash/search.png') }}" alt="search">
+                                            <img src="{{ asset('check-valuetrash/search.png') }}" alt="ดูบิล"
+                                                style="width: 24px; height: 24px;">
                                         </a>
                                     @endif
                                 </td>
@@ -230,11 +231,20 @@
                                         <p><strong>กำหนดชำระ:</strong>
                                             {{ \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y') }}</p>
 
-                                        @if ($payment->payment_slip)
+                                        {{-- @if ($payment->payment_slip)
+                                            <p><strong>สลิป:</strong></p>
+                                            <img src="{{ asset('storage/' . $payment->payment_slip) }}"
+                                                alt="slip" class="img-fluid rounded mb-2">
+                                        @endif --}}
+
+                                        @if (!empty($payment->payment_slip))
                                             <p><strong>สลิป:</strong></p>
                                             <img src="{{ asset('storage/payment_slips/' . $payment->payment_slip) }}"
-                                                alt="slip" class="img-fluid rounded mb-2">
+                                                alt="slip" class="img-fluid rounded mb-2" style="max-width: 300px;">
+                                        @else
+                                            <p class="text-muted">ยังไม่แนบ</p>
                                         @endif
+
 
                                         @if ($payment->payment_status == 1)
                                             <div class="mb-3">

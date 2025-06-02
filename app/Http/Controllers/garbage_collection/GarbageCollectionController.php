@@ -41,7 +41,7 @@ class GarbageCollectionController extends Controller
 
         $waste = WasteManagement::create([
             'users_id' => Auth::id(),
-            'status' => 1,
+            'status' => 2,
             'salutation' => $request->salutation,
             'name' => $request->full_name,
             'address' => $request->address,

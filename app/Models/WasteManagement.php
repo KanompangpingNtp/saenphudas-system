@@ -25,7 +25,8 @@ class WasteManagement extends Model
         'lng',
         'user_latitude',
         'user_longitude',
-        'trash_can_status'
+        'trash_can_status',
+        'status'
     ];
 
     public function user()

@@ -14,7 +14,7 @@ class WastePayment extends Model
         'amount',
         'payment_status',
         'payment_slip',
-        'paid_at',
+        'issued_at',
         'due_date',
         'bill'
     ];

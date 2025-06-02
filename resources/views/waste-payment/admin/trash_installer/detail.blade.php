@@ -85,8 +85,8 @@
                                     </td>
                                     <td class="text-center">{{ \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y') }}</td>
                                     <td class="text-center">
-                                        @if ($payment->paid_at)
-                                            {{ \Carbon\Carbon::parse($payment->paid_at)->format('d/m/Y') }}
+                                        @if ($payment->issued_at)
+                                            {{ \Carbon\Carbon::parse($payment->issued_at)->format('d/m/Y') }}
                                         @else
                                             -
                                         @endif

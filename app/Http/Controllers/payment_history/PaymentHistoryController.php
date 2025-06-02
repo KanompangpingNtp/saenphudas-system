@@ -9,15 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class PaymentHistoryController extends Controller
 {
-    // public function PaymentHistoryPage()
-    // {
-    //     $payments = WastePayment::with('wasteManagement')
-    //         ->where('payment_status', '3')
-    //         ->get();
-
-    //     return view('waste-payment.admin.payment_history.page', compact('payments'));
-    // }
-
     public function PaymentHistoryPage(Request $request)
     {
         $month = $request->input('month');

@@ -178,8 +178,7 @@
                     <tbody>
                         @foreach ($payments as $payment)
                             <tr>
-                                <td>{{ \Carbon\Carbon::parse($payment->due_date)->locale('th')->translatedFormat('F Y') }}
-                                </td>
+                                <td>{{ \Carbon\Carbon::parse($payment->due_date)->locale('th')->translatedFormat('F Y') }}</td>
                                 <td>ค่าชำระขยะประจำเดือน</td>
                                 <td>
                                     @if ($payment->payment_status == 3)
@@ -231,20 +230,11 @@
                                         <p><strong>กำหนดชำระ:</strong>
                                             {{ \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y') }}</p>
 
-                                        {{-- @if ($payment->payment_slip)
-                                            <p><strong>สลิป:</strong></p>
-                                            <img src="{{ asset('storage/' . $payment->payment_slip) }}"
-                                                alt="slip" class="img-fluid rounded mb-2">
-                                        @endif --}}
-
-                                        @if (!empty($payment->payment_slip))
+                                        @if ($payment->payment_slip)
                                             <p><strong>สลิป:</strong></p>
                                             <img src="{{ asset('storage/payment_slips/' . $payment->payment_slip) }}"
-                                                alt="slip" class="img-fluid rounded mb-2" style="max-width: 300px;">
-                                        @else
-                                            <p class="text-muted">ยังไม่แนบ</p>
+                                                alt="slip" class="img-fluid rounded mb-2">
                                         @endif
-
 
                                         @if ($payment->payment_status == 1)
                                             <div class="mb-3">
@@ -254,7 +244,6 @@
                                                     id="payment_slip_{{ $payment->id }}" class="form-control" required>
                                             </div>
                                         @endif
-
                                     </div>
 
                                     <div class="modal-footer">

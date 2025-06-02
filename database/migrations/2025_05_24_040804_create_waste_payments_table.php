@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('payment_status')->nullable();
             $table->string('payment_slip')->nullable();
             $table->date('due_date')->nullable();
-            $table->timestamp('paid_at')->nullable();
+            $table->timestamp('issued_at')->nullable();
             $table->string('bill')->nullable();
             $table->timestamps();
         });

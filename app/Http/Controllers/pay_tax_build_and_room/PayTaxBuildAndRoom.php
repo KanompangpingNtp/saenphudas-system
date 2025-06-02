@@ -18,7 +18,7 @@ class PayTaxBuildAndRoom extends Controller
         return view('users.pay_tax_build_and_room.page-form');
     }
 
-    public function PayTaxBuildAndRoomFormCreate(Request $request)
+     public function PayTaxBuildAndRoomFormCreate(Request $request)
     {
         $request->validate([
             'salutation' => 'nullable|string|max:20',

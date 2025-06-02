@@ -55,7 +55,7 @@
         <li class="menu-item {{ request()->is('admin/non_payment*') ? 'active' : '' }}">
             <a href="{{ route('NonPaymentPage') }}" class="menu-link">
                 <i class='menu-icon tf-icons bx  bx-no-entry'></i>
-                <div data-i18n="Analytics">บิลที่ขาดการชำระเงิน</div>
+                <div data-i18n="Analytics">บิลที่รอการชำระเงิน</div>
             </a>
         </li>
 

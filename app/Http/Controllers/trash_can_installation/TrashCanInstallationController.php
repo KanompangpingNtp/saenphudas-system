@@ -45,14 +45,20 @@ class TrashCanInstallationController extends Controller
 
         $amount = 100.00;
         $createdAt = now();
-        $dueDate = $createdAt->copy()->addMonth();
+
+        // วันที่ 20 เป็นต้นไป ให้เลื่อนไปอีก 2 เดือน
+        if ($createdAt->day >= 20) {
+            $dueDate = $createdAt->copy()->addMonthsNoOverflow(2)->startOfMonth();
+        } else {
+            $dueDate = $createdAt->copy()->addMonthNoOverflow()->startOfMonth();
+        }
 
         WastePayment::create([
             'waste_management_id' => $id,
             'amount' => $amount,
             'payment_status' => 1,
             'due_date' => $dueDate,
-            'paid_at' => $createdAt,
+            'issued_at' => $createdAt, // วันที่ออกบิล
         ]);
 
         return redirect()->back()->with('success', 'สร้างรายการชำระเงินเรียบร้อย');

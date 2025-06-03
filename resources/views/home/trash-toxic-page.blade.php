@@ -50,17 +50,17 @@
         width: 100%;
     }
 </style>
-{{-- @php
+@php
     // จำลองข้อมูลพิกัด 5 จุดเริ่มต้น
     $movingPoints = [
         // ['id' => 1, 'lat' => 15.86471156192326, 'lng' => 100.59032409380147],
-        // ['id' => 2, 'lat' => 13.738, 'lng' => 100.525],
-        // ['id' => 3, 'lat' => 13.734, 'lng' => 100.522],
-        // ['id' => 4, 'lat' => 13.737, 'lng' => 100.526],
-        // ['id' => 5, 'lat' => 13.7355, 'lng' => 100.524],
+        ['id' => 2, 'lat' => 13.738, 'lng' => 100.525],
+        ['id' => 3, 'lat' => 13.734, 'lng' => 100.522],
+        ['id' => 4, 'lat' => 13.737, 'lng' => 100.526],
+        ['id' => 5, 'lat' => 13.7355, 'lng' => 100.524],
     ];
-@endphp --}}
-@php
+@endphp
+{{-- @php
     $movingPoints = $movingPoints->map(function ($point) {
         return [
             'id' => $point->id,
@@ -68,7 +68,7 @@
             'lng' => (float) $point->lng,
         ];
     });
-@endphp
+@endphp --}}
 @section('content')
     <div class="body-bg py-4">
         <div class="container">

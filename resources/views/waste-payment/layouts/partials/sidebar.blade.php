@@ -21,7 +21,6 @@
         </li>
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Manage</span></li>
-
         <li class="menu-item {{ request()->is('admin/trash_can_installation*') ? 'active' : '' }}">
             <a href="{{ route('TrashCanInstallationPage') }}" class="menu-link">
                 <i class='menu-icon tf-icons bx bx-location-plus'></i>
@@ -37,7 +36,6 @@
         </li>
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Report</span></li>
-
         <li class="menu-item {{ request()->is('admin/verify_payment*') ? 'active' : '' }}">
             <a href="{{ route('VerifyPaymentPage') }}" class="menu-link">
                 <i class='menu-icon tf-icons bx  bx-credit-card-alt'></i>

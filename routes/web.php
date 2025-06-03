@@ -134,6 +134,11 @@ Route::post('/general-electricity-request/form/create', [GeneralElectricityReque
 Route::get('/general-road-request', [GeneralRoadRequestController::class, 'GeneralRoadRequestFormPage'])->name('GeneralRoadRequestFormPage');
 Route::post('/general-road-request/form/create', [GeneralRoadRequestController::class, 'GeneralRoadRequestFormCreate'])->name('GeneralRoadRequestFormCreate');
 
+//ค่าขยะ
+Route::get('/user/waste_payment', [UserWastePaymentController::class, 'UserWastePayment'])->name('UserWastePayment');
+Route::get('/user/waste_payment/status-trash', [StatusTrashController::class, 'StatusTrash'])->name('StatusTrash');
+Route::get('/user/waste_payment/trash-toxic', [TrashToxicController::class, 'TrashToxic'])->name('TrashToxic');
+
 Route::middleware(['user'])->group(function () {
     Route::get('/user/index', [UserController::class, 'UserIndex'])->name('UserIndex');
 
@@ -196,15 +201,9 @@ Route::middleware(['user'])->group(function () {
     Route::post('/user/account/TaxRefundRequest/{form}/reply', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestUserReply'])->name('LandTaxRefundRequestUserReply');
     Route::get('/user/account/TaxRefundRequest/{id}/pdf', [LandTaxRefundRequestController::class, 'LandTaxRefundRequestUserExportPDF'])->name('LandTaxRefundRequestUserExportPDF');
 
-    //ค่าขยะ (หน้าเว็บ)
-    Route::get('/user/waste_payment', [UserWastePaymentController::class, 'UserWastePayment'])->name('UserWastePayment');
-
+    //ค่าขยะ
     Route::get('/user/waste_payment/check-valuetrash', [CheckValuetrashController::class, 'CheckValuetrash'])->name('CheckValuetrash');
     Route::post('/user/waste_payment/check-valuetrash/update-slip/{id}', [CheckValuetrashController::class, 'CheckValuetrashUpdateSlip'])->name('CheckValuetrashUpdateSlip');
-
-    Route::get('/user/waste_payment/status-trash', [StatusTrashController::class, 'StatusTrash'])->name('StatusTrash');
-
-    Route::get('/user/waste_payment/trash-toxic', [TrashToxicController::class, 'TrashToxic'])->name('TrashToxic');
 
     //แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
     Route::get('/user/account/GarbageCollection/show-details', [GarbageCollectionController::class, 'GarbageCollectionShowDetails'])->name('GarbageCollectionShowDetails');

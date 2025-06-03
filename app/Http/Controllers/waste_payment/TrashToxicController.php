@@ -11,14 +11,16 @@ class TrashToxicController extends Controller
 {
     public function TrashToxic()
     {
-        $user = Auth::user();
-        $movingPoints = WasteManagement::where('users_id', $user->id)
-            ->whereNotNull('lat')
-            ->whereNotNull('lng')
-            ->get(['id', 'lat', 'lng']);
+        // $user = Auth::user();
+        // $movingPoints = WasteManagement::where('users_id', $user->id)
+        //     ->whereNotNull('lat')
+        //     ->whereNotNull('lng')
+        //     ->get(['id', 'lat', 'lng']);
 
         // dd($movingPoints);
 
-        return view("home.trash-toxic-page", compact('user', 'movingPoints'));
+        // return view("home.trash-toxic-page", compact('user', 'movingPoints'));
+
+        return view("home.trash-toxic-page");
     }
 }

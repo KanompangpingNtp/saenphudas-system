@@ -39,7 +39,7 @@ class CheckValuetrashController extends Controller
 
         $payment->payment_slip = $filename;
         $payment->payment_status = 2;
-        $payment->paid_at = now();
+        $payment->issued_at = now();
         $payment->save();
 
         return back()->with('success', 'อัปโหลดสลิปเรียบร้อยแล้ว');

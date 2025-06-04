@@ -45,7 +45,7 @@ class EmergencyController extends Controller
                     $text = "แจ้งเหตุ มี" . $type->name . "\n" . 'เบอร์ติดต่อ ' . $input['tel'] . "\n" . $input['detail'] . "\nhttps://www.google.com/maps?q=" . $input['latitude'] . ',' . $input['longitude'];
                     $data = [
                         'text' => $text,
-                        'photo' => 'https://khlong.udom.eservice.sosmartsolution.com/storage/' . $path
+                        'photo' => 'https://saenphudas.sosmartsolution.com/storage/' . $path
                     ];
                     $this->sendGps($data);
                     return response()->json([
@@ -76,11 +76,11 @@ class EmergencyController extends Controller
                     'type' => 'text',
                     'text' => $data['text']
                 ],
-                // [
-                //     // 'type' => 'image',
-                //     // 'originalContentUrl' => $data['photo'],
-                //     // 'previewImageUrl' => $data['photo']
-                // ]
+                [
+                    'type' => 'image',
+                    'originalContentUrl' => $data['photo'],
+                    'previewImageUrl' => $data['photo']
+                ]
             ]
         ];
 

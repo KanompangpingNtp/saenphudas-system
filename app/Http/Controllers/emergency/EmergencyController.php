@@ -35,7 +35,6 @@ class EmergencyController extends Controller
                 $insert->detail = $input['detail'];
                 $insert->photo = $path;
                 $insert->type = $input['options'];
-                // dd($input['options']);
                 $insert->tel = $input['tel'];
                 $insert->lat = $input['latitude'];
                 $insert->long = $input['longitude'];
@@ -43,7 +42,6 @@ class EmergencyController extends Controller
                 $insert->updated_at = date('Y-m-d H:i:s');
                 if ($insert->save()) {
                     $type = EmergenciesType::where('id', $input['options'])->first();
-                    // dd($type);
                     $text = "แจ้งเหตุ มี" . $type->name . "\n" . 'เบอร์ติดต่อ ' . $input['tel'] . "\n" . $input['detail'] . "\nhttps://www.google.com/maps?q=" . $input['latitude'] . ',' . $input['longitude'];
                     $data = [
                         'text' => $text,

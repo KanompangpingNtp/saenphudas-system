@@ -15,7 +15,7 @@ class AdminPayTaxBuildAndRoom extends Controller
     {
         $forms = PayTaxBuildAndRoomInformations::with(['user', 'files', 'replies'])->get();
 
-        return view('admin.treasury_department.pay_tax_build_and_room.show-data', compact('forms'));
+        return view('admin.pay_tax_build_and_room.show-data', compact('forms'));
     }
 
     public function PayTaxBuildAndRoomAdminReply(Request $request, $formId)

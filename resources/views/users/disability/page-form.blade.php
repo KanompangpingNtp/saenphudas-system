@@ -2,6 +2,10 @@
 @section('pages_content')
 
 <div class="container">
+    <div class="mt-2 mb-3">
+            <img src="{{ asset('eservice/3.png') }}" alt="" style="width: 100%; height: 600px;">
+        </div>
+
     <h3 class="text-center">แบบคำขอลงทะเบียนรับเงินเบี้ยความพิการ</h3>
     <form action="{{ route('DisabilityFormCreate') }}" method="POST" enctype="multipart/form-data">
         @csrf

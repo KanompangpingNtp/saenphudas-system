@@ -1,6 +1,10 @@
 @extends('users.layout.layout')
 @section('pages_content')
 <div class="container">
+    <div class="mt-2 mb-3">
+            <img src="{{ asset('eservice/6.png') }}" alt="" style="width: 100%; height: 600px;">
+        </div>
+
     <h2 class="text-center mb-4">คำร้องทั่วไป (แจ้งถนนชำรุด)</h2>
 
     <form action="{{route('GeneralRoadRequestFormCreate')}}" method="POST" enctype="multipart/form-data">

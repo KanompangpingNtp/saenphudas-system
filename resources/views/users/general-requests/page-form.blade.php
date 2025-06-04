@@ -1,6 +1,10 @@
 @extends('users.layout.layout')
 @section('pages_content')
 <div class="container">
+    <div class="mt-2 mb-3">
+            <img src="{{ asset('eservice/1.png') }}" alt="" style="width: 100%; height: 600px;">
+        </div>
+
     <h2 class="text-center mb-4">ฟอร์มส่งคำร้องทั่วไป</h2>
 
     <form action="{{route('GeneralRequestsFormCreate')}}" method="POST" enctype="multipart/form-data">

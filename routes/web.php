@@ -65,7 +65,7 @@ use App\Http\Controllers\general_electricity_request\GeneralElectricityRequestCo
 Route::view('/test', 'home.trash-page');
 
 Route::get('/', [HomeController::class, 'Home'])->name('Home');
-Route::get('/eservice', [HomeController::class, 'Eservice'])->name('Eservice');
+Route::get('/eservices', [HomeController::class, 'Eservice'])->name('Eservice');
 
 //auth
 Route::get('/login-page', [AuthController::class, 'LoginPage'])->name('LoginPage');

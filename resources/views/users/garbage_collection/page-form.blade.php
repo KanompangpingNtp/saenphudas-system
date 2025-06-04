@@ -8,11 +8,15 @@
         }
     </style>
 
-
-    <h3 class="text-center">แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป</h3>
-    <br>
-
     <div class="container">
+        <div class="mt-2 mb-3">
+            <img src="{{ asset('eservice/14.png') }}" alt="" style="width: 100%; height: 600px;">
+        </div>
+
+        <h3 class="text-center">แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
+        </h3>
+        <br>
+
         <form action="{{ route('GarbageCollectionFormCreate') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row g-3 mb-3">

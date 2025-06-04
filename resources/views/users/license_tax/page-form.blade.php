@@ -1,6 +1,11 @@
 @extends('users.layout.layout')
 @section('pages_content')
 <div class="container">
+
+    <div class="mt-2 mb-3">
+        <img src="{{ asset('eservice/12.png') }}" alt="" style="width: 100%; height: 600px;">
+    </div>
+
     <h2 class="text-center mb-4">แบบฟอร์ม(ภ.ป.๑) แนบแสดงรายการ ภาษีป้าย</h2><br>
 
     <form action="{{route('LicenseTaxFormCreate')}}" method="POST" enctype="multipart/form-data">

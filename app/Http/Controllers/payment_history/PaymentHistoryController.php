@@ -18,22 +18,22 @@ class PaymentHistoryController extends Controller
             ->where('payment_status', 3);
 
         if ($month) {
-            $query->whereMonth('paid_at', $month);
+            $query->whereMonth('issued_at', $month);
         }
 
         if ($year) {
-            $query->whereYear('paid_at', $year);
+            $query->whereYear('issued_at', $year);
         }
 
         $payments = $query->get();
 
         $availableMonths = WastePayment::where('payment_status', 3)
-            ->selectRaw('DISTINCT MONTH(paid_at) as month')
+            ->selectRaw('DISTINCT MONTH(issued_at) as month')
             ->pluck('month')
             ->toArray();
 
         $availableYears = WastePayment::where('payment_status', 3)
-            ->selectRaw('DISTINCT YEAR(paid_at) as year')
+            ->selectRaw('DISTINCT YEAR(issued_at) as year')
             ->pluck('year')
             ->toArray();
 

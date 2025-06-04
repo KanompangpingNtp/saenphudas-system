@@ -27,12 +27,12 @@ class AdminWastePaymentController extends Controller
 
 
         $revenueData = WastePayment::selectRaw("
-        YEAR(paid_at) as year,
-        MONTH(paid_at) as month,
+        YEAR(issued_at) as year,
+        MONTH(issued_at) as month,
         SUM(CASE WHEN payment_status = 3 THEN amount ELSE 0 END) as income,
         SUM(CASE WHEN payment_status != 3 THEN amount ELSE 0 END) as loss")
-            ->whereYear('paid_at', now()->year)
-            ->groupBy(DB::raw('YEAR(paid_at), MONTH(paid_at)'))
+            ->whereYear('issued_at', now()->year)
+            ->groupBy(DB::raw('YEAR(issued_at), MONTH(issued_at)'))
             ->orderBy('year')
             ->orderBy('month')
             ->get();

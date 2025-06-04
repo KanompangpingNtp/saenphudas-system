@@ -205,11 +205,6 @@ Route::middleware(['user'])->group(function () {
     Route::get('/user/waste_payment/check-valuetrash', [CheckValuetrashController::class, 'CheckValuetrash'])->name('CheckValuetrash');
     Route::post('/user/waste_payment/check-valuetrash/update-slip/{id}', [CheckValuetrashController::class, 'CheckValuetrashUpdateSlip'])->name('CheckValuetrashUpdateSlip');
 
-    //แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
-    Route::get('/user/account/GarbageCollection/show-details', [GarbageCollectionController::class, 'GarbageCollectionShowDetails'])->name('GarbageCollectionShowDetails');
-    Route::post('/user/account/GarbageCollection/{form}/reply', [GarbageCollectionController::class, 'GarbageCollectionUserReply'])->name('GarbageCollectionUserReply');
-    Route::get('/user/account/GarbageCollection/{id}/pdf', [GarbageCollectionController::class, 'GarbageCollectionUserExportPDF'])->name('GarbageCollectionUserExportPDF');
-
     //แบบคำร้องใบอณุญาตประกอบกิจการที่เป็นอันตรายต่อสุขภาพ
     Route::get('/health_hazard_applications', [HealthHazardApplicationController::class, 'HealthHazardApplicationFormPage'])->name('HealthHazardApplicationFormPage');
     Route::post('/health_hazard_applications/form/create', [HealthHazardApplicationController::class, 'HealthHazardApplicationFormCreate'])->name('HealthHazardApplicationFormCreate');
@@ -274,6 +269,11 @@ Route::middleware(['user'])->group(function () {
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin/index', [AdminController::class, 'AdminIndex'])->name('AdminIndex');
+
+    //แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
+    Route::get('/user/account/GarbageCollection/show-details', [GarbageCollectionController::class, 'GarbageCollectionShowDetails'])->name('GarbageCollectionShowDetails');
+    Route::post('/user/account/GarbageCollection/{form}/reply', [GarbageCollectionController::class, 'GarbageCollectionUserReply'])->name('GarbageCollectionUserReply');
+    Route::get('/user/account/GarbageCollection/{id}/pdf', [GarbageCollectionController::class, 'GarbageCollectionUserExportPDF'])->name('GarbageCollectionUserExportPDF');
 
     //คำร้องทั่วไป
     Route::get('/admin/general-requests/showdata', [AdminGeneralRequestsController::class, 'GeneralRequestsAdminShowData'])->name('GeneralRequestsAdminShowData');

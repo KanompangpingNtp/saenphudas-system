@@ -60,12 +60,12 @@
                             <img src="{{ asset('second-page/กองช่าง.png') }}" alt="กองช่าง">
                         </div>
                         <div class="d-flex flex-column justify-content-start align-items-start gap-2 w-100">
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('GeneralElectricityRequestFormPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-1 mb-xl-0">
                                 แบบฟอร์มคำร้องทั่วไป(แจ้งเรื่องไฟฟ้า)
                             </a>
-                            <a href="#" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
+                            <a href="{{ route('GeneralRoadRequestFormPage') }}" class="d-flex align-items-end fw-bold fs-4 gap-1 link-hover"
                                 style="line-height: 1;">
                                 <img src="{{ asset('second-page/นิ้วหัวข้อ.png') }}" alt="arrow" class="mb-1 mb-xl-0">
                                 แบบฟอร์มคำร้องทั่วไป(แจ้งถนนชำรุด)

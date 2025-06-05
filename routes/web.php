@@ -62,7 +62,7 @@ use App\Http\Controllers\general_electricity_request\GeneralElectricityRequestCo
 |
 */
 //test
-Route::view('/test', 'home.trash-page');
+Route::view('/test', 'home.license');
 
 Route::get('/', [HomeController::class, 'Home'])->name('Home');
 Route::get('/eservices', [HomeController::class, 'Eservice'])->name('Eservice');

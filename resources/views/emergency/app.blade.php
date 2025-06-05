@@ -108,10 +108,24 @@
         .btn-check:active+.btn {
             box-shadow: 0 0 12px rgba(255, 0, 0, 0.9);
         }
+        .btn-back-effect img {
+        transition: all 0.3s ease;
+    }
+
+    .btn-back-effect:hover img {
+        transform: scale(1.05);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    }
     </style>
     <main>
-        <div class="container d-flex flex-column flex-lg-row justify-content-center align-items-center text-center">
-            <div class="card w-100 m-3">
+        <div class="container d-flex flex-column justify-content-center align-items-start py-5">
+            <div class="d-flex justify-content-start my-3">
+                <a href="#" class="btn-back-effect">
+                    <img src="{{ asset('trash-page/btn-back.png') }}" alt="btn-back" class="img-fluid">
+                </a>
+            </div>
+            <div class=" d-flex flex-column flex-lg-row justify-content-center align-items-center text-center w-100">
+                <div class="card w-100 m-3">
                 <div class="card-body">
                     <div id="map"></div>
                     <button type="button" class="btn btn-primary mt-2" onclick="markMyLocation()">ตำแหน่งของคุณ</button>
@@ -119,7 +133,7 @@
             </div>
 
             <div class="row ms-0 ms-lg-3 w-100">
-                <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center align-items-lg-start">
+                <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center align-items-lg-start w-100">
                     <div class="card w-100">
                         <div class="card-body">
                             <form id="myform" enctype="multipart/form-data">
@@ -172,11 +186,18 @@
                                                 style="padding-top:9px" alt="ไฟไหม้"></label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="radio" class="btn-check" name="options" id="option3" value="5"
+                                        <input type="radio" class="btn-check" name="options" id="option3" value="3"
                                             autocomplete="off">
                                         <label class="" for="option3" title="ต้นไม้ล้ม"><img class="imgoption"
                                                 src="{{ asset('images/emergency/f24c8a8dfa8caac9.png') }}" id="imgoption3"
                                                 style="padding-top:6px" alt="ต้นไม้ล้ม"></label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="radio" class="btn-check" name="options" id="option4" value="4"
+                                            autocomplete="off">
+                                        <label class="" for="option4" title="แจ้งเหตุอื่นๆ"><img class="imgoption mt-2"
+                                                src="{{ asset('images/emergency/แจ้งเหตุอื่นๆ.png') }}" id="imgoption4"
+                                                style="padding-top:6px" alt="แจ้งเหตุอื่นๆ"></label>
                                     </div>
                                 </div>
                                 <input type="hidden" name="latitude" id="latitude">
@@ -193,6 +214,8 @@
                     </div>
                 </div>
             </div>
+            </div>
+            
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

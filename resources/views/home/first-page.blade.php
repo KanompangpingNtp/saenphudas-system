@@ -112,13 +112,13 @@
                         </div>
                         <div class="d-flex justify-content-center align-items-center px-3 gap-2">
                             <a href="{{ route('FoodStorageLicenseFormPage') }}" class="text-center btn-first-effect ">
-                                <img src="{{ asset('first-page/ใบอนุญาตสถานที่สะสมอาหาร.png') }}"
-                                    alt="ใบอนุญาตสถานที่สะสมอาหาร" class="img-fluid">
+                                <img src="{{ asset('first-page/ใบประกอบอุนุญาต.png') }}"
+                                    alt="ใบประกอบอุนุญาต" class="img-fluid">
                             </a>
-                            <a href="{{ route('HealthHazardApplicationFormPage') }}" class="text-center btn-first-effect border-x-custom2 ps-3">
+                            {{-- <a href="{{ route('HealthHazardApplicationFormPage') }}" class="text-center btn-first-effect border-x-custom2 ps-3">
                                 <img src="{{ asset('first-page/ใบอนุญาตประกอบกิจการ.png') }}" alt="ใบอนุญาตประกอบกิจการ"
                                     class="img-fluid">
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                 </div>

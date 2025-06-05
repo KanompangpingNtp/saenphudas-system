@@ -18,10 +18,24 @@
         color: #0d6efd;
         text-decoration: underline;
     }
+
+    .btn-back-effect img {
+        transition: all 0.3s ease;
+    }
+
+    .btn-back-effect:hover img {
+        transform: scale(1.05);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    }
 </style>
 @section('content')
     <div class="body-bg py-2">
         <div class="container">
+            <div class="d-flex justify-content-start my-3">
+                <a href="#" class="btn-back-effect">
+                    <img src="{{ asset('trash-page/btn-back.png') }}" alt="btn-back" class="img-fluid">
+                </a>
+            </div>
             <div class="row pt-5 px-3">
                 <div class="col-lg-6 d-flex flex-column justify-content-start align-items-center align-items-sm-start gap-3">
                     <div

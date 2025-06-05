@@ -19,14 +19,14 @@
 </style>
 @section('content')
     <div class="body-bg ">
-        <div class="container">
-            {{-- <div class="d-flex justify-content-start">
+        <div class="container d-flex flex-column justify-content-center align-items-start">
+            <div class="d-flex justify-content-start my-3">
                 <a href="#" class="btn-back-effect">
                     <img src="{{ asset('trash-page/btn-back.png') }}" alt="btn-back" class="img-fluid">
                 </a>
-            </div> --}}
+            </div>
             <div class="row justify-content-center align-items-center h-100">
-                <div class="col-6 col-md-4 d-flex flex-column justify-content-start align-items-center">
+                <div class="col-6 col-md-3 d-flex flex-column justify-content-start align-items-center">
                     <a href="{{ route('StatusTrash') }}" class="btn-back-effect">
                         <img src="{{ asset('trash-page/ดูสถานะรถขยะ.png') }}" alt="ดูสถานะรถขยะ" class="img-fluid">
                     </a>
@@ -34,7 +34,7 @@
                         ติดตามตำแหน่งของรถขยะเพื่อความสะดวกในการเตรียมขยะนำไปทิ้งสามารถวางแผนและจัดการการทิ้งขยะได้อย่างง่าย
                     </div>
                 </div>
-                <div class="col-6 col-md-4 d-flex flex-column justify-content-start align-items-center">
+                <div class="col-6 col-md-3 d-flex flex-column justify-content-start align-items-center">
                     <a href="{{ route('CheckValuetrash') }}" class="btn-back-effect">
                         <img src="{{ asset('trash-page/ดูข้อมูลการชำระ.png') }}" alt="ดูข้อมูลการชำระ" class="img-fluid">
                     </a>
@@ -44,13 +44,23 @@
                         การชำระครั้งถัดไป
                     </div>
                 </div>
-                <div class="col-6 col-md-4 d-flex flex-column justify-content-start align-items-center">
+                <div class="col-6 col-md-3 d-flex flex-column justify-content-start align-items-center">
                     <a href="{{ route('TrashToxic') }}" class="btn-back-effect">
                         <img src="{{ asset('trash-page/ดูจุดทิ้งขยะ.png') }}" alt="ดูจุดทิ้งขยะ" class="img-fluid">
                     </a>
                     <div class="d-none d-md-block fs-4 fw-bold mt-3 px-xl-5" style="line-height: 1;">
                         ติดตามตำแหน่งจุดทิ้งขยะมีพิษ
                         เพื่อ รวบรวม จัดการ และกำจัดขยะอันตรายอย่างปลอดภัยเพื่อปกป้องสุขภาพ์และสิ่งแวดล้อม
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 d-flex flex-column justify-content-start align-items-center">
+                    <a href="{{ route('TrashToxic') }}" class="btn-back-effect">
+                        <img src="{{ asset('trash-page/ขอร้องขอใช้ถัง.png') }}" alt="ขอร้องขอใช้ถัง" class="img-fluid">
+                    </a>
+                    <div class="d-none d-md-block fs-4 fw-bold mt-3 px-xl-5" style="line-height: 1;">
+                        ยื่นคำร้องเพื่อขอใช้บริการถัง
+                        ขยะตามจุดต่างๆ เพื่อความสะอาดเป็นระเบียบ
+                        เรียบร้อยของชุมชนที่อยู่อาศัย
                     </div>
                 </div>
             </div>

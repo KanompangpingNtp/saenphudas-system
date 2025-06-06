@@ -76,7 +76,7 @@
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="house_number" class="form-label">บ้านเลขที่</label>
-                                <input type="text" class="form-control" id="house_number" name="house_number" placeholder="บ้านเลขที่">
+                                <input type="text" class="form-control" id="house_number" name="house_number" placeholder="บ้านเลขที่" oninput="this.value = this.value.replace(/[^0-9/]/g, '')">
                             </div>
                             <div class="col-md-4">
                                 <label for="village" class="form-label">หมู่บ้าน</label>

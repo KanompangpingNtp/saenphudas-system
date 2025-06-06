@@ -95,7 +95,6 @@
                                 </tr>
                             @endforeach
 
-                            {{-- กลุ่มผู้ใช้งานทั่วไป (ไม่มี user_id) --}}
                             @foreach ($paymentsByAddress as $wasteAddressId => $group)
                                 @php
                                     $first = $group->sortByDesc('issued_at')->first();

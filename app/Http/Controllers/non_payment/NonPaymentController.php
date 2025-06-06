@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\WastePayment;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 class NonPaymentController extends Controller
 {
@@ -246,7 +247,7 @@ class NonPaymentController extends Controller
         $wasteAddress = \App\Models\WasteAddress::find($wasteAddressId);
         $totalAmount = $payments->sum('amount');
 
-        $pdf = Pdf::loadView('waste-payment.admin.non_payment.pdf', compact(
+        $pdf = Pdf::loadView('waste-payment.admin.non_payment.pdf_ad', compact(
             'payments',
             'wasteAddress',
             'month',
@@ -255,5 +256,33 @@ class NonPaymentController extends Controller
         ));
 
         return $pdf->stream('บิลที่รอการชำระเงิน.pdf');
+    }
+
+    public function NonPaymentUploadSlip(Request $request, $id)
+    {
+        $request->validate([
+            'payment_slip' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $payment = WastePayment::findOrFail($id);
+
+        // ถ้ามีไฟล์ใหม่ ให้ลบของเก่าและบันทึกใหม่
+        if ($request->hasFile('payment_slip')) {
+            if ($payment->payment_slip) {
+                Storage::delete('public/payment_slips/' . $payment->payment_slip);
+            }
+
+            $file = $request->file('payment_slip');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/payment_slips', $filename);
+            $payment->payment_slip = $filename;
+        }
+
+        // ปรับสถานะ และวันที่ออกใบแจ้ง
+        $payment->payment_status = 3;
+        $payment->issued_at = now();
+        $payment->save();
+
+        return back()->with('success', 'จ่ายเงินเรียบร้อยแล้ว');
     }
 }

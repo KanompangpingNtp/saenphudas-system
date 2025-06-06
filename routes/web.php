@@ -442,7 +442,7 @@ Route::middleware(['admin_waste_payment'])->group(function () {
     Route::get('/admin/payment_history/detail', [PaymentHistoryController::class, 'PaymentHistoryDetail'])->name('PaymentHistoryDetail');
     Route::get('/admin/payment_history/detail-ad', [PaymentHistoryController::class, 'PaymentHistoryDetailAd'])->name('PaymentHistoryDetailAd');
     Route::get('/admin/payment_history/export', [PaymentHistoryController::class, 'PaymentHistoryExportPDF'])->name('PaymentHistoryExportPDF');
-
+    Route::get('/admin/payment_history/export-ad', [PaymentHistoryController::class, 'PaymentHistoryExportPDFAd'])->name('PaymentHistoryExportPDFAd');
 
     Route::get('/admin/trash_installer', [TrashInstallerController::class, 'TrashInstallerPage'])->name('TrashInstallerPage');
     Route::get('/admin/trash_installer/detail/{id}', [TrashInstallerController::class, 'TrashInstallerDetail'])->name('TrashInstallerDetail');
@@ -452,6 +452,7 @@ Route::middleware(['admin_waste_payment'])->group(function () {
     Route::get('/admin/non_payment/detail_ad', [NonPaymentController::class, 'NonPaymentDetailAd'])->name('NonPaymentDetailAd');
     Route::get('/admin/non_payment/export-pdf', [NonPaymentController::class, 'NonPaymentExportPDF'])->name('NonPaymentExportPDF');
     Route::get('/admin/non_payment/export-pdf-ad', [NonPaymentController::class, 'NonPaymentExportPDFAd'])->name('NonPaymentExportPDFAd');
+    Route::post('/admin/non_payment/upload-slip/{id}', [NonPaymentController::class, 'NonPaymentUploadSlip'])->name('NonPaymentUploadSlip');
 });
 
 Route::get('/address', [Import::class, 'address'])->name('address');

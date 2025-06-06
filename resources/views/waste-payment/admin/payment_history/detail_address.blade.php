@@ -42,14 +42,14 @@
                         </div>
                     </form>
 
-                    {{-- <a href="{{ route('NonPaymentExportPDFAd', [
+                    <a href="{{ route('PaymentHistoryExportPDFAd', [
                         'waste_address_id' => $wasteAddressId,
                         'month' => request('month'),
                         'year' => request('year'),
                     ]) }}"
                         class="btn btn-danger btn-sm mb-3" target="_blank">
                         <i class="bi bi-filetype-pdf"></i> Export PDF
-                    </a> --}}
+                    </a>
 
                     <table class="table table-bordered table-striped" id="data_table">
                         <thead>

@@ -50,6 +50,7 @@ use App\Http\Controllers\general_road_request\AdminGeneralRoadRequestController;
 use App\Http\Controllers\general_road_request\GeneralRoadRequestController;
 use App\Http\Controllers\general_electricity_request\AdminGeneralElectricityRequestController;
 use App\Http\Controllers\general_electricity_request\GeneralElectricityRequestController;
+use App\Http\Controllers\Import;
 
 /*
 |--------------------------------------------------------------------------
@@ -438,9 +439,17 @@ Route::middleware(['admin_waste_payment'])->group(function () {
 
     Route::get('/admin/payment_history', [PaymentHistoryController::class, 'PaymentHistoryPage'])->name('PaymentHistoryPage');
     Route::post('/admin/payment_history/upload-bill/{id}', [PaymentHistoryController::class, 'uploadBill'])->name('uploadBill');
+    Route::get('/admin/payment_history/detail', [PaymentHistoryController::class, 'PaymentHistoryDetail'])->name('PaymentHistoryDetail');
+    Route::get('/admin/payment_history/export', [PaymentHistoryController::class, 'PaymentHistoryExportPDF'])->name('PaymentHistoryExportPDF');
+
 
     Route::get('/admin/trash_installer', [TrashInstallerController::class, 'TrashInstallerPage'])->name('TrashInstallerPage');
     Route::get('/admin/trash_installer/detail/{id}', [TrashInstallerController::class, 'TrashInstallerDetail'])->name('TrashInstallerDetail');
 
     Route::get('/admin/non_payment', [NonPaymentController::class, 'NonPaymentPage'])->name('NonPaymentPage');
+    Route::get('/admin/non_payment/detail', [NonPaymentController::class, 'NonPaymentDetail'])->name('NonPaymentDetail');
+    Route::get('/admin/non_payment/export-pdf', [NonPaymentController::class, 'NonPaymentExportPDF'])->name('NonPaymentExportPDF');
+
 });
+
+Route::get('/address', [Import::class, 'address'])->name('address');

@@ -49,13 +49,13 @@
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
-                                <th class="text-center">วันที่ชำระ</th>
+                                <th class="text-center">วันที่ชำระ (ล่าสุด)</th>
                                 <th class="text-center">ชื่อผู้จ่าย</th>
                                 <th class="text-center">ที่อยู่</th>
-                                <th class="text-center">ยอดชำระ (บาท)</th>
-                                <th class="text-center">สลิปชำระเงิน</th>
+                                <th class="text-center">ยอดชำระทั้งหมด (บาท)</th>
+                                <th class="text-center">จำนวนรายการ</th>
                                 <th class="text-center">สถานะ</th>
-                                <th class="text-center">จัดการ</th>
+                                <th class="text-center">รายละเอียด</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,96 +70,34 @@
                                     </td>
                                     <td class="text-center">
                                         {{ $payment->wasteManagement->address ?? '-' }},
-                                        หมู่ที่ {{ $payment->wasteManagement->village ?? '-' }},
+                                        หมู่ {{ $payment->wasteManagement->village ?? '-' }},
                                         ต.{{ $payment->wasteManagement->sub_district ?? '-' }},
                                         อ.{{ $payment->wasteManagement->district ?? '-' }},
                                         จ.{{ $payment->wasteManagement->province ?? '-' }}
                                     </td>
                                     <td class="text-center">
-                                        {{ number_format($payment->amount, 2) }}
+                                        {{ number_format($payment->total_amount, 2) }}
                                     </td>
                                     <td class="text-center">
-                                        @if ($payment->payment_slip)
-                                            <a href="{{ asset('storage/payment_slips/' . $payment->payment_slip) }}"
-                                                target="_blank">ดูสลิป</a>
+                                        {{ $payment->payment_count }} รายการ
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($payment->has_missing_bill)
+                                            <span class="text-warning">มีบางรายการยังไม่แนบบิล</span>
                                         @else
-                                            -
+                                            <span class="text-success">แนบบิลครบแล้ว</span>
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <span class="badge bg-success">ชำระแล้ว</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#modal-{{ $payment->id }}">
-                                            <i class="bi bi-archive"></i>
-                                        </button>
+                                        <a href="{{ route('PaymentHistoryDetail', ['user_id' => $payment->wasteManagement->users_id]) }}"
+                                            class="btn btn-primary btn-sm">
+                                            ดูบิล
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-
-                    @foreach ($payments as $payment)
-                        <div class="modal fade" id="modal-{{ $payment->id }}" tabindex="-1"
-                            aria-labelledby="modalLabel-{{ $payment->id }}" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalLabel-{{ $payment->id }}">
-                                            รายละเอียดบิลการชำระเงิน
-                                        </h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="ปิด"></button>
-                                    </div>
-                                    <form method="POST" action="{{ route('uploadBill', $payment->id) }}"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        @method('POST')
-
-                                        <div class="modal-body">
-                                            <div>
-                                                @if ($payment->bill)
-                                                    @php
-                                                        $extension = pathinfo($payment->bill, PATHINFO_EXTENSION);
-                                                    @endphp
-
-                                                    @if (in_array($extension, ['jpg', 'jpeg', 'png']))
-                                                        <img src="{{ asset('storage/bills/' . $payment->bill) }}"
-                                                            alt="บิล" class="img-fluid rounded border">
-                                                    @elseif ($extension === 'pdf')
-                                                        <iframe src="{{ asset('storage/bills/' . $payment->bill) }}"
-                                                            width="100%" height="500px" class="border rounded"></iframe>
-                                                    @else
-                                                        <p>ไม่สามารถแสดงไฟล์บิลนี้ได้</p>
-                                                    @endif
-                                                @else
-                                                    <p><strong>ไม่มีข้อมูล</strong></p>
-                                                @endif
-
-                                                @if (is_null($payment->bill))
-                                                    <div class="mb-3 mt-3">
-                                                        <label for="bill" class="form-label"><strong>แนบบิล (PDF, JPG,
-                                                                PNG):</strong></label>
-                                                        <input type="file" class="form-control" name="bill"
-                                                            accept=".pdf,.jpg,.jpeg,.png" required>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">ปิด</button>
-                                            @if (is_null($payment->bill))
-                                                <button type="submit" class="btn btn-success">บันทึกบิล</button>
-                                            @endif
-                                        </div>
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
 
                 </div>
             </div>

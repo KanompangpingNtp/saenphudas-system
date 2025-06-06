@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'level',
+        'user_old',
     ];
 
     /**
@@ -47,5 +49,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserDetail::class, 'users_id');
     }
-
 }

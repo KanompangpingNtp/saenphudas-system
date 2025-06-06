@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\waste_payment;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserAddressLog;
+use App\Models\WasteAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\WastePayment;
@@ -14,9 +16,14 @@ class CheckValuetrashController extends Controller
     {
         $user = Auth::user();
 
-        $payments = WastePayment::whereHas('wasteManagement', function ($query) use ($user) {
-            $query->where('users_id', $user->id);
-        })->get();
+        if ($user->user_old != 1) {
+            $payments = WastePayment::whereHas('wasteManagement', function ($query) use ($user) {
+                $query->where('users_id', $user->id);
+            })->get();
+        } else {
+            $address = UserAddressLog::where('user_id', $user->id)->first();
+            $payments = WastePayment::where('waste_address_id', $address->address_id)->get();
+        }
 
         return view("home.check-valuetrash-page", compact("user", "payments"));
     }

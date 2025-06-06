@@ -16,11 +16,17 @@ class WastePayment extends Model
         'payment_slip',
         'issued_at',
         'due_date',
-        'bill'
+        'bill',
+        'waste_address_id'
     ];
 
     public function wasteManagement()
     {
         return $this->belongsTo(WasteManagement::class);
+    }
+
+    public function wasteAddress()
+    {
+        return $this->belongsTo(WasteAddress::class);
     }
 }

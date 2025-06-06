@@ -26,7 +26,7 @@
                         <div class="col-md-2">
                             <select name="year" class="form-select">
                                 <option value="">-- เลือกปี --</option>
-                                @for ($y = now()->year; $y >= now()->year - 5; $y--)
+                                @for ($y = now()->year; $y >= now()->year - 9; $y--)
                                     <option value="{{ $y }}" {{ request('year') == $y ? 'selected' : '' }}
                                         {{ in_array($y, $availableYears) ? '' : 'disabled' }}>
                                         {{ $y + 543 }}

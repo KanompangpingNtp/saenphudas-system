@@ -1,22 +1,15 @@
 @extends('waste-payment.layouts.master')
 @section('content')
-    <style>
-        select option:disabled {
-            color: #999;
-            /* สีเทาอ่อน */
-            background-color: #f9f9f9;
-        }
-    </style>
-
     <div class="row">
         <div class="">
             <div class="card">
                 <div class="card-body">
+                    <h3 class="text-center mb-4">
+                        บิลที่รอการชำระเงิน : {{ $wasteAddress->name ?? '-' }}
+                    </h3>
 
-                    <h3 class="text-center mb-5">ประวัติการชำระเงิน</h3>
-
-                    <form method="GET" action="{{ route('PaymentHistoryDetail') }}" class="row g-2 mb-3">
-                        <input type="hidden" name="user_id" value="{{ $userId }}"> {{-- ต้องส่ง user_id กลับไปด้วย --}}
+                    <form method="GET" action="{{ route('NonPaymentDetailAd') }}" class="row g-2 mb-3">
+                        <input type="hidden" name="waste_address_id" value="{{ $wasteAddressId }}">
 
                         <div class="col-md-2">
                             <select name="month" class="form-select">
@@ -49,21 +42,20 @@
                         </div>
                     </form>
 
-                    <a href="{{ route('PaymentHistoryExportPDF', [
-                        'user_id' => $userId,
+                    {{-- <a href="{{ route('NonPaymentExportPDFAd', [
+                        'waste_address_id' => $wasteAddressId,
                         'month' => request('month'),
                         'year' => request('year'),
                     ]) }}"
                         class="btn btn-danger btn-sm mb-3" target="_blank">
                         <i class="bi bi-filetype-pdf"></i> Export PDF
-                    </a>
+                    </a> --}}
 
                     <table class="table table-bordered table-striped" id="data_table">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-center">วันที่ชำระ</th>
-                                {{-- <th class="text-center">ชื่อผู้จ่าย</th> --}}
                                 <th class="text-center">ที่อยู่</th>
                                 <th class="text-center">ยอดชำระ (บาท)</th>
                                 <th class="text-center">สลิปชำระเงิน</th>
@@ -82,15 +74,10 @@
                                             -
                                         @endif
                                     </td>
-                                    {{-- <td class="text-center">
-                                        {{ $payment->wasteManagement->name ?? '-' }}
-                                    </td> --}}
                                     <td class="text-center">
-                                        {{ $payment->wasteManagement->address ?? '-' }}
+                                        {{ $payment->wasteAddress->name ?? '-' }}
                                     </td>
-                                    <td class="text-center">
-                                        {{ number_format($payment->amount, 2) }}
-                                    </td>
+                                    <td class="text-center">{{ number_format($payment->amount, 2) }}</td>
                                     <td class="text-center">
                                         @if ($payment->payment_slip)
                                             <a href="{{ asset('storage/payment_slips/' . $payment->payment_slip) }}"
@@ -101,9 +88,9 @@
                                     </td>
                                     <td class="text-center">
                                         @if (is_null($payment->bill))
-                                            <span class="text-warning">ชำระเงินแล้วรอแนบบิล</span>
+                                            <span class="text-warning">รอแนบบิล</span>
                                         @else
-                                            <span class="text-success">แนบบิลกลับแล้ว</span>
+                                            <span class="text-success">แนบบิลแล้ว</span>
                                         @endif
                                     </td>
                                     <td class="text-center">
@@ -191,6 +178,5 @@
             </div>
         </div>
     </div>
-
     <script src="{{ asset('js/datatable.js') }}"></script>
 @endsection

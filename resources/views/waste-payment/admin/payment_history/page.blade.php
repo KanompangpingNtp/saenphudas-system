@@ -31,7 +31,7 @@
                         <div class="col-md-2">
                             <select name="year" class="form-select">
                                 <option value="">-- เลือกปี --</option>
-                                @for ($y = now()->year; $y >= now()->year - 5; $y--)
+                                @for ($y = now()->year; $y >= now()->year - 9; $y--)
                                     <option value="{{ $y }}" {{ request('year') == $y ? 'selected' : '' }}
                                         {{ in_array($y, $availableYears) ? '' : 'disabled' }}>
                                         {{ $y + 543 }}
@@ -50,7 +50,6 @@
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-center">วันที่ชำระ (ล่าสุด)</th>
-                                <th class="text-center">ชื่อผู้จ่าย</th>
                                 <th class="text-center">ที่อยู่</th>
                                 <th class="text-center">ยอดชำระทั้งหมด (บาท)</th>
                                 <th class="text-center">จำนวนรายการ</th>
@@ -59,38 +58,79 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($payments as $index => $payment)
+                            @php $i = 1; @endphp
+
+                            @foreach ($paymentsByUser as $group)
+                                @php
+                                    $first = $group->sortByDesc('issued_at')->first();
+                                    $user = optional($first->wasteManagement)->user;
+                                    $waste = $first->wasteManagement;
+                                @endphp
                                 <tr>
-                                    <td class="text-center">{{ $index + 1 }}</td>
-                                    <td class="text-center">
-                                        {{ \Carbon\Carbon::parse($payment->paid_at)->format('d/m/Y') }}
+                                    <td class="text-center">{{ $i++ }}</td>
+                                    <td class="text-center">{{ \Carbon\Carbon::parse($first->issued_at)->format('d/m/Y') }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $payment->wasteManagement->name ?? '-' }}
+                                        {{ $waste->address ?? '-' }}
                                     </td>
+                                    <td class="text-center">{{ number_format($group->sum('amount'), 2) }}</td>
+                                    <td class="text-center">{{ $group->count() }} รายการ</td>
                                     <td class="text-center">
-                                        {{ $payment->wasteManagement->address ?? '-' }},
-                                        หมู่ {{ $payment->wasteManagement->village ?? '-' }},
-                                        ต.{{ $payment->wasteManagement->sub_district ?? '-' }},
-                                        อ.{{ $payment->wasteManagement->district ?? '-' }},
-                                        จ.{{ $payment->wasteManagement->province ?? '-' }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ number_format($payment->total_amount, 2) }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ $payment->payment_count }} รายการ
-                                    </td>
-                                    <td class="text-center">
-                                        @if ($payment->has_missing_bill)
+                                        @if ($group->contains(fn($p) => is_null($p->bill)))
                                             <span class="text-warning">มีบางรายการยังไม่แนบบิล</span>
                                         @else
                                             <span class="text-success">แนบบิลครบแล้ว</span>
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('PaymentHistoryDetail', ['user_id' => $payment->wasteManagement->users_id]) }}"
-                                            class="btn btn-primary btn-sm">
+                                        <a href="{{ route('PaymentHistoryDetail', [
+                                            'user_id' => $user->id,
+                                            'month' => $month,
+                                            'year' => $year,
+                                        ]) }}"
+                                            class="btn btn-sm btn-primary">
+                                            ดูบิล
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            {{-- กลุ่มผู้ใช้งานทั่วไป (ไม่มี user_id) --}}
+                            @foreach ($paymentsByAddress as $wasteAddressId => $group)
+                                @php
+                                    $first = $group->sortByDesc('issued_at')->first();
+                                    $wasteAddress = $first->wasteAddress;
+                                    $waste = $first->wasteManagement;
+                                    if (!$wasteAddress) {
+                                        continue;
+                                    }
+                                @endphp
+                                <tr>
+                                    <td class="text-center">{{ $i++ }}</td>
+                                    <td class="text-center">
+                                        @if (!is_null($first->issued_at))
+                                            {{ \Carbon\Carbon::parse($first->issued_at)->format('d/m/Y') }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                    <td class="text-center">{{ $wasteAddress->name ?? '-' }}</td>
+                                    <td class="text-center">{{ number_format($group->sum('amount'), 2) }}</td>
+                                    <td class="text-center">{{ $group->count() }} รายการ</td>
+                                    <td class="text-center">
+                                        @if ($group->contains(fn($p) => is_null($p->bill)))
+                                            <span class="text-warning">มีบางรายการยังไม่แนบบิล</span>
+                                        @else
+                                            <span class="text-success">แนบบิลครบแล้ว</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{ route('PaymentHistoryDetailAd', [
+                                            'waste_address_id' => $wasteAddressId,
+                                            'month' => $month,
+                                            'year' => $year,
+                                        ]) }}"
+                                            class="btn btn-sm btn-primary">
                                             ดูบิล
                                         </a>
                                     </td>

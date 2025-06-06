@@ -4,9 +4,13 @@
         <div class="">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="text-center mb-4">บิลที่รอการชำระเงิน</h3>
+                    <h3 class="text-center mb-4">
+                        บิลที่รอการชำระเงิน : {{ $wasteAddress->name ?? '-' }}
+                    </h3>
 
-                    <form method="GET" action="{{ route('NonPaymentPage') }}" class="row g-2 mb-3">
+                    <form method="GET" action="{{ route('NonPaymentDetailAd') }}" class="row g-2 mb-3">
+                        <input type="hidden" name="waste_address_id" value="{{ $wasteAddressId }}">
+
                         <div class="col-md-2">
                             <select name="month" class="form-select">
                                 <option value="">-- เลือกเดือน --</option>
@@ -38,67 +42,59 @@
                         </div>
                     </form>
 
+                    {{-- <a href="{{ route('NonPaymentExportPDFAd', [
+                        'waste_address_id' => $wasteAddressId,
+                        'month' => request('month'),
+                        'year' => request('year'),
+                    ]) }}"
+                        class="btn btn-danger btn-sm mb-3" target="_blank">
+                        <i class="bi bi-filetype-pdf"></i> Export PDF
+                    </a> --}}
+
                     <table class="table table-bordered table-striped" id="data_table">
                         <thead>
                             <tr>
+                                <th class="text-center">#</th>
                                 <th class="text-center">ที่อยู่</th>
                                 <th class="text-center">เบอร์โทร</th>
                                 <th class="text-center">จำนวนเงิน</th>
                                 <th class="text-center">สถานะ</th>
-                                <th class="text-center">รายละเอียด</th>
+                                <th class="text-center">วันครบกำหนด</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($nonPaymentsByUser as $group)
+                            @foreach ($payments as $index => $payment)
                                 @php
-                                    $firstPayment = $group->first();
-                                    $user = $firstPayment->wasteManagement->user;
-                                    $waste = $firstPayment->wasteManagement;
+                                    $waste = $payment->wasteManagement;
+                                    $wasteAddress = $payment->wasteAddress;
+                                    $user = $waste->user ?? null;
                                 @endphp
                                 <tr>
+                                    <td class="text-center">{{ $index + 1 }}</td>
                                     <td>
-                                        {{ $waste->address }}
+                                        {{ $wasteAddress->name ?? '-' }}
                                     </td>
-                                    <td class="text-center">{{ $waste->phone }}</td>
-                                    <td class="text-center">{{ number_format($group->sum('amount'), 2) }} บาท</td>
+                                    <td class="text-center">{{ $waste->phone ?? '-' }}</td>
+                                    <td class="text-center">{{ number_format($payment->amount, 2) }} บาท</td>
                                     <td class="text-center">
-                                        <span class="text-danger">ยังไม่ชำระ {{ $group->count() }} รายการ</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="{{ route('NonPaymentDetail', ['user_id' => $user->id, 'month' => $month, 'year' => $year]) }}"
-                                            class="btn btn-sm btn-primary">
-                                            ดูบิล
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-
-                            @foreach ($nonPaymentsByAddress as $wasteAddressId => $group)
-                                @php
-                                    $firstPayment = $group->first();
-                                    $wasteAddress = $firstPayment->wasteAddress;
-                                    if (!$wasteAddress) {
-                                        continue;
-                                    }
-                                    $wasteManagement = $firstPayment->wasteManagement;
-                                    $user = $wasteManagement->user ?? null;
-                                @endphp
-                                <tr>
-                                    <td>{{ $wasteAddress->name ?? '-' }}</td>
-                                    <td class="text-center">{{ $wasteManagement->phone ?? '-' }}</td>
-                                    <td class="text-center">{{ number_format($group->sum('amount'), 2) }} บาท</td>
-                                    <td class="text-center">
-                                        <span class="text-danger">ยังไม่ชำระ {{ $group->count() }} รายการ</span>
+                                        @if ($payment->payment_status == 1)
+                                            <span class="text-danger">ยังไม่ชำระ</span>
+                                        @elseif($payment->payment_status == 3)
+                                            <span class="text-success">ชำระแล้ว</span>
+                                        @else
+                                            <span class="text-secondary">สถานะอื่นๆ</span>
+                                        @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('NonPaymentDetailAd', ['waste_address_id' => $wasteAddressId, 'month' => $month, 'year' => $year]) }}"
-                                            class="btn btn-sm btn-primary">
-                                            ดูบิล
-                                        </a>
+                                        {{ \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y') }}
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tr>
+                            <td colspan="4" class="text-center fw-bold">ยอดรวมค้างชำระทั้งหมด</td>
+                            <td class="text-center fw-bold">{{ number_format($totalAmount, 2) }} บาท</td>
+                        </tr>
                     </table>
 
                 </div>

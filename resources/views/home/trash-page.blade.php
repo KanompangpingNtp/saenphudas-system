@@ -44,7 +44,7 @@
                         การชำระครั้งถัดไป
                     </div>
                 </div>
-                <div class="col-6 col-md-3 d-flex flex-column justify-content-start align-items-center">
+                <div class="col-6 col-md-3 d-flex flex-column justify-content-start align-items-center" style="margin-bottom: 9px;">
                     <a href="{{ route('TrashToxic') }}" class="btn-back-effect">
                         <img src="{{ asset('trash-page/ดูจุดทิ้งขยะ.png') }}" alt="ดูจุดทิ้งขยะ" class="img-fluid">
                     </a>
@@ -53,9 +53,9 @@
                         เพื่อ รวบรวม จัดการ และกำจัดขยะอันตรายอย่างปลอดภัยเพื่อปกป้องสุขภาพ์และสิ่งแวดล้อม
                     </div>
                 </div>
-                <div class="col-6 col-md-3 d-flex flex-column justify-content-start align-items-center">
+                <div class="col-6 col-md-3 d-flex flex-column justify-content-start align-items-center" style="margin-bottom: 9px;">
                     <a href="{{ route('TrashToxic') }}" class="btn-back-effect">
-                        <img src="{{ asset('trash-page/ขอร้องขอใช้ถัง.png') }}" alt="ขอร้องขอใช้ถัง" class="img-fluid">
+                        <img src="{{ asset('trash-page/image_69.png') }}" alt="image_69" class="img-fluid">
                     </a>
                     <div class="d-none d-md-block fs-4 fw-bold mt-3 px-xl-5" style="line-height: 1;">
                         ยื่นคำร้องเพื่อขอใช้บริการถัง

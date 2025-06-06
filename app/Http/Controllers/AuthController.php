@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserDetail;
+use App\Models\WasteAddress;
+use App\Models\UserAddressLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -60,11 +62,15 @@ class AuthController extends Controller
             'province' => 'required|string',
         ]);
 
+        $wasteAddress = WasteAddress::where('name', $request->house_number)->first();
+        $isOldUser = $wasteAddress !== null;
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'level' => 'user',
+            'level' => '2',
+            'user_old' => $isOldUser ? 2 : 1,
         ]);
 
         UserDetail::create([
@@ -79,8 +85,16 @@ class AuthController extends Controller
             'province' => $request->province,
         ]);
 
+        if ($isOldUser) {
+            UserAddressLog::create([
+                'user_id' => $user->id,
+                'address_id' => $wasteAddress->id,
+            ]);
+        }
+
         return redirect()->route('LoginPage')->with('success', 'ลงทะเบียนเรียบร้อยแล้ว กรุณาเข้าสู่ระบบ');
     }
+
 
     public function logout(Request $request)
     {

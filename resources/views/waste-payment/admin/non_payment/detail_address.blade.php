@@ -42,14 +42,14 @@
                         </div>
                     </form>
 
-                    {{-- <a href="{{ route('NonPaymentExportPDFAd', [
+                    <a href="{{ route('NonPaymentExportPDFAd', [
                         'waste_address_id' => $wasteAddressId,
                         'month' => request('month'),
                         'year' => request('year'),
                     ]) }}"
                         class="btn btn-danger btn-sm mb-3" target="_blank">
                         <i class="bi bi-filetype-pdf"></i> Export PDF
-                    </a> --}}
+                    </a>
 
                     <table class="table table-bordered table-striped" id="data_table">
                         <thead>
@@ -60,6 +60,7 @@
                                 <th class="text-center">จำนวนเงิน</th>
                                 <th class="text-center">สถานะ</th>
                                 <th class="text-center">วันครบกำหนด</th>
+                                <th class="text-center">action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,6 +89,12 @@
                                     <td class="text-center">
                                         {{ \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y') }}
                                     </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#payModal-{{ $payment->id }}">
+                                            จ่ายบิล
+                                        </button>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -96,6 +103,40 @@
                             <td class="text-center fw-bold">{{ number_format($totalAmount, 2) }} บาท</td>
                         </tr>
                     </table>
+
+                    @foreach ($payments as $payment)
+                        <div class="modal fade" id="payModal-{{ $payment->id }}" tabindex="-1"
+                            aria-labelledby="payModalLabel-{{ $payment->id }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form action="{{ route('NonPaymentUploadSlip', $payment->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="payModalLabel-{{ $payment->id }}">ชำระเงิน</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="ปิด"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>ยอดที่ต้องชำระ: <strong>{{ number_format($payment->amount, 2) }}
+                                                    บาท</strong></p>
+                                            <div class="mb-3">
+                                                <label for="payment_slip_{{ $payment->id }}"
+                                                    class="form-label">อัปโหลดสลิปการชำระเงิน</label>
+                                                <input type="file" class="form-control" name="payment_slip"
+                                                    id="payment_slip_{{ $payment->id }}">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success">ยืนยันการชำระ</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">ยกเลิก</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
 
                 </div>
             </div>

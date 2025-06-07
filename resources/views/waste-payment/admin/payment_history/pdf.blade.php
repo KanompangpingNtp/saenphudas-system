@@ -38,14 +38,14 @@
 
     <p>
         @if ($month || $year)
-            @if ($month)
-                เดือน: {{ \Carbon\Carbon::create()->month($month)->locale('th')->isoFormat('MMMM') }}
-            @endif
-            @if ($year)
-                ปี: {{ $year + 543 }}
-            @endif
+        @if ($month)
+        เดือน: {{ \Carbon\Carbon::create()->month($month)->locale('th')->isoFormat('MMMM') }}
+        @endif
+        @if ($year)
+        ปี: {{ $year + 543 }}
+        @endif
         @else
-            แสดงรายการทั้งหมด
+        แสดงรายการทั้งหมด
         @endif
     </p>
 
@@ -55,25 +55,27 @@
                 <th>#</th>
                 <th>วันที่ชำระ</th>
                 <th>ที่อยู่</th>
+                <th>เดือน/ปี</th>
                 <th>เบอร์โทร</th>
                 <th>จำนวนเงิน (บาท)</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($payments as $index => $payment)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ \Carbon\Carbon::parse($payment->paid_at)->format('d/m/Y') }}</td>
-                    <td>
-                        {{ $payment->wasteManagement->address }},
-                        หมู่ {{ $payment->wasteManagement->village }},
-                        ต.{{ $payment->wasteManagement->sub_district }},
-                        อ.{{ $payment->wasteManagement->district }},
-                        จ.{{ $payment->wasteManagement->province }}
-                    </td>
-                    <td>{{ $payment->wasteManagement->phone }}</td>
-                    <td>{{ number_format($payment->amount, 2) }}</td>
-                </tr>
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ \Carbon\Carbon::parse($payment->paid_at)->format('d/m/Y') }}</td>
+                <td>
+                    {{ $payment->wasteManagement->address }},
+                    หมู่ {{ $payment->wasteManagement->village }},
+                    ต.{{ $payment->wasteManagement->sub_district }},
+                    อ.{{ $payment->wasteManagement->district }},
+                    จ.{{ $payment->wasteManagement->province }}
+                </td>
+                <td>{{ \Carbon\Carbon::parse($payment->due_date)->locale('th')->translatedFormat('F') }} {{ ($payment->end_date) ? '-' : '' }} {{ ($payment->end_date) ? \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('F') : '' }} {{ \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('Y')+543 }}</td>
+                <td>{{ $payment->wasteManagement->phone }}</td>
+                <td>{{ number_format($payment->amount, 2) }}</td>
+            </tr>
             @endforeach
             <tr>
                 <td colspan="4"><strong>รวมยอดที่ชำระแล้ว</strong></td>

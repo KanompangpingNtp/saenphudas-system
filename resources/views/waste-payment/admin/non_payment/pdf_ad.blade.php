@@ -56,7 +56,7 @@
             <tr>
                 <th>#</th>
                 <th>ที่อยู่</th>
-                <th>เดือน</th>
+                <th>เดือน/ปี</th>
                 <th>เบอร์โทร</th>
                 <th>จำนวนเงิน (บาท)</th>
             </tr>
@@ -68,7 +68,7 @@
                 <td>
                     {{ $payment->wasteAddress->name ?? '-' }}
                 </td>
-                <td>{{ \Carbon\Carbon::parse($payment->due_date)->locale('th')->translatedFormat('F') }} - {{ \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('F') }} {{ \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('Y')+543 }}</td>
+                <td>{{ \Carbon\Carbon::parse($payment->due_date)->locale('th')->translatedFormat('F') }} {{ ($payment->end_date) ? '-' : '' }} {{ ($payment->end_date) ? \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('F') : '' }} {{ \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('Y')+543 }}</td>
                 <td>{{ $payment->wasteManagement->phone ?? '-' }}</td>
                 <td>{{ number_format($payment->amount, 2) }}</td>
             </tr>

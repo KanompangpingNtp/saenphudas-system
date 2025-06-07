@@ -104,7 +104,7 @@
     }
 
     #map {
-        height: 500px;
+        height: 610px;
         width: 100%;
     }
 
@@ -160,6 +160,14 @@
                                             <input type="file" accept="image/*" capture="environment" id="file"
                                                 name="file" style="display: none;" onchange="displayFileName()">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="selectBookregist"
+                                        class="col-sm-4 col-form-label d-flex justify-content-start">ชื่อผู้แจ้ง :
+                                    </label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="fullname" name="fullname" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -314,10 +322,19 @@
         e.preventDefault();
         const lat = $('#latitude').val();
         const lng = $('#longitude').val();
+        const fullname = $('#fullname').val();
         const file = $('#file').val();
         const detail = $('#detail').val().trim();
         const selectedOption = $('input[name="options"]:checked').val();
 
+        if (!fullname) {
+            Swal.fire({
+                title: "กรุณากรอกชื่อผู้แจ้ง",
+                text: "",
+                icon: "warning"
+            });
+            return;
+        }
         if (!lat && !lng) {
             Swal.fire({
                 title: "กรุณาแจ้งตำแหน่งอุบัติเหตุของท่าน",

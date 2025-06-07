@@ -12,9 +12,9 @@ class EmergencyController extends Controller
     // public $channelToken = 'L4x3vp1t8f4gDx+op2v5bYQO3lozP3T+2aMMhEjtl9CkmsMiAJ8fNC+BqRReVSTEiZk6gR5oRs73p2QyZzNlyuB2ziCpX/zcNGLK1xGRAmDKMj/NXq3x9IRdLYZjLQZs1z3llUhNnlpNMB8iqvP7NwdB04t89/1O/w1cDnyilFU=';
     // public $group_id = 'C39a38abf0c6ddb8679a7524748fd0f37';
 
-    public $channelToken = 'rXAqVM4Sst0WA8i3aSmEAhKcwqdY4o4zO+dOkzAY3E/h7Ykx1FOUaXdE2avc1a4IvsOW9EntkqXExh0DN4BHBzMv5gLBRXjdyIiVMh3wP4Ff5yMIRMM+t7zDE2Umab5h2ka39GPidW3dzYxqS2Q0NgdB04t89/1O/w1cDnyilFU=';
+    public $channelToken = 'L4x3vp1t8f4gDx+op2v5bYQO3lozP3T+2aMMhEjtl9CkmsMiAJ8fNC+BqRReVSTEiZk6gR5oRs73p2QyZzNlyuB2ziCpX/zcNGLK1xGRAmDKMj/NXq3x9IRdLYZjLQZs1z3llUhNnlpNMB8iqvP7NwdB04t89/1O/w1cDnyilFU=';
 
-    public $group_id = 'C020683c3f249223015cd92ec6f9b76f8';
+    public $group_id = 'C8937860f98b44b88d27bc79fead7ea86';
 
     public function index()
     {
@@ -35,6 +35,7 @@ class EmergencyController extends Controller
                 $insert->detail = $input['detail'];
                 $insert->photo = $path;
                 $insert->type = $input['options'];
+                $insert->fullname = $input['fullname'];
                 $insert->tel = $input['tel'];
                 $insert->lat = $input['latitude'];
                 $insert->long = $input['longitude'];
@@ -42,7 +43,7 @@ class EmergencyController extends Controller
                 $insert->updated_at = date('Y-m-d H:i:s');
                 if ($insert->save()) {
                     $type = EmergenciesType::where('id', $input['options'])->first();
-                    $text = "แจ้งเหตุ มี" . $type->name . "\n" . 'เบอร์ติดต่อ ' . $input['tel'] . "\n" . $input['detail'] . "\nhttps://www.google.com/maps?q=" . $input['latitude'] . ',' . $input['longitude'];
+                    $text = "แจ้งเหตุ มี" . $type->name . "\n" . 'ชื่อผู้แจ้ง ' . $input['fullname'] . "\n" . 'เบอร์ติดต่อ ' . $input['tel'] . "\n" . $input['detail'] . "\nhttps://www.google.com/maps?q=" . $input['latitude'] . ',' . $input['longitude'];
                     $data = [
                         'text' => $text,
                         'photo' => 'https://saenphudas.sosmartsolution.com/storage/' . $path

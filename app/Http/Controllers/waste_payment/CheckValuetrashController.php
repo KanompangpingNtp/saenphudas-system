@@ -16,7 +16,7 @@ class CheckValuetrashController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->user_old != 1) {
+        if ($user->user_old != 2) {
             $payments = WastePayment::whereHas('wasteManagement', function ($query) use ($user) {
                 $query->where('users_id', $user->id);
             })->get();

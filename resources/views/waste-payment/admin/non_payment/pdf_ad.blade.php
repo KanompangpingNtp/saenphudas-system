@@ -40,14 +40,14 @@
 
     <p>
         @if ($month || $year)
-            @if ($month)
-                เดือน: {{ \Carbon\Carbon::create()->month($month)->locale('th')->isoFormat('MMMM') }}
-            @endif
-            @if ($year)
-                ปี: {{ $year + 543 }}
-            @endif
+        @if ($month)
+        เดือน: {{ \Carbon\Carbon::create()->month($month)->locale('th')->isoFormat('MMMM') }}
+        @endif
+        @if ($year)
+        ปี: {{ $year + 543 }}
+        @endif
         @else
-            แสดงรายการทั้งหมด
+        แสดงรายการทั้งหมด
         @endif
     </p>
 
@@ -56,23 +56,25 @@
             <tr>
                 <th>#</th>
                 <th>ที่อยู่</th>
+                <th>เดือน</th>
                 <th>เบอร์โทร</th>
                 <th>จำนวนเงิน (บาท)</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($payments as $index => $payment)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>
-                        {{ $payment->wasteAddress->name ?? '-' }}
-                    </td>
-                    <td>{{ $payment->wasteManagement->phone ?? '-' }}</td>
-                    <td>{{ number_format($payment->amount, 2) }}</td>
-                </tr>
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>
+                    {{ $payment->wasteAddress->name ?? '-' }}
+                </td>
+                <td>{{ \Carbon\Carbon::parse($payment->due_date)->locale('th')->translatedFormat('F') }} - {{ \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('F') }} {{ \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('Y')+543 }}</td>
+                <td>{{ $payment->wasteManagement->phone ?? '-' }}</td>
+                <td>{{ number_format($payment->amount, 2) }}</td>
+            </tr>
             @endforeach
             <tr>
-                <td colspan="3"><strong>รวมยอดที่ชำระแล้ว</strong></td>
+                <td colspan="4"><strong>รวมยอดที่ชำระแล้ว</strong></td>
                 <td><strong>{{ number_format($totalAmount, 2) }}</strong></td>
             </tr>
         </tbody>

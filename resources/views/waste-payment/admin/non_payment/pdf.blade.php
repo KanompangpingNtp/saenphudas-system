@@ -78,7 +78,7 @@
             </tr>
             @endforeach
             <tr>
-                <td colspan="3"><strong>รวมยอดค้างชำระทั้งหมด</strong></td>
+                <td colspan="4"><strong>รวมยอดค้างชำระทั้งหมด</strong></td>
                 <td colspan="2"><strong>{{ number_format($totalAmount, 2) }} บาท</strong></td>
             </tr>
         </tbody>

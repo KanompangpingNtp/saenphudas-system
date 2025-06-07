@@ -78,7 +78,7 @@
             </tr>
             @endforeach
             <tr>
-                <td colspan="4"><strong>รวมยอดที่ชำระแล้ว</strong></td>
+                <td colspan="5"><strong>รวมยอดที่ชำระแล้ว</strong></td>
                 <td><strong>{{ number_format($totalAmount, 2) }}</strong></td>
             </tr>
         </tbody>

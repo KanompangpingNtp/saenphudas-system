@@ -178,7 +178,7 @@
                 <tbody>
                     @foreach ($payments as $payment)
                     <tr>
-                        <td>{{ \Carbon\Carbon::parse($payment->due_date)->locale('th')->translatedFormat('F') }} {{ ($payment->end_date) ? \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('F') : '' }} {{ \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('Y')+543 }}</td>
+                        <td>{{ \Carbon\Carbon::parse($payment->due_date)->locale('th')->translatedFormat('F') }} {{ ($payment->end_date) ? '-' : '' }} {{ ($payment->end_date) ? \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('F') : '' }} {{ \Carbon\Carbon::parse($payment->end_date)->locale('th')->translatedFormat('Y')+543 }}</td>
                         <td>ค่าชำระขยะประจำเดือน</td>
                         <td>
                             @if ($payment->payment_status == 3)

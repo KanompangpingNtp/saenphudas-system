@@ -71,7 +71,7 @@ class GenerateWasteBill extends Command
 
         foreach ($wasteManagements as $wm) {
             $latestPayment = WastePayment::where('waste_management_id', $wm->id)
-                ->orderByDesc('due_date')  // เปลี่ยนมาเรียงตาม due_date ล่าสุด
+                ->orderByDesc('due_date')
                 ->first();
 
             if ($latestPayment) {
@@ -93,7 +93,7 @@ class GenerateWasteBill extends Command
                         WastePayment::create([
                             'waste_management_id' => $wm->id,
                             'amount' => $latestPayment->amount,
-                            'payment_status' => 1,
+                            'payment_status' => 20,
                             'due_date' => $nextDueDate,
                             'issued_at' => now(),
                         ]);

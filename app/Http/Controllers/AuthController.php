@@ -31,7 +31,7 @@ class AuthController extends Controller
                 return redirect()->route('AdminIndex');
             } elseif (Auth::user()->level === '2') {
                 return redirect()->route('Home');
-            } elseif (Auth::user()->level === '3') {
+            } elseif (in_array(Auth::user()->level, ['3', '4'])) {
                 return redirect()->route('AdminWastePayment');
             }
         }

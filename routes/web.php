@@ -336,12 +336,6 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/tax_refund_requests/admin-reply/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestAdminReply'])->name('LandTaxRefundRequestAdminReply');
     Route::post('/admin/tax_refund_requests/update-status/{id}', [AdminLandTaxRefundRequestController::class, 'LandTaxRefundRequestUpdateStatus'])->name('LandTaxRefundRequestUpdateStatus');
 
-    //แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
-    Route::get('/admin/GarbageCollection/showdata', [AdminGarbageCollectionController::class, 'GarbageCollectionAdminShowData'])->name('GarbageCollectionAdminShowData');
-    Route::get('/admin/GarbageCollection/export-pdf/{id}', [AdminGarbageCollectionController::class, 'GarbageCollectionAdminExportPDF'])->name('GarbageCollectionAdminExportPDF');
-    Route::post('/admin/GarbageCollection/admin-reply/{id}', [AdminGarbageCollectionController::class, 'AdminGarbageCollectionAdminReply'])->name('AdminGarbageCollectionAdminReply');
-    Route::post('/admin/GarbageCollection/update-status/{id}', [AdminGarbageCollectionController::class, 'AdminGarbageCollectionUpdateStatus'])->name('AdminGarbageCollectionUpdateStatus');
-
     //แบบคำร้องใบอณุญาตประกอบกิจการที่เป็นอันตรายต่อสุขภาพ
     Route::get('/admin/health_hazard_applications/showdata', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminShowData'])->name('HealthHazardApplicationAdminShowData');
     Route::get('/admin/health_hazard_applications/appointment', [AdminHealthHazardApplicationController::class, 'HealthHazardApplicationAdminAppointment'])->name('HealthHazardApplicationAdminAppointment');
@@ -428,6 +422,12 @@ Route::middleware(['admin'])->group(function () {
 
 Route::middleware(['admin_waste_payment'])->group(function () {
     Route::get('/admin/waste_payment', [AdminWastePaymentController::class, 'AdminWastePayment'])->name('AdminWastePayment');
+
+    //แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย และ แบบขอรับถังขยะมูลฝอยทั่วไป
+    Route::get('/admin/GarbageCollection/showdata', [AdminGarbageCollectionController::class, 'GarbageCollectionAdminShowData'])->name('GarbageCollectionAdminShowData');
+    Route::get('/admin/GarbageCollection/export-pdf/{id}', [AdminGarbageCollectionController::class, 'GarbageCollectionAdminExportPDF'])->name('GarbageCollectionAdminExportPDF');
+    Route::post('/admin/GarbageCollection/admin-reply/{id}', [AdminGarbageCollectionController::class, 'AdminGarbageCollectionAdminReply'])->name('AdminGarbageCollectionAdminReply');
+    Route::post('/admin/GarbageCollection/update-status/{id}', [AdminGarbageCollectionController::class, 'AdminGarbageCollectionUpdateStatus'])->name('AdminGarbageCollectionUpdateStatus');
 
     Route::get('/admin/trash_can_installation', [TrashCanInstallationController::class, 'TrashCanInstallationPage'])->name('TrashCanInstallationPage');
     Route::get('/admin/trash_can_installation/detail/{id}', [TrashCanInstallationController::class, 'TrashCanInstallationDetail'])->name('TrashCanInstallationDetail');

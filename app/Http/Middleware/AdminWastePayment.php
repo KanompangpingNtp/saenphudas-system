@@ -16,7 +16,7 @@ class AdminWastePayment
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->level === '3') {
+        if (Auth::check() && in_array(Auth::user()->level, [3, 4])) {
             return $next($request);
         }
 

@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('app:generate-waste-bill')->dailyAt('00:00');
+        $schedule->command('generate:waste-bill-address')->dailyAt('00:00');
     }
 
     /**

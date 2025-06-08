@@ -11,9 +11,10 @@
                         <div class="col-md-4">
                             <div class="card text-white bg-success mb-3">
                                 <div class="card-body text-center">
-                                    <h5 class="card-title text-white">ผู้ชำระเงินแล้ว</h5>
-                                    <p class="card-text display-6">{{ $paidCount }} คน</p>
-                                    <a href="{{ route('PaymentHistoryPage') }}" class="btn btn-light btn-sm">ดูรายละเอียด</a>
+                                    <h5 class="card-title text-white">บิลที่ชำระเงินแล้ว</h5>
+                                    <p class="card-text display-6">{{ $paidCount }} บิล</p>
+                                    <a href="{{ route('PaymentHistoryPage') }}"
+                                        class="btn btn-light btn-sm">ดูรายละเอียด</a>
                                 </div>
                             </div>
                         </div>
@@ -21,8 +22,8 @@
                         <div class="col-md-4">
                             <div class="card text-white bg-danger mb-3">
                                 <div class="card-body text-center">
-                                    <h5 class="card-title text-white">ผู้ขาดการชำระเงิน</h5>
-                                    <p class="card-text display-6">{{ $unpaidCount }} คน</p>
+                                    <h5 class="card-title text-white">บิลที่ขาดการชำระเงิน</h5>
+                                    <p class="card-text display-6">{{ $unpaidCount }} บิล</p>
                                     <a href="{{ route('NonPaymentPage') }}" class="btn btn-light btn-sm">ดูรายละเอียด</a>
                                 </div>
                             </div>
@@ -32,7 +33,7 @@
                             <div class="card text-white bg-warning mb-3">
                                 <div class="card-body text-center">
                                     <h5 class="card-title text-white">รอตรวจสอบการชำระ</h5>
-                                    <p class="card-text display-6">{{ $verifyCount }} คน</p>
+                                    <p class="card-text display-6">{{ $verifyCount }} บิล</p>
                                     <a href="{{ route('VerifyPaymentPage') }}" class="btn btn-light btn-sm">ดูรายละเอียด</a>
                                 </div>
                             </div>
@@ -41,23 +42,24 @@
 
                     <br>
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-6">
                             <canvas id="paymentChart" height="150"></canvas>
                         </div>
                         <div class="col-md-6">
                             <canvas id="revenueChart" height="150"></canvas>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
+        // === กราฟผู้ชำระและยังไม่ชำระเงิน ===
         const ctx = document.getElementById('paymentChart').getContext('2d');
 
         const chart = new Chart(ctx, {
@@ -65,7 +67,7 @@
             data: {
                 labels: {!! json_encode(
                     $monthlyData->pluck('month')->map(function ($m) {
-                        return \Carbon\Carbon::create()->month($m)->locale('th')->isoFormat('MMMM');
+                        return \Carbon\Carbon::createFromDate(null, $m)->locale('th')->isoFormat('MMMM');
                     }),
                 ) !!},
                 datasets: [{
@@ -86,7 +88,9 @@
                     y: {
                         beginAtZero: true,
                         ticks: {
-                            callback: value => value + ' คน'
+                            callback: function(value) {
+                                return value + ' บิล';
+                            }
                         },
                         title: {
                             display: true,
@@ -105,6 +109,7 @@
     </script>
 
     <script>
+        // === กราฟรายรับและขาดทุน ===
         const ctx2 = document.getElementById('revenueChart').getContext('2d');
 
         const revenueChart = new Chart(ctx2, {
@@ -112,7 +117,7 @@
             data: {
                 labels: {!! json_encode(
                     $revenueData->map(function ($item) {
-                        return \Carbon\Carbon::create($item->year, $item->month)->locale('th')->isoFormat('MMMM YYYY');
+                        return \Carbon\Carbon::createFromDate($item->year, $item->month)->locale('th')->isoFormat('MMMM YYYY');
                     }),
                 ) !!},
                 datasets: [{
@@ -133,7 +138,9 @@
                     y: {
                         beginAtZero: true,
                         ticks: {
-                            callback: value => value.toLocaleString() + ' บาท'
+                            callback: function(value) {
+                                return Number(value).toLocaleString() + ' บาท';
+                            }
                         },
                         title: {
                             display: true,
@@ -149,5 +156,5 @@
                 }
             }
         });
-    </script>
+    </script> --}}
 @endsection

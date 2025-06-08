@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="col-6 col-md-3 d-flex flex-column justify-content-start align-items-center" style="margin-bottom: 9px;">
-                    <a href="{{ route('TrashToxic') }}" class="btn-back-effect">
+                    <a href="{{ route('GarbageCollectionForm') }}" class="btn-back-effect">
                         <img src="{{ asset('trash-page/image_69.png') }}" alt="image_69" class="img-fluid">
                     </a>
                     <div class="d-none d-md-block fs-4 fw-bold mt-3 px-xl-5" style="line-height: 1;">

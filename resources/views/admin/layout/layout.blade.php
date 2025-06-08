@@ -204,10 +204,10 @@
                                     href="{{ route('CertificatePrivateMarketExpire') }}">ใบอนุญาตใกล้หมดอายุ</a>
                             </nav>
                         </div>
-                            <a class="nav-link" href="{{ route('GarbageCollectionAdminShowData') }}">
+                        {{-- <a class="nav-link" href="{{ route('GarbageCollectionAdminShowData') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clipboard"></i></div>
                             แบบคำขอรับการประเมินค่าธรรมเนียมการกำจัดสิ่งปฏิกูลและมูลฝอย
-                        </a>
+                        </a> --}}
 
                         <div class="sb-sidenav-menu-heading">กองการศึกษาศาสนาและวัฒนธรรม</div>
                         <a class="nav-link" href="{{ route('TableChildApplyAdminPages') }}">

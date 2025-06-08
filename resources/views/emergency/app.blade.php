@@ -208,13 +208,13 @@
                                                 src="{{ asset('images/emergency/f24c8a8dfa8caac9.png') }}" id="imgoption3"
                                                 style="padding-top:6px" alt="ต้นไม้ล้ม"></label>
                                     </div>
-                                    <div class="col-auto">
+                                    {{-- <div class="col-auto">
                                         <input type="radio" class="btn-check" name="options" id="option4" value="4"
                                             autocomplete="off">
                                         <label class="" for="option4" title="แจ้งเหตุอื่นๆ"><img class="imgoption mt-2"
                                                 src="{{ asset('images/emergency/แจ้งเหตุอื่นๆ.png') }}" id="imgoption4"
                                                 style="padding-top:6px" alt="แจ้งเหตุอื่นๆ"></label>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <input type="hidden" name="latitude" id="latitude">
                                 <input type="hidden" name="longitude" id="longitude">

@@ -148,7 +148,7 @@
                                 <div class="row">
                                     <label for="selectBookregist"
                                         class="col-sm-5 col-form-label d-flex justify-content-start">ตัวอย่างรูปสถานที่เกิดเหตุ
-                                        : </label>
+                                        <span class="text-danger"> *</span></label>
                                     <div class="col-sm-12">
                                         <div class="input-group">
                                             <label class="input-group-text" id="basic-addon2" for="file"
@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="row">
                                     <label for="selectBookregist"
-                                        class="col-sm-4 col-form-label d-flex justify-content-start">ชื่อผู้แจ้ง :
+                                        class="col-sm-4 col-form-label d-flex justify-content-start">ชื่อผู้แจ้ง <span class="text-danger"> *</span>
                                     </label>
                                     <div class="col-sm-12">
                                         <input type="text" class="form-control" id="fullname" name="fullname" required>
@@ -172,7 +172,7 @@
                                 </div>
                                 <div class="row">
                                     <label for="selectBookregist"
-                                        class="col-sm-4 col-form-label d-flex justify-content-start">เบอร์โทรศัพท์ :
+                                        class="col-sm-4 col-form-label d-flex justify-content-start">เบอร์โทรศัพท์ <span class="text-danger"> *</span>
                                     </label>
                                     <div class="col-sm-12">
                                         <input type="text" class="form-control" id="tel" name="tel"
@@ -181,7 +181,7 @@
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="selectBookregist"
-                                        class="col-sm-4 col-form-label d-flex justify-content-start">รายละเอียด : </label>
+                                        class="col-sm-4 col-form-label d-flex justify-content-start">รายละเอียด <span class="text-danger"> *</span></label>
                                     <div class="col-sm-12">
                                         <textarea rows="5" class="form-control" name="detail" id="detail" required></textarea>
                                     </div>

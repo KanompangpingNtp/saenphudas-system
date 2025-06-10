@@ -104,11 +104,11 @@
                 <div class="cool-12 col-md-6 d-flex flex-column justify-content-center align-content-center px-0 my-4">
                     <div class="d-flex justify-content-center align-items-end fs-2 fw-bold gap-2" style="line-height: 0.4;">
                         <img src="{{ asset('first-page/ใบอนุญาต.png') }}" alt="ใบอนุญาต">
-                        ใบประกอบอนุญาติ
+                        ใบประกอบอนุญาต
                     </div>
                     <div class="bg-green mx-auto d-flex flex-column align-items-center  mt-3 ">
                         <div class="text-center text-white fs-4 fw-bold">
-                            ประกอบกิจการสาธารณสุข ยื่นขออณุญาต / ต่ออายุ
+                            ประกอบกิจการสาธารณสุข ยื่นขออนุญาต / ต่ออายุ
                         </div>
                         <div class="d-flex justify-content-center align-items-center px-3 gap-2">
                             <a href="{{ route('FoodStorageLicenseFormPage') }}" class="text-center btn-first-effect ">

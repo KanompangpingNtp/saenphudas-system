@@ -132,11 +132,11 @@
                             <img src="{{ asset('first-page/แจ้งเหตุ.png') }}" alt="แจ้งเหตุ" class="img-fluid">
                         </a>
                         <div class="d-flex flex-column justify-content-center align-items-center border-x-custom2 ps-3 gap-1">
-                            <a href="#" class="text-center btn-first-effect ">
+                            <a href="{{ route('GeneralRequestsFormPage') }}" class="text-center btn-first-effect ">
                                 <img src="{{ asset('first-page/แจ้งเหตุไฟเสีย.png') }}" alt="แจ้งเหตุไฟเสีย"
                                     class="img-fluid">
                             </a>
-                            <a href="#" class="text-center btn-first-effect ">
+                            <a href="{{ route('GeneralRequestsFormPage') }}" class="text-center btn-first-effect ">
                                 <img src="{{ asset('first-page/แจ้งถนนพัง.png') }}" alt="แจ้งถนนพัง" class="img-fluid">
                             </a>
                         </div>
